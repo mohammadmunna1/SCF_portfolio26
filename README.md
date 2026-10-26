@@ -6,7 +6,7 @@ A modern, minimal portfolio (React + Vite + Tailwind) that presents Md Munna Mia
 
 ### Public site
 
-- **Hero:** the positioning headline, a short introduction, *Explore my projects* / *View my background* / *Download CV* (shown when a CV link is set in Admin → Profile), and the portrait inside a line-art supply chain ring (source → store → move → deliver) with the current role and the degree in progress pinned to it
+- **Hero:** the positioning headline, a short introduction, *Explore my projects* / *View my background* / *Download CV* (shown when a CV link is set in Admin → Profile), and the portrait inside an animated field-to-consumer ring (11 stops, from field and factory through cargo, port, sea and air freight, rail, warehouse and road to retail and the consumer) with the current role and the degree in progress pinned to it
 - **At a glance:** a ruled strip of key figures
 - **About:** the story, the supply chain focus drawn as a shipment-tracking route, the technical edge and languages
 - **Experience:** a timeline with focus tags (e.g. Supply Chain Finance, ERP) and the current role marked
@@ -15,7 +15,7 @@ A modern, minimal portfolio (React + Vite + Tailwind) that presents Md Munna Mia
 - **Courses & certifications:** every course with its real image — the certificate, the official course image or the provider's logo — in matching 4:3 frames, with status (*Completed*, *In progress*, *Planned*), provider, date and a link; certificates open full size
 - **Skills:** supply chain capabilities first, then the technical toolkit
 - Contact form: messages are saved to the admin inbox **and** forwarded by email via Web3Forms
-- Light by default ("Manifest"), with a dark preset ("Night Freight") and others in the admin; restrained motion (short fades as content scrolls into view, no glow or parallax); fully responsive, keyboard accessible, honours "reduce motion"; falls back to bundled content if the API or database is down
+- Light by default ("Manifest"), with a dark preset ("Night Freight") and others in the admin; restrained motion (short fades as content scrolls into view and the hero's field-to-consumer journey; no glow or parallax); fully responsive, keyboard accessible, honours "reduce motion"; falls back to bundled content if the API or database is down
 
 ### Admin panel (`/admin`)
 
@@ -106,7 +106,7 @@ The ultra-condensed display face of the previous design (Humane / Six Caps, `src
 
 ### Illustrations
 
-The supply chain visuals are line art drawn in code (`src/Components/illustrations/`), so they take the palette's colours and need no image files: the hero's network ring (`NetworkRing.jsx`) and the workflow route used for projects without a screenshot (`FlowDiagram.jsx`, fed by each project's **Workflow steps** in the admin). Icons come from `react-icons` (Lucide).
+The supply chain visuals are line art drawn in code (`src/Components/illustrations/`), so they take the palette's colours and need no image files: the hero's field-to-consumer ring (`SupplyJourney.jsx` — a shipment travels field → factory → cargo → port → sea and air freight → rail → warehouse → road → retail → consumer, each stop lighting up as it's reached; it pauses off screen and stays still with "reduce motion") and the workflow route used for projects without a screenshot (`FlowDiagram.jsx`, fed by each project's **Workflow steps** in the admin). Icons come from `react-icons` (Lucide).
 
 ### Course and certificate images
 

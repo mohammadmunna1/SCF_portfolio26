@@ -1,4 +1,5 @@
-import { LuArrowUpRight, LuDownload, LuPackageCheck, LuTruck, LuWarehouse } from "react-icons/lu";
+import { Fragment } from "react";
+import { LuArrowUpRight, LuDownload, LuFactory, LuShip, LuTruck, LuUserRound, LuWarehouse, LuWheat } from "react-icons/lu";
 import { useLocation } from "react-router-dom";
 import { useContent } from "../context/ContentContext";
 import { cvLinkProps } from "../lib/text";
@@ -9,17 +10,25 @@ import Reveal from "./ui/Reveal";
 // The footer links to just these sections after Home; every section is in the menu.
 const FOOTER_SECTIONS = ["about", "experience", "work", "courses", "contact"];
 
-/** A short delivery route — warehouse, truck, delivered — drawn in the band's text colour. */
+// Field to consumer, in short — the truck on the road is the one marked.
+const ROUTE = [LuWheat, LuFactory, LuShip, LuWarehouse, LuTruck, LuUserRound];
+
+/** The supply chain from field to consumer as a quiet line of icons, drawn in the band's text colour. */
 function DeliveryRoute() {
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute bottom-8 right-8 hidden items-center gap-3 text-button-text/50 md:flex">
-      <LuWarehouse className="h-5 w-5" />
-      <span className="w-16 border-t border-dashed border-current" />
-      <span className="grid h-9 w-9 place-items-center rounded-full bg-accent text-accent-on">
-        <LuTruck className="h-[18px] w-[18px]" />
-      </span>
-      <span className="w-16 border-t border-dashed border-current" />
-      <LuPackageCheck className="h-5 w-5" />
+    <div aria-hidden="true" className="pointer-events-none absolute bottom-8 right-8 hidden items-center gap-2.5 text-button-text/50 lg:flex">
+      {ROUTE.map((Icon, index) => (
+        <Fragment key={index}>
+          {index > 0 && <span className="w-7 border-t border-dashed border-current xl:w-10" />}
+          {Icon === LuTruck ? (
+            <span className="grid h-9 w-9 place-items-center rounded-full bg-accent text-accent-on">
+              <Icon className="h-[18px] w-[18px]" />
+            </span>
+          ) : (
+            <Icon className="h-5 w-5" />
+          )}
+        </Fragment>
+      ))}
     </div>
   );
 }

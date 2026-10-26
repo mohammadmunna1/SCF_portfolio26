@@ -4,7 +4,7 @@ import { useContent } from "../context/ContentContext";
 import { resolveAsset } from "../lib/api";
 import { EASE_OUT } from "../lib/motion";
 import { cvLinkProps } from "../lib/text";
-import NetworkRing from "./illustrations/NetworkRing";
+import SupplyJourney from "./illustrations/SupplyJourney";
 import { Button } from "./ui/Buttons";
 
 const appear = (delay) => ({
@@ -25,25 +25,36 @@ const compactDegree = (degree = "") => {
 /** "Academy of Business Professionals (ABP)" → "ABP" */
 const shortName = (name = "") => name.match(/\(([A-Z]{2,8})\)\s*$/)?.[1] || name;
 
-/** A small card pinned to the portrait — like a label on a parcel — with a status line, a title and a note. */
-function PortraitLabel({ status, title, note, accent = false, className = "" }) {
+/**
+ * A small card pinned to the portrait — like a label on a parcel — with a status line, a title and a note.
+ * Compact until wide screens (where `extra` is added to the note), so it never hides a stop of the ring.
+ */
+function PortraitLabel({ status, title, note, extra, accent = false, className = "" }) {
   return (
-    <div className={`absolute w-[min(16rem,62%)] rounded-xl border border-line bg-surface-raised/95 p-3 shadow-lg backdrop-blur sm:p-3.5 ${className}`}>
-      <p className="eyebrow flex items-center gap-2 text-[0.6875rem]">
+    <div className={`absolute w-[min(16rem,54%)] rounded-xl border border-line bg-surface-raised/95 p-2.5 shadow-lg backdrop-blur xl:p-3.5 ${className}`}>
+      <p className="eyebrow flex items-center gap-2 text-[0.625rem] xl:text-[0.6875rem]">
         <span aria-hidden="true" className={`h-1.5 w-1.5 rounded-full ${accent ? "bg-accent" : "bg-heading/40"}`} />
         {status}
       </p>
-      <p className="mt-1.5 text-[0.875rem] font-semibold leading-snug text-heading">{title}</p>
-      {note && <p className="mt-0.5 text-[0.8125rem] leading-snug text-body">{note}</p>}
+      <p className="mt-1 text-[0.8125rem] font-semibold leading-snug text-heading xl:mt-1.5 xl:text-[0.875rem]">{title}</p>
+      {note && (
+        <p className="mt-0.5 text-[0.75rem] leading-snug text-body xl:text-[0.8125rem]">
+          {note}
+          {extra && <span className="hidden xl:inline"> · {extra}</span>}
+        </p>
+      )}
     </div>
   );
 }
 
-/** The portrait inside the supply chain ring, with the current role and the degree in progress pinned to it. */
+/**
+ * The portrait inside the field-to-consumer ring, with the current role and the degree in progress pinned
+ * to it. The bottom margin leaves room for the ring's caption.
+ */
 function HeroVisual({ profile, current, studying }) {
   return (
-    <div className="relative mx-auto aspect-[5/6] w-full max-w-[25rem] lg:max-w-[28rem]">
-      <NetworkRing />
+    <div className="relative mx-auto mb-12 aspect-[5/6] w-full max-w-[25rem] lg:max-w-[28rem]">
+      <SupplyJourney />
       <div className="absolute inset-x-[14%] bottom-[10%] top-[6.7%] overflow-hidden rounded-[1.75rem] bg-photo">
         <div aria-hidden="true" className="dot-grid absolute inset-0 opacity-60" />
         {profile.portrait && (
@@ -71,7 +82,8 @@ function HeroVisual({ profile, current, studying }) {
           status="Now"
           accent
           title={current.role}
-          note={[shortCompany(current.company), current.tags?.[0]].filter(Boolean).join(" · ")}
+          note={shortCompany(current.company)}
+          extra={current.tags?.[0]}
           className="bottom-[17%] left-0 sm:-left-[4%]"
         />
       )}

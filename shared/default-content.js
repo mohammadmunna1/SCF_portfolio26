@@ -42,7 +42,8 @@ export const DEFAULT_PROFILE = {
   email: "mohammadmunnamia0@gmail.com",
   phone: "+88 01858201032",
   location: "Uttara, Dhaka, Bangladesh",
-  resumeUrl: "",
+  // The CV without its reference section (the referee's contact details aren't published)
+  resumeUrl: "/cv/Md-Munna-Mia-CV.pdf",
   ctaTitle: "Let's talk supply chain.",
   ctaButtonLabel: "Get in touch",
   siteTitle: `${SITE_NAME} — Supply Chain & Logistics`,

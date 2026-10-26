@@ -1,0 +1,6 @@
+# Never upload local secrets or private backups with `vercel deploy` (Git deployments don't contain them anyway).
+# Environment variables are set in the Vercel project instead.
+.env
+.env.*
+!.env.example
+backups/

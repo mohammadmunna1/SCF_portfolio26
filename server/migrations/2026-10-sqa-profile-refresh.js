@@ -7,10 +7,10 @@
 //  • a new field is filled only if it is empty
 //  • items no longer in the CV are deleted only if untouched, and hidden (not deleted) when unsure
 
-import * as V2 from "../../shared/default-content.js";
 import { CollectionModels, SingletonModels } from "../models/index.js";
 import { applyOrder, followsOrder, isEmpty, same } from "./helpers.js";
 import * as V1 from "./snapshots/content-v1.js";
+import * as V2 from "./snapshots/content-v2.js";
 
 /** True when every field of the original v1 item still holds its v1 value. */
 const untouched = (doc, v1Item) => Boolean(v1Item) && Object.keys(v1Item).every((field) => same(doc[field], v1Item[field]));

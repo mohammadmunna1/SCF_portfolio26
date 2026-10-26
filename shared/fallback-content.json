@@ -1,147 +1,161 @@
 {
   "format": 1,
-  "generatedAt": "2026-10-18T19:44:04.084Z",
-  "source": "https://codewithmunna.vercel.app/api/content",
-  "fingerprint": "5567924f71179ca3",
+  "generatedAt": "2026-10-26T18:31:34.880Z",
+  "source": "database",
+  "fingerprint": "2207211f60fe3666",
   "hiddenSections": [
     "testimonials",
     "faq"
   ],
   "migrations": [
-    "2026-10-sqa-profile-refresh",
     "2026-10-design-copy-refresh",
+    "2026-10-logo-hover",
     "2026-10-site-name",
-    "2026-10-logo-hover"
+    "2026-10-sqa-profile-refresh"
   ],
   "content": {
     "profile": {
-      "name": "Mohammad Munna Mia",
-      "brand": "Munna",
-      "brandHover": "QA x DEV",
-      "role": "SQA Engineer",
-      "portrait": "/backup-assets/6ad3cb449a10ae1fbc541018.webp",
+      "name": "Md Munna Mia",
+      "brand": "Md Munna Mia",
+      "brandHover": "Supply Chain & Logistics",
+      "role": "Supply Chain & Logistics",
+      "portrait": "/images/portraits/portrait-professional.webp",
       "availableForWork": true,
-      "headline": "SQA Engineer",
-      "heroIntro": "Hey there, I'm Mohammad Munna Mia — an SQA Engineer focused on manual testing, test automation, regression, API and end-to-end testing, with a background in front-end and full-stack development.",
-      "about": "Hi there! I'm Mohammad Munna Mia, an SQA Engineer based in Dhaka, Bangladesh. At Spectrum Software & Consulting (SSCL) I test OptiFin, a Supply Chain Finance solution used by leading banks in Bangladesh — running functional, regression and on-site User Acceptance Testing with banking stakeholders, and automating test cases with Cypress.\n\nBefore moving into quality assurance, I worked as a front-end and full-stack developer, building responsive web applications with React.js, Next.js, Svelte, TypeScript and the MERN stack. That development background helps me understand how software is built, write maintainable automation and report defects developers can act on.\n\nI hold a B.Sc. in Computer Science and Engineering from IUBAT. I believe in building quality into software, not testing it in later.",
+      "availability": "Open to supply chain & logistics roles",
+      "headline": "Supply chain & logistics, powered by technology.",
+      "heroIntro": "I'm Md Munna Mia — a Computer Science & Engineering graduate pursuing a Postgraduate Diploma in Logistics & Supply Chain Management. With 2 years 9 months of hands-on experience across ERP modules, data validation and Supply Chain Finance software, I bring a data-driven, technical edge to procurement, inventory control and distribution.",
+      "about": "I work where supply chain operations meet technology. I'm completing a Postgraduate Diploma in Logistics & Supply Chain Management at the Academy of Business Professionals (ABP) — now in its penultimate semester — on top of a B.Sc. in Computer Science & Engineering from IUBAT.\n\nIn 2 years 9 months of technical roles, I've developed ERP modules for core operational workflows, coordinated between technical and non-technical teams, and conducted on-site user acceptance testing of OptiFin, a Supply Chain Finance solution, at the headquarters of Prime Bank, Dhaka Bank and Eastern Bank. I've also built two supply chain systems end to end: PROCUREX for procurement and ORDERFLOW for inventory and orders.\n\nNext, I want a role in logistics and supply chain management where that analytical, data-driven approach improves planning, procurement, inventory control and distribution — using AI, automation and digital tools to make operations measurably more efficient.",
       "focusAreas": [
-        "Manual Testing",
-        "Test Automation",
-        "Regression Testing",
-        "API Testing",
-        "End-to-End Testing",
-        "Cypress"
+        "Procurement & vendor management",
+        "Inventory control",
+        "Demand planning",
+        "Logistics coordination",
+        "ERP/SAP-supported operations",
+        "Data analysis & MIS"
       ],
       "devBackground": [
-        "Front-end Development",
-        "Full-stack Development",
-        "React.js",
-        "Next.js",
-        "Svelte",
-        "TypeScript",
-        "Javascript"
+        "ERP module development",
+        "Supply Chain Finance UAT",
+        "Process automation (n8n)",
+        "AI & API integration",
+        "Software quality assurance",
+        "JavaScript · React · Svelte"
+      ],
+      "languages": [
+        "Bangla — Native",
+        "English — Professional working proficiency",
+        "Hindi — Professional working proficiency"
       ],
       "email": "mohammadmunnamia0@gmail.com",
-      "phone": "+8801858201032",
+      "phone": "+88 01858201032",
       "location": "Uttara, Dhaka, Bangladesh",
-      "resumeUrl": "https://drive.google.com/file/d/1DS-XyN0chrT0D1-428y1IgOfYpoU7-Gk/view?usp=sharing",
-      "ctaTitle": "Let's work together!",
+      "resumeUrl": "",
+      "ctaTitle": "Let's talk supply chain.",
       "ctaButtonLabel": "Get in touch",
-      "siteTitle": "Munna",
-      "siteDescription": "Portfolio of Mohammad Munna Mia — SQA Engineer specializing in manual testing, test automation, regression, API and end-to-end testing, with a background in front-end and full-stack development."
+      "siteTitle": "Md Munna Mia — Supply Chain & Logistics",
+      "siteDescription": "Md Munna Mia — supply chain and logistics portfolio. Pursuing a PGD in Logistics & Supply Chain Management, with a Computer Science background and hands-on experience in ERP, data and Supply Chain Finance software."
     },
     "theme": {
-      "background": "#242424",
-      "surface": "#2A2A2A",
-      "surfaceRaised": "#343537",
-      "photoCard": "#D6D4D2",
-      "heading": "#E3E1E2",
-      "body": "#D6D4D2",
-      "muted": "#8C9492",
-      "border": "#343537",
-      "borderStrong": "#717070",
-      "accent": "#CBA385",
-      "onAccent": "#242424",
-      "button": "#E3E1E2",
-      "buttonText": "#242424"
+      "background": "#F5F3EE",
+      "surface": "#FBFAF7",
+      "surfaceRaised": "#FFFFFF",
+      "photoCard": "#E8E3D9",
+      "heading": "#111A24",
+      "body": "#3A4452",
+      "muted": "#646D79",
+      "border": "#E2DDD3",
+      "borderStrong": "#C7C0B3",
+      "accent": "#B93D0B",
+      "onAccent": "#FFFFFF",
+      "button": "#111A24",
+      "buttonText": "#F5F3EE"
     },
     "sections": [
       {
-        "id": "6ad10f7baceac04813c18895",
-        "navLabel": "About",
-        "eyebrow": "About",
-        "title": "About Me",
-        "subtitle": "",
-        "ctaLabel": "",
-        "key": "about"
-      },
-      {
-        "id": "6ad10f7baceac04813c1889a",
+        "id": "f047d1eb20a936b584f4ccf6",
         "navLabel": "",
         "eyebrow": "",
-        "title": "Highlights",
+        "title": "At a glance",
         "subtitle": "",
         "ctaLabel": "",
         "key": "stats"
       },
       {
-        "id": "6ad10f7baceac04813c18897",
+        "id": "0d8c1d656add66edead551e7",
+        "navLabel": "About",
+        "eyebrow": "Profile",
+        "title": "Where supply chain meets technology",
+        "subtitle": "",
+        "ctaLabel": "",
+        "key": "about"
+      },
+      {
+        "id": "88b1025305199520b71a1c9f",
         "navLabel": "Experience",
         "eyebrow": "Career",
         "title": "Experience",
-        "subtitle": "",
+        "subtitle": "Technical roles with hands-on exposure to Supply Chain Finance, ERP workflows and cross-functional operations.",
         "ctaLabel": "",
         "key": "experience"
       },
       {
-        "id": "6ad10f7baceac04813c18899",
-        "navLabel": "SQA Projects",
-        "eyebrow": "01 — Current focus",
-        "title": "SQA & Test Automation",
-        "subtitle": "Cypress, BDD, Selenium WebDriver, Playwright, TestNG, API testing, regression testing and end-to-end automation.",
-        "ctaLabel": "View all SQA projects",
-        "key": "sqa"
-      },
-      {
-        "id": "6ad10f7baceac04813c18894",
-        "navLabel": "Development",
-        "eyebrow": "02 — Previous experience",
-        "title": "Software Development",
-        "subtitle": "Front-end and full-stack projects from my development years — the technical foundation behind my QA work.",
+        "id": "35f27c4d89e5de355b51ac09",
+        "navLabel": "Projects",
+        "eyebrow": "Projects",
+        "title": "Systems built for supply chain work",
+        "subtitle": "Procurement and inventory systems built end to end, plus the automation, quality and software projects behind them.",
         "ctaLabel": "View all projects",
         "key": "work"
       },
       {
-        "id": "6ad10f7baceac04813c18898",
-        "navLabel": "Skills",
-        "eyebrow": "Toolkit",
-        "title": "Skills",
-        "subtitle": "Quality assurance and automation first — with development skills as a strong foundation.",
-        "ctaLabel": "",
-        "key": "skills"
+        "id": "a5567d7c611f46c490ff29a6",
+        "navLabel": "",
+        "eyebrow": "Quality",
+        "title": "Quality & test automation",
+        "subtitle": "Test automation and UAT work, including the Supply Chain Finance platform OptiFin.",
+        "ctaLabel": "View all QA projects",
+        "key": "sqa"
       },
       {
-        "id": "6ad11bb2cc6c5236e0d2ef10",
+        "id": "21594088ec552c45a9bf5206",
         "navLabel": "Education",
-        "eyebrow": "Background",
-        "title": "Education",
+        "eyebrow": "Education",
+        "title": "Academic background",
         "subtitle": "",
         "ctaLabel": "",
         "key": "education"
       },
       {
-        "id": "6ad10f7baceac04813c1889d",
+        "id": "438e9cf6c803fff28146cd2c",
+        "navLabel": "Courses",
+        "eyebrow": "Courses & certifications",
+        "title": "Training & certifications",
+        "subtitle": "Supply chain and ERP training first, then the technology and professional courses behind my technical side.",
+        "ctaLabel": "",
+        "key": "courses"
+      },
+      {
+        "id": "ef907c3037c60e1cb8910017",
+        "navLabel": "Skills",
+        "eyebrow": "Skills",
+        "title": "Capabilities & toolkit",
+        "subtitle": "Supply chain capabilities first, backed by a technical toolkit.",
+        "ctaLabel": "",
+        "key": "skills"
+      },
+      {
+        "id": "efb2870d50978c41261fc817",
         "navLabel": "Contact",
         "eyebrow": "Contact",
-        "title": "Let's Talk",
-        "subtitle": "Have a question or want to work together? Feel free to contact me!",
-        "ctaLabel": "Send Message",
+        "title": "Let's talk",
+        "subtitle": "Hiring for a supply chain, logistics or procurement role — or want to talk operations and technology? I'd be glad to hear from you.",
+        "ctaLabel": "Send message",
         "key": "contact"
       }
     ],
     "sqaProjects": [
       {
-        "id": "6ad11cb4f09826405a473580",
+        "id": "57c93f8eb5d36b9517a52a1f",
         "title": "Cypress Automation with BDD Framework",
         "type": "Automation",
         "summary": "A behaviour-driven Cypress test suite for OptiFin, a Supply Chain Finance web application. Scenarios are written in Gherkin and mapped to reusable step definitions, locator classes and shared test-data modules, covering admin user management, configuration and CAD Maker workflows across multiple finance products.",
@@ -175,7 +189,7 @@
         "icon": "workflow"
       },
       {
-        "id": "6ad11cb4f09826405a473581",
+        "id": "3c2fa551d923dbde85ffe981",
         "title": "CBS Onboarding Automation",
         "type": "Automation",
         "summary": "Cypress automation for the onboarding workflow of a mock Core Banking System (CBS) in the OptiFin staging environment. It bulk-creates customer accounts (CD, OD and ASG) for each customer, saves them for reuse, and creates and approves Factoring Finance limits through a maker–checker flow.",
@@ -207,11 +221,16 @@
         "icon": "bank"
       },
       {
-        "id": "6ad10f7caceac04813c188a6",
+        "id": "9f922461f99537fb76702e85",
         "title": "E-commerce Automation",
         "type": "Automation",
-        "icon": "cart",
         "summary": "",
+        "highlights": [],
+        "tools": [
+          "Selenium WebDriver",
+          "Page Object Model",
+          "HTMLTestRunner"
+        ],
         "framework": "Selenium WebDriver with Page Object Model (POM)",
         "methodology": "",
         "testingType": "Functional, UI, and Automation Testing",
@@ -222,18 +241,24 @@
           "Edge"
         ],
         "repoUrl": "https://github.com/mohammadmunnamia0/e-commerce-automation.git",
-        "tools": [
-          "Selenium WebDriver",
-          "Page Object Model",
-          "HTMLTestRunner"
-        ]
+        "liveUrl": "",
+        "image": "",
+        "snippet": "",
+        "snippetFile": "",
+        "snippetLanguage": "",
+        "icon": "cart"
       },
       {
-        "id": "6ad10f7caceac04813c188a7",
+        "id": "253ff7e49fa74f5e7ee88529",
         "title": "Login Functionality Automation",
         "type": "Automation",
-        "icon": "lock",
         "summary": "",
+        "highlights": [],
+        "tools": [
+          "Selenium WebDriver",
+          "Java",
+          "TestNG"
+        ],
         "framework": "Selenium WebDriver with Java",
         "methodology": "",
         "testingType": "Functional & UI Testing",
@@ -244,18 +269,25 @@
           "Edge"
         ],
         "repoUrl": "https://github.com/mohammadmunnamia0/selenium-with-java.git",
+        "liveUrl": "",
+        "image": "",
+        "snippet": "",
+        "snippetFile": "",
+        "snippetLanguage": "",
+        "icon": "lock"
+      },
+      {
+        "id": "4a00131571fe74762c3f3867",
+        "title": "POM Framework - Login Functionality Automation",
+        "type": "Automation",
+        "summary": "",
+        "highlights": [],
         "tools": [
           "Selenium WebDriver",
           "Java",
-          "TestNG"
-        ]
-      },
-      {
-        "id": "6ad10f7caceac04813c188a8",
-        "title": "POM Framework - Login Functionality Automation",
-        "type": "Automation",
-        "icon": "lock",
-        "summary": "",
+          "TestNG",
+          "Page Object Model"
+        ],
         "framework": "Selenium WebDriver with Java",
         "methodology": "",
         "testingType": "Functional & UI Testing",
@@ -266,19 +298,24 @@
           "Edge"
         ],
         "repoUrl": "https://github.com/mohammadmunnamia0/Automation-POM-Framework-Testing.git",
-        "tools": [
-          "Selenium WebDriver",
-          "Java",
-          "TestNG",
-          "Page Object Model"
-        ]
+        "liveUrl": "",
+        "image": "",
+        "snippet": "",
+        "snippetFile": "",
+        "snippetLanguage": "",
+        "icon": "lock"
       },
       {
-        "id": "6ad10f7caceac04813c188a9",
+        "id": "25d2531ce1ef539dbcb482b4",
         "title": "Online Banking Website",
         "type": "Manual",
-        "icon": "bank",
         "summary": "",
+        "highlights": [],
+        "tools": [
+          "Manual Testing",
+          "Excel",
+          "MS Word"
+        ],
         "framework": "",
         "methodology": "Agile",
         "testingType": "Functional & UI Testing",
@@ -289,18 +326,23 @@
           "Edge"
         ],
         "repoUrl": "https://github.com/mohammadmunnamia0/Manual-Testing-for-a-Banking-Website.git",
-        "tools": [
-          "Manual Testing",
-          "Excel",
-          "MS Word"
-        ]
+        "liveUrl": "",
+        "image": "",
+        "snippet": "",
+        "snippetFile": "",
+        "snippetLanguage": "",
+        "icon": "bank"
       },
       {
-        "id": "6ad10f7caceac04813c188aa",
+        "id": "fef63df1621cab52302f2fc3",
         "title": "Login Functionality",
         "type": "Manual",
-        "icon": "lock",
         "summary": "",
+        "highlights": [],
+        "tools": [
+          "Manual Testing",
+          "Excel"
+        ],
         "framework": "",
         "methodology": "Manual Testing",
         "testingType": "Functional & UI Testing",
@@ -311,47 +353,107 @@
           "Edge"
         ],
         "repoUrl": "https://github.com/mohammadmunnamia0/TestCAse-openCart.git",
-        "tools": [
-          "Manual Testing",
-          "Excel"
-        ]
+        "liveUrl": "",
+        "image": "",
+        "snippet": "",
+        "snippetFile": "",
+        "snippetLanguage": "",
+        "icon": "lock"
       }
     ],
     "projects": [
       {
-        "id": "6ad11cb5f09826405a473582",
-        "title": "Artcon",
-        "tagline": "Web Platform for a Leading Bangladeshi Art Agency",
-        "context": "Edistys · Client project",
-        "category": "frontend",
-        "image": "/images/projects/artcon.webp",
-        "description": "A content-driven web platform for Artcon, one of Bangladesh's leading art agencies, presenting its exhibitions, artists, collections, publications and events — with virtual-reality gallery tours and a CMS the Artcon team uses to publish without a developer.\n\nBuilt by the Edistys team with SvelteKit, TypeScript, Tailwind CSS and Sanity.io. My contribution covered front-end work and manual QA: designing and executing test cases, reporting UI/API defects and validating integrations.",
-        "technologies": [
-          "SvelteKit",
-          "TypeScript",
-          "Tailwind CSS",
-          "Sanity.io"
+        "id": "71dd0f245f194ff01f4baec8",
+        "title": "PROCUREX",
+        "tagline": "Procurement & vendor tracking module",
+        "context": "Procurement · Vendor management",
+        "category": "supply-chain",
+        "image": "/images/projects/procurex.webp",
+        "description": "A procurement suite that follows a purchase from requisition to delivery — vendor records, purchase orders, approval workflows and supplier delivery tracking, with operational reports that support purchasing and planning decisions.",
+        "highlights": [
+          "Developed vendor database management and purchase-order tracking",
+          "Implemented an approval workflow for procurement requests and order confirmation",
+          "Monitored supplier delivery timelines and procurement status",
+          "Generated operational reports to support purchasing and planning decisions",
+          "Ensured structured data validation for procurement compliance"
         ],
-        "liveUrl": "https://www.artcon.bd/",
-        "repoUrl": "",
-        "serverRepoUrl": "",
+        "flow": [
+          "Requisition",
+          "Approval",
+          "Purchase order",
+          "Supplier delivery",
+          "Reporting"
+        ],
+        "technologies": [
+          "React",
+          "Recharts",
+          "Node.js",
+          "Express.js",
+          "MongoDB",
+          "JWT"
+        ],
+        "liveUrl": "https://procurex-mocha.vercel.app/",
+        "repoUrl": "https://github.com/mohammadmunnamia0/PROCUREX-Client",
+        "serverRepoUrl": "https://github.com/mohammadmunnamia0/PROCUREX-Server",
         "featured": true
       },
       {
-        "id": "6ad11cb5f09826405a473583",
-        "title": "Ryoko Travel Agency",
-        "tagline": "Online Travel Agency Platform — B2C, B2B & Admin CRM",
-        "context": "Edistys · Client project",
-        "category": "fullstack",
-        "image": "/images/projects/ryoko.webp",
-        "description": "A full-stack online travel agency platform handling visa applications, airport transfers, flight bookings and holiday packages — with a consumer site, a reseller (B2B) portal and an internal admin CRM. It includes dynamic visa application flows, passport OCR, document uploads, payments and role-based access.\n\nBuilt by the Edistys team with SvelteKit, Hono.js, Drizzle ORM, PostgreSQL and Payload CMS. My contribution was quality assurance: designing and executing test cases, identifying UI/API defects and validating integrations.",
+        "id": "3c7a342cfde24ba3f0a7c151",
+        "title": "ORDERFLOW",
+        "tagline": "Inventory & order management system",
+        "context": "Inventory · Order fulfilment",
+        "category": "supply-chain",
+        "image": "",
+        "description": "An inventory and order management system covering the whole order cycle — placement, stock deduction and fulfilment tracking — with real-time stock updates that prevent mismatches and overselling.",
+        "highlights": [
+          "Developed the end-to-end order workflow: order placement, stock deduction and fulfilment tracking",
+          "Implemented real-time inventory updates to prevent stock mismatches and overselling",
+          "Assisted in stock reconciliation and inventory-accuracy reporting",
+          "Supported role-based access control for admin, warehouse and sales operations"
+        ],
+        "flow": [
+          "Order placed",
+          "Stock deducted",
+          "Fulfilment tracked",
+          "Stock reconciled"
+        ],
         "technologies": [
-          "SvelteKit",
-          "TypeScript",
-          "Hono.js",
-          "PostgreSQL",
-          "Drizzle ORM",
-          "Payload CMS"
+          "React",
+          "Recharts",
+          "Node.js",
+          "Express.js",
+          "MongoDB",
+          "JWT"
+        ],
+        "liveUrl": "",
+        "repoUrl": "https://github.com/mohammadmunnamia0/ORDERFLOW-Client",
+        "serverRepoUrl": "https://github.com/mohammadmunnamia0/ORDERFLOW-Server",
+        "featured": true
+      },
+      {
+        "id": "a677225f7d0674db02c9a422",
+        "title": "AUTO PING",
+        "tagline": "AI chatbot platform for customer support",
+        "context": "",
+        "category": "automation",
+        "image": "",
+        "description": "An AI-driven chatbot platform that automates customer-query handling through structured conversation workflows, reducing the manual support workload.",
+        "highlights": [
+          "Worked as the full-stack developer, across frontend and backend",
+          "Implemented AI API integration and managed token optimization",
+          "Ensured seamless communication between the interface and the AI backend services",
+          "Designed structured conversation workflows to automate customer query handling"
+        ],
+        "flow": [
+          "Customer query",
+          "Conversation workflow",
+          "AI response",
+          "Query resolved"
+        ],
+        "technologies": [
+          "AI APIs",
+          "Token optimization",
+          "Conversation workflows"
         ],
         "liveUrl": "",
         "repoUrl": "",
@@ -359,26 +461,7 @@
         "featured": true
       },
       {
-        "id": "6ad11cb5f09826405a473584",
-        "title": "Dialleads",
-        "tagline": "Marketing Website for an AI Call-Agent Platform",
-        "context": "Edistys · Client project",
-        "category": "frontend",
-        "image": "/images/projects/dialleads.webp",
-        "description": "A fast, responsive marketing website for Dialleads, an AI-powered phone call automation platform whose voice agents make and take calls for businesses. The site explains a technical product with audio samples, a traditional-vs-AI comparison, industry use-case pages and an onboarding flow, all managed through a CMS.\n\nBuilt at Edistys with SvelteKit, TypeScript, Tailwind CSS and Sanity.io.",
-        "technologies": [
-          "SvelteKit",
-          "TypeScript",
-          "Tailwind CSS",
-          "Sanity.io"
-        ],
-        "liveUrl": "https://www.dialleads.ai/",
-        "repoUrl": "",
-        "serverRepoUrl": "",
-        "featured": true
-      },
-      {
-        "id": "6ad11cb5f09826405a473585",
+        "id": "04c6f7276342834a7c027a5b",
         "title": "Tanzi Stretto",
         "tagline": "E-commerce Platform for a Handcrafted Bangles Brand",
         "context": "",
@@ -396,12 +479,15 @@
         "liveUrl": "https://tanzistretto.com/",
         "repoUrl": "",
         "serverRepoUrl": "",
-        "featured": true
+        "featured": true,
+        "highlights": [],
+        "flow": []
       },
       {
-        "id": "6ad10f7caceac04813c1889e",
+        "id": "2888edd29e02c685e50699bb",
         "title": "ShopEase",
         "tagline": "Full-Featured E-commerce Platform",
+        "context": "",
         "category": "fullstack",
         "image": "/images/projects/shopease.webp",
         "description": "ShopEase is a full-featured e-commerce app built with Next.js, Node.js, and Stripe, featuring JWT auth, an admin panel, and a responsive design for a secure, seamless shopping experience.\n\nThe ShopEase backend uses Node.js, Express, MongoDB, and JWT to handle secure auth, product & order management, and Stripe payments with reliable, real-time performance.",
@@ -420,12 +506,80 @@
         "liveUrl": "https://shopease-frontend-blond.vercel.app/",
         "repoUrl": "https://github.com/mohammadmunnamia0/shopease_frontend.git",
         "serverRepoUrl": "https://github.com/mohammadmunnamia0/shopease_backend.git",
-        "featured": true
+        "featured": true,
+        "highlights": [],
+        "flow": []
       },
       {
-        "id": "6ad10f7caceac04813c1889f",
+        "id": "8f2f768d3c12506a4ff58611",
+        "title": "Ryoko Travel Agency",
+        "tagline": "Online Travel Agency Platform — B2C, B2B & Admin CRM",
+        "context": "Edistys · Client project",
+        "category": "fullstack",
+        "image": "/images/projects/ryoko.webp",
+        "description": "A full-stack online travel agency platform handling visa applications, airport transfers, flight bookings and holiday packages — with a consumer site, a reseller (B2B) portal and an internal admin CRM. It includes dynamic visa application flows, passport OCR, document uploads, payments and role-based access.\n\nBuilt by the Edistys team with SvelteKit, Hono.js, Drizzle ORM, PostgreSQL and Payload CMS. My contribution was quality assurance: designing and executing test cases, identifying UI/API defects and validating integrations.",
+        "technologies": [
+          "SvelteKit",
+          "TypeScript",
+          "Hono.js",
+          "PostgreSQL",
+          "Drizzle ORM",
+          "Payload CMS"
+        ],
+        "liveUrl": "",
+        "repoUrl": "",
+        "serverRepoUrl": "",
+        "featured": true,
+        "highlights": [],
+        "flow": []
+      },
+      {
+        "id": "3108c9e80e1c2471c99fb101",
+        "title": "Artcon",
+        "tagline": "Web Platform for a Leading Bangladeshi Art Agency",
+        "context": "Edistys · Client project",
+        "category": "frontend",
+        "image": "/images/projects/artcon.webp",
+        "description": "A content-driven web platform for Artcon, one of Bangladesh's leading art agencies, presenting its exhibitions, artists, collections, publications and events — with virtual-reality gallery tours and a CMS the Artcon team uses to publish without a developer.\n\nBuilt by the Edistys team with SvelteKit, TypeScript, Tailwind CSS and Sanity.io. My contribution covered front-end work and manual QA: designing and executing test cases, reporting UI/API defects and validating integrations.",
+        "technologies": [
+          "SvelteKit",
+          "TypeScript",
+          "Tailwind CSS",
+          "Sanity.io"
+        ],
+        "liveUrl": "https://www.artcon.bd/",
+        "repoUrl": "",
+        "serverRepoUrl": "",
+        "featured": true,
+        "highlights": [],
+        "flow": []
+      },
+      {
+        "id": "3c406f48c0f57f164046fbcd",
+        "title": "Dialleads",
+        "tagline": "Marketing Website for an AI Call-Agent Platform",
+        "context": "Edistys · Client project",
+        "category": "frontend",
+        "image": "/images/projects/dialleads.webp",
+        "description": "A fast, responsive marketing website for Dialleads, an AI-powered phone call automation platform whose voice agents make and take calls for businesses. The site explains a technical product with audio samples, a traditional-vs-AI comparison, industry use-case pages and an onboarding flow, all managed through a CMS.\n\nBuilt at Edistys with SvelteKit, TypeScript, Tailwind CSS and Sanity.io.",
+        "technologies": [
+          "SvelteKit",
+          "TypeScript",
+          "Tailwind CSS",
+          "Sanity.io"
+        ],
+        "liveUrl": "https://www.dialleads.ai/",
+        "repoUrl": "",
+        "serverRepoUrl": "",
+        "featured": false,
+        "highlights": [],
+        "flow": []
+      },
+      {
+        "id": "fb151e6bdaafc66ee2e2c4c3",
         "title": "Blood Bridge Foundation",
         "tagline": "Life-Saving Blood Donation Web App",
+        "context": "",
         "category": "fullstack",
         "image": "/images/projects/blood-bridge.webp",
         "description": "Built a secure and user-centric full-stack blood donation platform using the MERN stack. Features include hospital and organization directories, donor registration, blood request system with validation, and a public request dashboard. Implemented secure access to donor info via modal authentication and used Firebase for auth and database management.",
@@ -445,12 +599,15 @@
         "liveUrl": "https://blood-bridge-foundation.vercel.app/",
         "repoUrl": "https://github.com/mohammadmunnamia0/BloodBridge-Foundation.git",
         "serverRepoUrl": "",
-        "featured": true
+        "featured": false,
+        "highlights": [],
+        "flow": []
       },
       {
-        "id": "6ad10f7caceac04813c188a0",
+        "id": "874ee7f6d0b1dda78e4c86cb",
         "title": "Smart-Star School",
         "tagline": "Real Life Preliminary School Web Project",
+        "context": "",
         "category": "frontend",
         "image": "/images/projects/smartstar-school.webp",
         "description": "Solo project built with React, Tailwind CSS, JavaScript, Web3Form and Framer Motion.\n\nSmartStar School is a colorful, kid-friendly educational website built to make early learning fun and engaging. I developed it using React for interactivity, Tailwind CSS for clean design, and Framer Motion for smooth animations. It's fully responsive, playful, and built with young users in mind.",
@@ -466,12 +623,15 @@
         "liveUrl": "https://smart-start-school-wgkf.vercel.app/",
         "repoUrl": "https://github.com/mohammadmunnamia0/SmartStart-School.git",
         "serverRepoUrl": "",
-        "featured": false
+        "featured": false,
+        "highlights": [],
+        "flow": []
       },
       {
-        "id": "6ad10f7caceac04813c188a1",
+        "id": "7edebf3d4654299b7a52a366",
         "title": "HexTech",
         "tagline": "Portfolio Web Project – Team Collaboration",
+        "context": "",
         "category": "fullstack",
         "image": "/images/projects/hextech.webp",
         "description": "Developed a MERN stack portfolio app using Next.js for SEO and performance. Collaborated in a team to integrate AOS, GSAP, and Framer Motion for smooth animations. Added dynamic email with Nodemailer, interactive maps, sliders, and responsive UI with TailwindCSS.",
@@ -490,12 +650,15 @@
         "liveUrl": "https://hex-tech-project-b88o.vercel.app/",
         "repoUrl": "https://github.com/mohammadmunnamia0/HexTech-Project",
         "serverRepoUrl": "",
-        "featured": false
+        "featured": false,
+        "highlights": [],
+        "flow": []
       },
       {
-        "id": "6ad10f7caceac04813c188a2",
+        "id": "41ca815a8c75be0a522fc86e",
         "title": "LoneOrbit",
         "tagline": "Full-Stack Development Project",
+        "context": "",
         "category": "fullstack",
         "image": "/images/projects/loneorbit.webp",
         "description": "A marketplace built with React and Tailwind, allowing employers to manage jobs and bids, while bidders can place and track bids. Features include secure login, private routes, real-time updates, and optional bid deadlines.",
@@ -512,12 +675,15 @@
         "liveUrl": "https://loneorbit-96b7e.web.app/",
         "repoUrl": "https://github.com/mohammadmunnamia0/LoneOrbit0.1-Client",
         "serverRepoUrl": "https://github.com/mohammadmunnamia0/LoneOrbit0.1-Server",
-        "featured": false
+        "featured": false,
+        "highlights": [],
+        "flow": []
       },
       {
-        "id": "6ad10f7caceac04813c188a3",
+        "id": "7540492b80ed7b640f07b7bf",
         "title": "Dev-Challenges",
         "tagline": "API-Based Web Project",
+        "context": "",
         "category": "frontend",
         "image": "/images/projects/dev-challenges.webp",
         "description": "A dynamic web project that fetches real-time data from an external API. Users can browse, read, and bookmark content, with the ability to manage and delete bookmarks. The site is interactive, responsive, and built with modern web development practices for a smooth experience.",
@@ -531,12 +697,15 @@
         "liveUrl": "https://dev-challenges-o6bw.vercel.app/",
         "repoUrl": "https://github.com/mohammadmunnamia0/devChallenges",
         "serverRepoUrl": "",
-        "featured": false
+        "featured": false,
+        "highlights": [],
+        "flow": []
       },
       {
-        "id": "6ad10f7caceac04813c188a4",
+        "id": "dc74e94f9605a1f1ac1665f1",
         "title": "Quick Quiz",
         "tagline": "Interactive Quiz Platform",
+        "context": "",
         "category": "frontend",
         "image": "/images/projects/quick-quiz.webp",
         "description": "An interactive quiz platform with real-time answers, a countdown timer, answer preview, and a result summary showing scores and comparisons. It features a user-friendly, responsive interface.",
@@ -550,12 +719,15 @@
         "liveUrl": "https://quick-quiz01.netlify.app/",
         "repoUrl": "https://github.com/mohammadmunnamia0/Quick-Quiz",
         "serverRepoUrl": "",
-        "featured": false
+        "featured": false,
+        "highlights": [],
+        "flow": []
       },
       {
-        "id": "6ad10f7caceac04813c188a5",
+        "id": "4195c5ca5bc37dba2496bdaa",
         "title": "Portfolio Website",
         "tagline": "Personal Portfolio",
+        "context": "",
         "category": "frontend",
         "image": "/images/projects/portfolio.webp",
         "description": "A personal portfolio website to showcase projects, experience, and skills. Features include responsive design and smooth navigation.",
@@ -570,306 +742,425 @@
         "repoUrl": "",
         "serverRepoUrl": "",
         "featured": false,
-        "context": ""
+        "highlights": [],
+        "flow": []
       }
     ],
     "experience": [
       {
-        "id": "6ad11cb1f09826405a473575",
-        "role": "Junior SQA Engineer",
-        "company": "Spectrum Software & Consulting (Pvt.) Ltd. (SSCL)",
+        "id": "10c20e8a7a4afd60aa666c3a",
+        "role": "Software Quality Engineer",
+        "company": "Spectrum Software & Consulting (Pvt.) Ltd.",
         "companyUrl": "https://sscl.tech/",
-        "period": "April 2026 – Present",
+        "period": "May 2026 – Present",
         "location": "Dhaka, Bangladesh",
-        "employmentType": "Full TIme",
+        "employmentType": "Full-time",
         "track": "qa",
         "current": true,
         "description": "",
         "highlights": [
-          "Conduct functional, regression and on-site User Acceptance Testing (UAT) at client bank headquarters for OptiFin, a Supply Chain Finance solution used by leading banks in Bangladesh.",
-          "Collaborate with cross-functional teams and banking stakeholders to validate new features, identify defects and support high-quality software releases.",
-          "Use Cypress to automate test cases and support regression testing for web application features."
+          "Conduct on-site user acceptance testing (UAT) at client bank headquarters — Prime Bank, Dhaka Bank and Eastern Bank — for OptiFin, a Supply Chain Finance solution used by leading banks in Bangladesh.",
+          "Contribute to quality assurance, process improvement, release validation and production-readiness activities for enterprise-grade software.",
+          "Validate system reliability, data accuracy, business-rule implementation and user experience across interconnected modules and workflows."
+        ],
+        "tags": [
+          "Supply Chain Finance",
+          "UAT",
+          "Release validation",
+          "Process improvement"
         ],
         "icon": "shield"
       },
       {
-        "id": "6ad10f7caceac04813c188ab",
-        "role": "Front-End Developer",
-        "company": "Edistys",
+        "id": "98a057b285c5c997a58e10ae",
+        "role": "Software Engineer",
+        "company": "Edistys Ltd.",
         "companyUrl": "https://www.edistys.dev/",
-        "period": "May 2025 – April 2026",
+        "period": "Jun 2025 – Apr 2026",
         "location": "Dhaka, Bangladesh",
-        "employmentType": "Full Time",
-        "description": "",
-        "icon": "code",
+        "employmentType": "Full-time",
+        "track": "development",
         "current": false,
+        "description": "",
         "highlights": [
-          "Developed responsive web applications using Svelte, Tailwind CSS and Headless CMS technologies.",
-          "Handled API integration, UI optimization and debugging across client projects.",
-          "Tested the Artcon and Ryoko Travel Agency websites — designed and executed 120+ test cases, identified UI/API defects and validated integrations."
+          "Developed and maintained ERP modules supporting core operational workflows.",
+          "Managed ongoing projects for 1,000+ clients, including the Ryoko platform.",
+          "Worked closely with cross-functional teams to keep processes consistent and delivery quality high.",
+          "Supported process improvement and coordination between technical and non-technical teams."
         ],
-        "track": "development"
+        "tags": [
+          "ERP",
+          "Operational workflows",
+          "Cross-functional coordination"
+        ],
+        "icon": "code"
       },
       {
-        "id": "6ad10f7caceac04813c188ad",
-        "role": "MERN Stack Developer Intern",
+        "id": "910c92b249ca4497963daebe",
+        "role": "MERN Stack Developer (Intern)",
         "company": "Solutya Pvt. Ltd.",
         "companyUrl": "https://solutya.com/",
-        "period": "January 2025 – May 2025",
+        "period": "Jan 2025 – May 2025",
         "location": "Dhaka, Bangladesh",
         "employmentType": "Internship",
+        "track": "development",
+        "current": false,
         "description": "",
-        "icon": "server",
-        "current": false,
         "highlights": [
-          "Developed features with MongoDB, Express.js, React.js, Node.js, Next.js and TypeScript.",
-          "Debugged and tested features and verified deployments.",
-          "Collaborated closely with senior developers throughout delivery."
+          "Supported end-to-end system workflows through structured testing and validation.",
+          "Assisted with data-flow optimization, documentation and deployment verification.",
+          "Coordinated with senior engineers to ensure production readiness and operational stability.",
+          "Helped monitor system performance and identify potential issues to improve reliability."
         ],
-        "track": "development"
+        "tags": [
+          "Workflow validation",
+          "Documentation",
+          "Deployment verification"
+        ],
+        "icon": "server"
       },
       {
-        "id": "6ad10f7caceac04813c188ac",
-        "role": "Web Developer (Front-End)",
-        "company": "Zensoftlab",
-        "companyUrl": "https://www.zensoftlab.com/",
-        "period": "April 2025 – May 2025",
-        "location": "Remote",
+        "id": "7e62b232dde5f356b1acd37d",
+        "role": "Web Developer (Part-time)",
+        "company": "ReturnHex",
+        "companyUrl": "",
+        "period": "Nov 2023 – Dec 2024",
+        "location": "",
         "employmentType": "Part-time",
-        "description": "Designed and developed reusable UI components with React.js and Next.js. Improved performance and SEO via Lighthouse audits and optimization. Reported and tracked frontend bugs to aid early defect detection. Collaborated with designers for consistent UI/UX across all devices.",
-        "icon": "monitor",
+        "track": "development",
         "current": false,
-        "highlights": [],
-        "track": "development"
-      },
-      {
-        "id": "6ad10f7caceac04813c188ae",
-        "role": "Senior Mentor",
-        "company": "Shopnojoyee Academy Care",
-        "companyUrl": "https://www.facebook.com/SAC122018/",
-        "period": "January 2021 – March 2025 · 4 yrs 3 mos",
-        "location": "Dhaka",
-        "employmentType": "Senior Mentor",
-        "description": "Mentored both HSC and SSC batch students with a focus on academic guidance and personal development in the tech field. Provided insights into modern technologies and career paths, and conducted engaging sessions on programming, development, and mathematics. Delivered lessons via Zoom and Google Meet, offered one-on-one support, and helped learners build a strong foundational knowledge for their exams. Focused on enhancing subject understanding, exam preparation, and student motivation through structured lesson planning and consistent support.",
-        "icon": "users",
-        "current": false,
-        "highlights": [],
-        "track": ""
+        "description": "",
+        "highlights": [
+          "Developed and customized WordPress websites — responsive layouts, themes, plugins and business-specific features.",
+          "Delivered freelance web development projects for clients.",
+          "Maintained and optimized sites by troubleshooting issues, improving performance and implementing client updates."
+        ],
+        "tags": [
+          "WordPress",
+          "Client delivery"
+        ],
+        "icon": "monitor"
       }
     ],
     "education": [
       {
-        "id": "6ad10f7caceac04813c188af",
-        "degree": "B.Sc. in Computer Science and Engineering",
+        "id": "e85debb5e0d9922004c283f2",
+        "degree": "Postgraduate Diploma (PGD) in Logistics & Supply Chain Management",
+        "institution": "Academy of Business Professionals (ABP)",
+        "period": "2025 – Present",
+        "status": "ongoing",
+        "grade": "Penultimate semester",
+        "thesis": "",
+        "details": "An 8-month programme of 120 credits."
+      },
+      {
+        "id": "4e125e656f4a72b3fe4d7ca9",
+        "degree": "B.Sc. (Engg.) in Computer Science & Engineering",
         "institution": "International University of Business Agriculture and Technology (IUBAT)",
         "period": "2021 – 2025",
-        "details": "",
-        "grade": "CGPA: 3.70 / 4.00",
-        "thesis": "IoT-based Smart Cane for Blind People"
+        "status": "completed",
+        "grade": "CGPA 3.70 / 4.00",
+        "thesis": "IoT-based Smart Cane for Blind People",
+        "details": "A one-year thesis project: a smart cane that uses IoT to help blind people navigate and detect obstacles — to be published in 2026."
+      },
+      {
+        "id": "e152f348cadad4985b708938",
+        "degree": "Higher Secondary Certificate (HSC)",
+        "institution": "Nawab Habibullah Model School & College, Dhaka",
+        "period": "2020",
+        "status": "completed",
+        "grade": "GPA 4.83 / 5.00",
+        "thesis": "",
+        "details": ""
+      },
+      {
+        "id": "37ecb3a173974c38f3b38454",
+        "degree": "Secondary School Certificate (SSC)",
+        "institution": "E.H.A High School, Dhaka",
+        "period": "2018",
+        "status": "completed",
+        "grade": "GPA 4.94 / 5.00",
+        "thesis": "",
+        "details": ""
       }
     ],
     "certifications": [
       {
-        "id": "6ad11cb2f09826405a473576",
-        "title": "SQA: Manual & Automated Testing",
-        "issuer": "Ostad",
-        "issued": "",
-        "url": "https://ostad.app/share/certificate/c44788-md.-munna-mia",
-        "icon": "clipboard"
-      },
-      {
-        "id": "6ad10f7caceac04813c188b1",
-        "title": "Manual and Automation Software Testing",
-        "issuer": "EDGE Bangladesh",
-        "issued": "",
-        "url": "https://drive.google.com/file/d/14sGysmqanKmNNEf1aGxr_AXzOwLF3MtO/view",
+        "id": "7b8f7e551085cd3d0f2d5f91",
+        "title": "Postgraduate Diploma in Logistics & Supply Chain Management",
+        "issuer": "Academy of Business Professionals (ABP)",
+        "category": "supply-chain",
+        "status": "ongoing",
+        "issued": "2025",
+        "mode": "",
+        "note": "8 months · 120 credits · penultimate semester",
+        "image": "/images/courses/abp-pgd-logistics-scm.webp",
+        "logo": "/images/logos/abp.webp",
+        "url": "https://abpbd.org/pgdlscm/",
+        "urlLabel": "Programme page",
         "icon": "graduation-cap"
       },
       {
-        "id": "6ad10f7caceac04813c188b2",
-        "title": "SQA Crash Course",
-        "issuer": "Online Course",
+        "id": "2e1e6334d9dbdd34a90640b8",
+        "title": "SAP Training Workshop",
+        "issuer": "Academy of Business Professionals (ABP)",
+        "category": "supply-chain",
+        "status": "completed",
         "issued": "",
-        "url": "https://drive.google.com/file/d/188H84Rg1QCyaBgR1hkGsPMpPYwS_B_Dn/view",
-        "icon": "flask"
+        "mode": "Online",
+        "note": "",
+        "image": "",
+        "logo": "/images/logos/abp.webp",
+        "url": "",
+        "urlLabel": "",
+        "icon": "database"
       },
       {
-        "id": "6ad10f7caceac04813c188b4",
-        "title": "Full Stack Web Development Course",
-        "issuer": "Development",
+        "id": "be3010df9037a32813619b79",
+        "title": "Inventory & Warehouse Management",
+        "issuer": "Academy of Business Professionals (ABP)",
+        "category": "supply-chain",
+        "status": "completed",
         "issued": "",
+        "mode": "Bangladesh",
+        "note": "",
+        "image": "",
+        "logo": "/images/logos/abp.webp",
+        "url": "",
+        "urlLabel": "",
+        "icon": "warehouse"
+      },
+      {
+        "id": "75e2ea08be9a394a92631c6c",
+        "title": "AI for Supply Chain Optimization",
+        "issuer": "Coursera",
+        "category": "supply-chain",
+        "status": "completed",
+        "issued": "",
+        "mode": "Online",
+        "note": "",
+        "image": "",
+        "logo": "/images/logos/coursera.webp",
+        "url": "",
+        "urlLabel": "",
+        "icon": "network"
+      },
+      {
+        "id": "e633733edf41a3a920b0410d",
+        "title": "SQA: Manual & Automated Testing",
+        "issuer": "Ostad",
+        "category": "technology",
+        "status": "completed",
+        "issued": "",
+        "mode": "Online",
+        "note": "",
+        "image": "/images/courses/ostad-sqa-certificate.webp",
+        "logo": "/images/logos/ostad.webp",
+        "url": "https://ostad.app/share/certificate/c44788-md.-munna-mia",
+        "urlLabel": "View certificate",
+        "icon": "clipboard"
+      },
+      {
+        "id": "5b7cb90fe922ca445ec76078",
+        "title": "Software Testing",
+        "issuer": "EDGE Project, Bangladesh Computer Council",
+        "category": "technology",
+        "status": "completed",
+        "issued": "Jul 2025",
+        "mode": "Bangladesh",
+        "note": "80 hours · CSE, Jagannath University",
+        "image": "/images/courses/edge-software-testing-certificate.webp",
+        "logo": "/images/logos/edge.webp",
+        "url": "https://drive.google.com/file/d/14sGysmqanKmNNEf1aGxr_AXzOwLF3MtO/view",
+        "urlLabel": "View certificate",
+        "icon": "graduation-cap"
+      },
+      {
+        "id": "f8574aa73da7fc23ce931597",
+        "title": "Complete Web Development Course",
+        "issuer": "Programming Hero",
+        "category": "technology",
+        "status": "completed",
+        "issued": "",
+        "mode": "Online",
+        "note": "Batch 07",
+        "image": "/images/courses/programming-hero-certificate.webp",
+        "logo": "/images/logos/programming-hero.webp",
         "url": "https://drive.google.com/file/d/1MDMVBM0wDx-lOF00mOitxKVJO644w0qO/view",
+        "urlLabel": "View certificate",
         "icon": "monitor"
       },
       {
-        "id": "6ad10f7caceac04813c188b5",
-        "title": "Public Speaking and Presentation",
-        "issuer": "Professional",
-        "issued": "",
+        "id": "b47753945b049c29318c30e3",
+        "title": "Presentation & Public Speaking",
+        "issuer": "10 Minute School",
+        "category": "professional",
+        "status": "completed",
+        "issued": "Jan 2025",
+        "mode": "Online",
+        "note": "",
+        "image": "/images/courses/10ms-public-speaking-certificate.webp",
+        "logo": "/images/logos/10-minute-school.webp",
         "url": "https://10minuteschool.com/certificate/678557cecb866/",
+        "urlLabel": "View certificate",
         "icon": "mic"
-      },
-      {
-        "id": "6ad10f7caceac04813c188b3",
-        "title": "SQA Career Launchpad for Beginners",
-        "issuer": "Online Course",
-        "issued": "",
-        "url": "https://drive.google.com/file/d/14cDeLEITntZ4WGmLd6N9vgWFtW0K85L0/view",
-        "icon": "rocket"
       }
     ],
     "achievements": [
       {
-        "id": "6ad11cb2f09826405a473577",
+        "id": "4e0963fc5bf0289072486e85",
         "role": "Participant",
         "organization": "CSE Intra-University Programming Contest (IUPC)",
         "period": "2022",
-        "description": ""
+        "description": "Analytical thinking, problem-solving and teamwork under time constraints."
       },
       {
-        "id": "6ad11cb2f09826405a473578",
+        "id": "b9eefe3c94623d118c1ab6ee",
         "role": "Member",
         "organization": "IUBAT Math Olympics Society",
-        "period": "2022 – 2023",
-        "description": ""
+        "period": "Dec 2022 – Jan 2024",
+        "description": "Analytical problem-solving activities that sharpened logical and quantitative skills."
       },
       {
-        "id": "6ad11cb2f09826405a473579",
+        "id": "a7a17f9d1f201324e977d874",
         "role": "Senior Mentor",
         "organization": "Shopnojoyee Academy Care",
-        "period": "2020 – 2025",
-        "description": "Mentored HSC and SSC students through online sessions on programming, development and mathematics."
+        "period": "Jan 2021 – Feb 2024",
+        "description": "Mentored SSC and HSC students in structured learning, discipline, communication and academic planning."
       }
     ],
     "skills": [
       {
-        "id": "6ad11cb4f09826405a47357a",
-        "title": "QA & Test Management",
-        "kind": "qa",
-        "icon": "clipboard",
+        "id": "b1318ede28cfd94d3eba3448",
+        "title": "Procurement & sourcing",
+        "kind": "supply-chain",
+        "icon": "cart",
         "items": [
-          "TestRail",
-          "Jira"
+          "Vendor management",
+          "Purchase order tracking",
+          "Approval workflows",
+          "Supplier delivery monitoring",
+          "LC (Letter of Credit) concepts"
         ]
       },
       {
-        "id": "6ad11cb4f09826405a47357b",
-        "title": "Automation & Testing Tools",
-        "kind": "qa",
+        "id": "994730d8395c224d5e35a5df",
+        "title": "Inventory & warehouse",
+        "kind": "supply-chain",
+        "icon": "boxes",
+        "items": [
+          "Inventory control",
+          "Stock reconciliation",
+          "Real-time stock updates",
+          "Order fulfilment tracking",
+          "Warehouse management"
+        ]
+      },
+      {
+        "id": "6e40497fdc8e5f4f1f64bead",
+        "title": "ERP & process",
+        "kind": "supply-chain",
+        "icon": "workflow",
+        "items": [
+          "ERP concepts (SAP)",
+          "SAP S/4HANA (academic)",
+          "ERP module development",
+          "Process documentation & compliance",
+          "Role-based access control"
+        ]
+      },
+      {
+        "id": "53252852938c266d938134c1",
+        "title": "Data & reporting",
+        "kind": "supply-chain",
+        "icon": "chart",
+        "items": [
+          "Data analysis & MIS",
+          "Operational reporting",
+          "Data validation",
+          "Excel, Word, PowerPoint & Outlook"
+        ]
+      },
+      {
+        "id": "71ab7bdf4fb0498f0d52ad97",
+        "title": "Automation & AI",
+        "kind": "technology",
         "icon": "bot",
         "items": [
-          "Cypress",
-          "Selenium WebDriver",
-          "Playwright",
-          "TestNG",
-          "JMeter",
-          "Postman"
+          "n8n automation",
+          "AI API integration",
+          "Token optimization",
+          "Conversation workflows"
         ]
       },
       {
-        "id": "6ad11cb4f09826405a47357c",
-        "title": "Testing Expertise",
+        "id": "84bf1f5d346d99a8c2806fb5",
+        "title": "Quality assurance",
         "kind": "qa",
-        "icon": "bug",
+        "icon": "shield",
         "items": [
-          "Manual Testing",
-          "Test Automation",
-          "Test Case Design",
-          "Bug Reporting",
-          "Bug Lifecycle",
-          "Retesting",
-          "Functional Testing",
-          "Regression Testing",
-          "Web Testing",
-          "API Testing",
-          "SDLC",
-          "STLC",
-          "Agile",
-          "Scrum",
-          "Sprint Workflows"
+          "UAT",
+          "Release validation",
+          "Regression testing",
+          "API testing",
+          "Cypress",
+          "Selenium",
+          "Playwright",
+          "Postman",
+          "Jira",
+          "TestRail"
         ]
       },
       {
-        "id": "6ad11cb4f09826405a47357d",
-        "title": "Programming Languages",
-        "kind": "other",
+        "id": "e78ed6dd5e18f6d31acb14cd",
+        "title": "Development",
+        "kind": "development",
         "icon": "code",
         "items": [
           "JavaScript",
           "TypeScript",
-          "C",
-          "C++"
-        ]
-      },
-      {
-        "id": "6ad11cb4f09826405a47357e",
-        "title": "Technical Skills",
-        "kind": "other",
-        "icon": "wrench",
-        "items": [
-          "SQL",
-          "Database Management",
-          "API Validation",
-          "Basic ETL Concepts",
-          "AI Automation",
-          "Debugging",
-          "Git",
-          "CI/CD",
-          "HTML",
-          "CSS",
-          "Bootstrap",
-          "Tailwind CSS"
-        ]
-      },
-      {
-        "id": "6ad11cb4f09826405a47357f",
-        "title": "Development Technologies",
-        "kind": "development",
-        "icon": "monitor",
-        "items": [
-          "React.js",
-          "Next.js",
+          "React",
           "Svelte",
           "Node.js",
           "Express.js",
           "MongoDB",
-          "Firebase",
-          "Framer Motion"
+          "PostgreSQL",
+          "Git"
         ]
       }
     ],
     "stats": [
       {
-        "id": "6ad10f7caceac04813c188c1",
-        "value": "1.8+",
-        "label": "Years of Experience"
+        "id": "46221a67e6bce05faf6bb6a2",
+        "value": "2Y 9M+",
+        "label": "Experience across ERP, Supply Chain Finance & software"
       },
       {
-        "id": "6ad10f7caceac04813c188c2",
-        "value": "15+",
-        "label": "Own Projects Completed"
+        "id": "709c71a06e8045015b6a1f74",
+        "value": "3",
+        "label": "Leading banks — on-site UAT for a Supply Chain Finance platform"
       },
       {
-        "id": "6ad10f7caceac04813c188c3",
-        "value": "6+",
-        "label": "Organization Projects Completed"
+        "id": "a73ef942df546aa33c1f36a2",
+        "value": "7",
+        "label": "Courses & trainings completed, incl. SAP and warehouse management"
       },
       {
-        "id": "6ad10f7caceac04813c188c4",
-        "value": "5+",
-        "label": "Certificates Earned"
+        "id": "6a6864ed18299f7b45898a4b",
+        "value": "3.70",
+        "label": "CGPA, B.Sc. in Computer Science & Engineering"
       }
     ],
     "socials": [
       {
-        "id": "6ad10f7caceac04813c188c5",
+        "id": "8c06508926b2a0bf5623b0e4",
         "platform": "linkedin",
         "label": "LinkedIn",
         "url": "https://www.linkedin.com/in/mdmunnamia0/",
         "showInHero": true
       },
       {
-        "id": "6ad10f7caceac04813c188c6",
+        "id": "ccb4cc3ae95ccd4606027d31",
         "platform": "github",
         "label": "GitHub",
         "url": "https://github.com/mohammadmunnamia0",
@@ -878,29 +1169,29 @@
     ],
     "faqs": [
       {
-        "id": "6ad11cb7f09826405a473586",
-        "question": "What do you specialize in?",
-        "answer": "Software quality assurance: manual and functional testing, test automation with Cypress, regression, API and end-to-end testing. Before QA, I worked as a front-end and full-stack developer with React.js, Next.js, Svelte and TypeScript."
+        "id": "199ccc03faced21a989ef7f8",
+        "question": "What kind of role are you looking for?",
+        "answer": "A role in logistics and supply chain management — across planning, procurement, inventory control and distribution — where analytical thinking, data handling and technical skills make operations run more efficiently."
       },
       {
-        "id": "6ad11cb7f09826405a473587",
+        "id": "5b9603451e016637e3c48e58",
+        "question": "How does a technical background help in supply chain work?",
+        "answer": "I've developed ERP modules for operational workflows, validated data and business rules in a Supply Chain Finance platform, and built procurement and inventory systems. I'm comfortable with the systems, data and automation that modern supply chains depend on."
+      },
+      {
+        "id": "87b7aa672e45b314db2e4492",
+        "question": "What are you studying now?",
+        "answer": "A Postgraduate Diploma in Logistics & Supply Chain Management at the Academy of Business Professionals (ABP) — an 8-month, 120-credit programme. I'm in the penultimate semester."
+      },
+      {
+        "id": "11987ac0eadb1ce3d5943e37",
         "question": "Where do you work now?",
-        "answer": "I'm an SQA Engineer Trainee / Junior SQA Engineer at Spectrum Software & Consulting (SSCL) in Dhaka, testing OptiFin, a Supply Chain Finance solution used by leading banks in Bangladesh."
+        "answer": "I'm a Software Quality Engineer at Spectrum Software & Consulting, conducting on-site UAT for OptiFin — a Supply Chain Finance solution — at the headquarters of Prime Bank, Dhaka Bank and Eastern Bank."
       },
       {
-        "id": "6ad11cb7f09826405a473588",
-        "question": "Which testing tools do you use?",
-        "answer": "Cypress, Selenium WebDriver, Playwright, TestNG, JMeter and Postman for testing and automation, with TestRail and Jira for test management and bug tracking."
-      },
-      {
-        "id": "6ad11cb7f09826405a473589",
-        "question": "What kind of testing have you done on real projects?",
-        "answer": "Functional, regression and on-site User Acceptance Testing at client bank headquarters for OptiFin, plus manual QA for the Artcon and Ryoko Travel Agency websites at Edistys — designing and executing 120+ test cases."
-      },
-      {
-        "id": "6ad11cb7f09826405a47358a",
+        "id": "a0e85de7795d0588d0748c85",
         "question": "How can I reach you?",
-        "answer": "Use the contact form on this page, email me at mohammadmunnamia0@gmail.com, or connect with me on LinkedIn."
+        "answer": "Use the contact form on this page, email mohammadmunnamia0@gmail.com, or connect with me on LinkedIn."
       }
     ],
     "testimonials": []

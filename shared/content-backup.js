@@ -28,17 +28,18 @@ export const CONTENT_LISTS = [
 ];
 
 /**
- * The homepage sections in the reference screenshot — these must never disappear — and the lists each
- * one is built from. The hero, the About text, contact details and the footer come from the profile.
+ * The homepage sections that must never disappear, and the lists each one is built from. The hero, the
+ * About text, contact details and the footer come from the profile.
  */
 export const ESSENTIAL_SECTIONS = {
-  about: [],
   stats: ["stats"],
-  sqa: ["sqaProjects"],
+  about: [],
   experience: ["experience"],
   work: ["projects"],
+  sqa: ["sqaProjects"],
+  education: ["education", "achievements"],
+  courses: ["certifications"],
   skills: ["skills"],
-  education: ["education", "certifications", "achievements"],
   contact: ["socials"],
 };
 

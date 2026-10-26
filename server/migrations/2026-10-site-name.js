@@ -1,10 +1,10 @@
 // Names the site “QA x DEV M” (logo text and browser title) in databases that still use an
 // earlier default. A name chosen in the admin panel is left alone.
 
-import { SITE_NAME } from "../../shared/site.js";
 import { SingletonModels } from "../models/index.js";
 import { isEmpty, same } from "./helpers.js";
 import * as V1 from "./snapshots/content-v1.js";
+import { SITE_NAME } from "./snapshots/content-v2.js";
 
 const PREVIOUS_DEFAULTS = {
   brand: [V1.DEFAULT_PROFILE.brand, "MUNNA."],

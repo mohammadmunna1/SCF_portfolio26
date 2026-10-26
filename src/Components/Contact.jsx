@@ -1,8 +1,9 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { LuArrowUpRight } from "react-icons/lu";
+import { LuArrowUpRight, LuDownload, LuMail, LuMapPin, LuPhone } from "react-icons/lu";
 import { useContent } from "../context/ContentContext";
 import { apiFetch } from "../lib/api";
+import { cvLinkProps } from "../lib/text";
 import { Button, NodesIcon } from "./ui/Buttons";
 import Reveal from "./ui/Reveal";
 import SectionHeader from "./ui/SectionHeader";
@@ -39,8 +40,8 @@ function validate(form) {
 
 const Field = ({ id, label, error, children }) => (
   <div>
-    <label htmlFor={id} className="caps mb-2.5 block">
-      {label} <span aria-hidden="true">*</span>
+    <label htmlFor={id} className="mb-2 block text-[0.875rem] font-medium text-heading">
+      {label} <span aria-hidden="true" className="text-accent">*</span>
     </label>
     {children}
     {error && (
@@ -51,8 +52,10 @@ const Field = ({ id, label, error, children }) => (
   </div>
 );
 
+const CONTACT_ICONS = { Email: LuMail, Phone: LuPhone, Location: LuMapPin };
+
 /** Contact details and a message form. Messages land in the admin inbox and are emailed via Web3Forms. */
-const Contact = ({ section }) => {
+const Contact = ({ section, index }) => {
   const { profile, socials } = useContent();
   const [form, setForm] = useState(EMPTY);
   const [errors, setErrors] = useState({});
@@ -92,44 +95,58 @@ const Contact = ({ section }) => {
   ].filter(Boolean);
 
   return (
-    <section id="contact" aria-labelledby="contact-title" className="section-y">
+    <section id="contact" aria-labelledby="contact-title" className="section-y border-t border-line">
       <div className="container-site grid items-start gap-14 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-5">
-          <SectionHeader section={section} id="contact-title" />
-          <Reveal as="dl" delay={0.1} className="mt-12 border-t border-line-strong/60">
-            {contactRows.map(({ label, value, href }) => (
-              <div key={label} className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-line-strong/60 py-4">
-                <dt className="caps text-muted">{label}</dt>
-                <dd className="min-w-0 text-[17px] text-heading">
-                  {href ? (
-                    <a href={href} className="link break-all">
-                      {value}
-                    </a>
-                  ) : (
-                    value
-                  )}
-                </dd>
-              </div>
-            ))}
+          <SectionHeader section={section} index={index} id="contact-title" />
+          <Reveal as="dl" delay={0.08} className="mt-10 border-t border-line">
+            {contactRows.map(({ label, value, href }) => {
+              const Icon = CONTACT_ICONS[label];
+              return (
+                <div key={label} className="flex items-center gap-4 border-b border-line py-4">
+                  <span aria-hidden="true" className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-line bg-surface-raised text-heading">
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <div className="min-w-0">
+                    <dt className="eyebrow text-[0.6875rem]">{label}</dt>
+                    <dd className="text-[1rem] font-medium text-heading">
+                      {href ? (
+                        <a href={href} className="link break-all">
+                          {value}
+                        </a>
+                      ) : (
+                        value
+                      )}
+                    </dd>
+                  </div>
+                </div>
+              );
+            })}
           </Reveal>
           {(socials.length > 0 || profile.resumeUrl) && (
-            <Reveal as="ul" delay={0.15} className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
-              {[...(profile.resumeUrl ? [{ id: "resume", label: "Resume", url: profile.resumeUrl }] : []), ...socials].map(
-                (link) => (
-                  <li key={link.id}>
-                    <a href={link.url} target="_blank" rel="noopener noreferrer" className="caps link text-heading">
-                      {link.label}
-                      <LuArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" />
-                      <span className="sr-only"> (opens in a new tab)</span>
-                    </a>
-                  </li>
-                )
+            <Reveal as="ul" delay={0.12} className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
+              {profile.resumeUrl && (
+                <li>
+                  <a href={profile.resumeUrl} className="link text-[0.9375rem] font-medium text-heading" {...cvLinkProps(profile.resumeUrl)}>
+                    <LuDownload aria-hidden="true" className="h-3.5 w-3.5" />
+                    Download CV
+                  </a>
+                </li>
               )}
+              {socials.map((link) => (
+                <li key={link.id}>
+                  <a href={link.url} target="_blank" rel="noopener noreferrer" className="link text-[0.9375rem] font-medium text-heading">
+                    {link.label}
+                    <LuArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" />
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                </li>
+              ))}
             </Reveal>
           )}
         </div>
 
-        <Reveal delay={0.1} className="lg:col-span-7 lg:pl-6 xl:pl-12">
+        <Reveal delay={0.08} className="lg:col-span-7 lg:pl-6 xl:pl-12">
           <form onSubmit={handleSubmit} noValidate className="card relative p-6 sm:p-8 md:p-10">
             <div className="grid gap-6 sm:grid-cols-2">
               <Field id="contact-name" label="Your name" error={errors.name}>
@@ -156,7 +173,7 @@ const Contact = ({ section }) => {
                   aria-invalid={Boolean(errors.email)}
                   aria-describedby={errors.email ? "contact-email-error" : undefined}
                   className="input"
-                  placeholder="jane@example.com"
+                  placeholder="jane@company.com"
                 />
               </Field>
             </div>
@@ -171,7 +188,7 @@ const Contact = ({ section }) => {
                   aria-invalid={Boolean(errors.message)}
                   aria-describedby={errors.message ? "contact-message-error" : undefined}
                   className="input resize-y"
-                  placeholder="Tell me about your project or opportunity…"
+                  placeholder="Tell me about the role or project…"
                 />
               </Field>
             </div>
@@ -190,10 +207,10 @@ const Contact = ({ section }) => {
                   {status.message && (
                     <motion.p
                       key={status.state}
-                      initial={{ opacity: 0, x: -8 }}
-                      animate={{ opacity: 1, x: 0 }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      className={`text-[15px] ${status.state === "error" ? "text-danger" : "text-heading"}`}
+                      className={`text-[0.9375rem] ${status.state === "error" ? "text-danger" : "text-heading"}`}
                     >
                       {status.message}
                     </motion.p>

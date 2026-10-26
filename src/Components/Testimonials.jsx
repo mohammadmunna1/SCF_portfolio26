@@ -35,14 +35,14 @@ function TestimonialCard({ item }) {
 }
 
 /** Rendered only when testimonials exist — add them from the admin panel. */
-const Testimonials = ({ section }) => {
+const Testimonials = ({ section, index }) => {
   const { testimonials } = useContent();
   if (!testimonials.length) return null;
 
   return (
-    <section id="testimonials" aria-labelledby="testimonials-title" className="section-y">
+    <section id="testimonials" aria-labelledby="testimonials-title" className="section-y border-t border-line">
       <div className="container-site">
-        <SectionHeader section={section} id="testimonials-title" />
+        <SectionHeader section={section} index={index} id="testimonials-title" />
       </div>
       <div className="mt-14 md:mt-20">
         <Marquee

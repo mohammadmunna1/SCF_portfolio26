@@ -1,18 +1,13 @@
-import { existsSync, readdirSync } from "node:fs";
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 
-// Six Caps only stands in for Humane until its licensed files are added (src/lib/fonts.js).
-const HUMANE_DIR = "src/assets/fonts/humane";
-const humaneInstalled = existsSync(HUMANE_DIR) && readdirSync(HUMANE_DIR).some((file) => /\.woff2?$/i.test(file));
-// The latin files of the faces the first screen is set in (other subsets load only for the characters they cover).
-const FIRST_SCREEN_FONTS = humaneInstalled
-  ? /^assets\/geist-latin-wght-normal-[\w-]+\.woff2$/
-  : /^assets\/(geist-latin-wght-normal|six-caps-latin-400-normal)-[\w-]+\.woff2$/;
+// The latin file of the face the first screen is set in — Geist, for headlines and text alike (other
+// subsets load only for the characters they cover; the condensed display face isn't used on it).
+const FIRST_SCREEN_FONTS = /^assets\/geist-latin-wght-normal-[\w-]+\.woff2$/;
 
 /**
- * Starts what the first screen waits for — the content and its fonts — as soon as the HTML arrives, rather
- * than once the scripts have downloaded and run. Otherwise the fonts would only be requested when the content
+ * Starts what the first screen waits for — the content and its font — as soon as the HTML arrives, rather
+ * than once the scripts have downloaded and run. Otherwise the font would only be requested when the content
  * renders, and the hero would show in a fallback face first, then jump.
  */
 function preloadFirstScreen(apiBase) {

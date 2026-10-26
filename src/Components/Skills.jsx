@@ -1,75 +1,78 @@
-import { useId } from "react";
+import { LuCheck } from "react-icons/lu";
 import { useContent } from "../context/ContentContext";
-import { useCardStack } from "../hooks/useCardStack";
-import { revealMotion } from "../lib/motion";
+import { getIcon } from "../lib/icons";
+import Reveal from "./ui/Reveal";
 import SectionHeader from "./ui/SectionHeader";
-import StackItem from "./ui/StackItem";
 
-const KIND_LABELS = { qa: "Quality assurance", development: "Development", other: "Technical" };
-
-/** The reference's circular badge: a label ringed by slowly rotating text (still for reduced motion). */
-function RotatingBadge({ label, ring, className = "" }) {
-  const pathId = useId();
-  return (
-    <div
-      aria-hidden="true"
-      className={`relative h-40 w-40 shrink-0 place-items-center rounded-full bg-button text-button-text xl:h-44 xl:w-44 ${className}`}
-    >
-      <svg viewBox="0 0 200 200" className="absolute inset-0 h-full w-full animate-spin-slow">
-        <defs>
-          <path id={pathId} d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0" />
-        </defs>
-        <text className="fill-current text-[13px] uppercase">
-          <textPath href={`#${pathId}`} textLength="474" lengthAdjust="spacing">
-            {`${ring} · `.repeat(2)}
-          </textPath>
-        </text>
-      </svg>
-      <span className="display text-[3.25rem] leading-none text-button-text">{label}</span>
-    </div>
-  );
-}
-
-/** Skill groups from the CV as cards — quality assurance first. On phones the cards stack as you scroll. */
-const Skills = ({ section }) => {
+/**
+ * Skills in two tiers: the supply chain capabilities as cards with a checked list each, then the technical
+ * toolkit behind them as a compact table of chips (every category other than supply chain).
+ */
+const Skills = ({ section, index }) => {
   const { skills } = useContent();
-  const stack = useCardStack(skills.length);
   if (!skills.length) return null;
+  const capabilities = skills.filter((group) => group.kind === "supply-chain");
+  const toolkit = skills.filter((group) => group.kind !== "supply-chain");
 
   return (
-    <section id="skills" aria-labelledby="skills-title" className="section-y">
+    <section id="skills" aria-labelledby="skills-title" className="section-y border-t border-line">
       <div className="container-site">
-        <div className="flex items-end justify-between gap-10">
-          <SectionHeader section={section} id="skills-title" />
-          <RotatingBadge label="Skills" ring="Quality first · What I use" className="hidden md:grid" />
-        </div>
+        <SectionHeader section={section} index={index} id="skills-title" />
 
-        <ul {...stack.listProps} className="stack mt-14 grid gap-4 md:mt-20 md:grid-cols-2 md:gap-5 xl:grid-cols-3">
-          {skills.map((group, index) => (
-            <StackItem key={group.id} stack={stack} index={index} className="flex" {...revealMotion({ delay: (index % 3) * 0.06 })}>
-              <div className="card flex w-full flex-col p-6 md:p-9">
-                <div className="flex items-start justify-between gap-4">
-                  <span aria-hidden="true" className="text-[2.5rem] font-extralight leading-none text-body/70">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  {KIND_LABELS[group.kind] && (
-                    <span className={`meta ${group.kind === "qa" ? "text-accent" : "text-body"}`}>
-                      {KIND_LABELS[group.kind]}
+        {capabilities.length > 0 && (
+          <div className="mt-12 md:mt-16">
+            <h3 className="eyebrow">Supply chain capabilities</h3>
+            <ul className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+              {capabilities.map((group, position) => {
+                const Icon = getIcon(group.icon);
+                return (
+                  <Reveal as="li" key={group.id} delay={(position % 4) * 0.04} className="card flex flex-col p-6">
+                    <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent/10 text-accent">
+                      <Icon aria-hidden="true" className="h-5 w-5" />
                     </span>
-                  )}
-                </div>
-                <h3 className="title-item mt-8">{group.title}</h3>
-                <ul className="mt-5 flex flex-wrap gap-2">
-                  {group.items.map((item) => (
-                    <li key={item} className="chip-line">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </StackItem>
-          ))}
-        </ul>
+                    <h4 className="title-card mt-5">{group.title}</h4>
+                    <ul className="mt-4 space-y-2">
+                      {group.items.map((item) => (
+                        <li key={item} className="flex gap-2.5 text-[0.9375rem] leading-snug text-body">
+                          <LuCheck aria-hidden="true" className="mt-[0.2em] h-4 w-4 shrink-0 text-heading/60" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </Reveal>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+
+        {toolkit.length > 0 && (
+          <Reveal className="mt-14 md:mt-16">
+            <h3 className="eyebrow">Technical toolkit</h3>
+            <dl className="mt-5 border-t border-line">
+              {toolkit.map((group) => {
+                const Icon = getIcon(group.icon);
+                return (
+                  <div key={group.id} className="grid gap-3 border-b border-line py-5 md:grid-cols-[15rem_1fr] md:gap-8">
+                    <dt className="flex items-center gap-3 font-semibold text-heading">
+                      <Icon aria-hidden="true" className="h-[1.125rem] w-[1.125rem] text-muted" />
+                      {group.title}
+                    </dt>
+                    <dd>
+                      <ul className="flex flex-wrap gap-1.5">
+                        {group.items.map((item) => (
+                          <li key={item} className="chip chip-sm">
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </dd>
+                  </div>
+                );
+              })}
+            </dl>
+          </Reveal>
+        )}
       </div>
     </section>
   );

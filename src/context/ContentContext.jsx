@@ -39,7 +39,9 @@ const readCache = () => {
 const writeCache = (content) => {
   try {
     localStorage.setItem(CONTENT_CACHE_KEY, JSON.stringify({ ...content, savedAt: new Date().toISOString() }));
-    localStorage.removeItem("portfolio:content:v1"); // cache from the previous design
+    // Caches from previous designs
+    localStorage.removeItem("portfolio:content:v1");
+    localStorage.removeItem("portfolio:content:v2");
   } catch {
     // Storage can be unavailable (private mode, quota) — the cache is only an optimisation.
   }

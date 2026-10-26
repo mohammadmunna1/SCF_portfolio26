@@ -1,10 +1,9 @@
 // The logo shows “Munna” and rolls to “QA x DEV” on hover. Applied only while the logo text is still a
 // default (empty, the previous “QA x DEV M”, or already “Munna”) — a custom logo set in the admin is kept.
 
-import { DEFAULT_PROFILE } from "../../shared/default-content.js";
-import { SITE_NAME } from "../../shared/site.js";
 import { SingletonModels } from "../models/index.js";
 import { isEmpty, same } from "./helpers.js";
+import { DEFAULT_PROFILE, SITE_NAME } from "./snapshots/content-v2.js";
 
 export default {
   id: "2026-10-logo-hover",

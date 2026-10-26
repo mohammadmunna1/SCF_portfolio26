@@ -1,6 +1,6 @@
 import { THEME_TOKENS, dangerColor, hexToChannels, isLightTheme, normalizeHex, resolveTheme } from "../../shared/theme.js";
 
-export const CONTENT_CACHE_KEY = "portfolio:content:v2";
+export const CONTENT_CACHE_KEY = "portfolio:content:v3";
 const PREVIEW_PARAM = "previewTheme";
 const EXTRA_VARS = ["--c-danger"];
 

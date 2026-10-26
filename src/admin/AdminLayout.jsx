@@ -45,16 +45,16 @@ const COLLECTION_ICONS = {
   quote: LuQuote,
 };
 
-// Same order as the homepage: current focus (SQA) before earlier development work.
+// Roughly the homepage order, supply chain work first.
 const CONTENT_ORDER = [
   "sections",
+  "projects",
   "sqaProjects",
   "experience",
-  "projects",
-  "skills",
   "education",
   "certifications",
   "achievements",
+  "skills",
   "stats",
   "socials",
   "faqs",

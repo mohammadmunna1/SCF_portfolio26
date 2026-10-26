@@ -194,7 +194,7 @@ function ImageField({ id, value, onChange, invalid }) {
       >
         <div className="grid aspect-[4/3] w-full shrink-0 place-items-center overflow-hidden rounded-lg bg-surface-raised sm:w-40">
           {value ? (
-            <img src={resolveAsset(value)} alt="" className="h-full w-full object-cover" />
+            <img src={resolveAsset(value)} alt="" className="h-full w-full object-contain" />
           ) : (
             <LuImagePlus className="h-7 w-7 text-body/40" aria-hidden="true" />
           )}

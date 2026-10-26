@@ -1,32 +1,29 @@
-import { MaskText } from "./AnimatedText";
+import { twoDigits } from "../../lib/text";
 import Reveal from "./Reveal";
 
-/** The reference's oversized title with its leading dash ("— My work process"). */
-export function DisplayTitle({ id, text, as: Tag = "h2", className = "" }) {
+/**
+ * The header every section shares: its number and label ("03 — Projects") in small monospace type, like a
+ * field on a shipping manifest, then the title and an optional introduction. `index` is the section's
+ * position on the page (see Layouts/Home.jsx); without it the label stands alone.
+ */
+export default function SectionHeader({ section, id, index, className = "", children }) {
+  const label = section.eyebrow;
   return (
-    <Tag id={id} className={`display text-display-lg ${className}`}>
-      <span aria-hidden="true" className="mr-[0.14em] inline-block h-[0.075em] w-[0.36em] bg-current align-[0.33em]" />
-      <MaskText text={text} />
-    </Tag>
-  );
-}
-
-/** Small label, oversized title and an optional uppercase intro — the header used by every section. */
-export default function SectionHeader({ section, id, className = "", children }) {
-  return (
-    <header className={className}>
-      {section.eyebrow && (
-        <Reveal as="p" y={12} className="caps mb-5 text-muted md:mb-6">
-          {section.eyebrow}
-        </Reveal>
+    <Reveal as="header" className={className}>
+      {(label || index) && (
+        <p className="eyebrow flex items-center gap-3">
+          {index && <span className="text-accent">{twoDigits(index)}</span>}
+          {index && label && <span aria-hidden="true" className="h-px w-8 bg-line-strong" />}
+          {label}
+        </p>
       )}
-      {section.title && <DisplayTitle id={id} text={section.title} />}
-      {section.subtitle && (
-        <Reveal as="p" y={16} delay={0.1} className="mt-6 max-w-[34rem] uppercase md:mt-8">
-          {section.subtitle}
-        </Reveal>
+      {section.title && (
+        <h2 id={id} className="display mt-4 max-w-[22ch] text-balance text-display-lg">
+          {section.title}
+        </h2>
       )}
+      {section.subtitle && <p className="mt-5 max-w-[42rem] text-lead text-body">{section.subtitle}</p>}
       {children}
-    </header>
+    </Reveal>
   );
 }

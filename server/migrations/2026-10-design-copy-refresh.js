@@ -5,10 +5,10 @@
 //
 // Same safety rule as before: a value is replaced only while it still holds the text it replaces.
 
-import * as V2 from "../../shared/default-content.js";
 import { CollectionModels, SingletonModels } from "../models/index.js";
 import { applyOrder, followsOrder, same } from "./helpers.js";
 import * as V1 from "./snapshots/content-v1.js";
+import * as V2 from "./snapshots/content-v2.js";
 
 // Text written by the first v2 migration that this one updates.
 const PREVIOUS_HERO_INTRO =

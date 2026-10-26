@@ -13,13 +13,12 @@ export const hostname = (url = "") => {
   }
 };
 
-/** "5+" → { prefix: "", number: 5, suffix: "+" }, so stats can count up. */
-export function parseStat(value = "") {
-  const match = String(value).match(/^(\D*?)(\d+(?:\.\d+)?)(.*)$/);
-  if (!match) return null;
-  return { prefix: match[1], number: Number(match[2]), suffix: match[3], decimals: (match[2].split(".")[1] || "").length };
-}
-
 export const isExternal = (url = "") => /^https?:\/\//i.test(url);
+
+/** 3 → "03" — section and step numbers. */
+export const twoDigits = (number) => String(number).padStart(2, "0");
+
+/** Props for a CV link: a file served by the site downloads; a shared link (e.g. Google Drive) opens in a new tab. */
+export const cvLinkProps = (url = "") => (url.startsWith("/") ? { download: "" } : {});
 
 export const unique = (list) => [...new Set(list)];

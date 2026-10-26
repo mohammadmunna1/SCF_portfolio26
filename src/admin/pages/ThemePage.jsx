@@ -30,57 +30,52 @@ const scopedVars = (palette) => ({ ...themeToCssVars(palette), "--c-danger": hex
 
 /** A miniature of the site drawn with the draft palette (same token classes as the real components). */
 function ThemePreview({ palette, profile }) {
-  const [firstWord, ...rest] = String(profile.headline || "SQA Engineer").split(/\s+/);
   return (
     <div style={scopedVars(palette)} aria-hidden="true" className="overflow-hidden rounded-xl border border-heading/10 bg-canvas text-[11px] leading-4 text-body">
-      <div className="flex items-center justify-between px-4 py-3">
-        <span className="text-[12px] uppercase text-heading">{profile.brand || profile.name || "Portfolio"}</span>
-        <span className="flex items-center gap-2 rounded-full bg-surface-raised py-0.5 pl-3 pr-0.5 text-[9px] uppercase text-heading">
-          Menu
-          <span className="grid h-5 w-5 place-items-center rounded-full bg-button">
-            <span className="h-px w-2 bg-button-text" />
-          </span>
+      <div className="flex items-center justify-between border-b border-line px-4 py-3">
+        <span className="text-[12px] font-semibold text-heading">{profile.brand || profile.name || "Portfolio"}</span>
+        <span className="flex items-center gap-3 text-[9.5px] font-medium">
+          <span className="text-heading">About</span>
+          <span>Projects</span>
+          <span className="inline-flex h-5 items-center rounded-full bg-button px-2.5 text-button-text">Download CV</span>
         </span>
       </div>
 
-      <div className="px-4 pb-5 pt-2 text-center">
-        <p className="display flex items-center justify-center gap-1.5 text-[3.6rem] leading-[0.75]">
-          <span>{firstWord}</span>
-          <span className="relative inline-block h-[0.72em] w-[0.33em] overflow-hidden rounded-full bg-photo">
+      <div className="grid grid-cols-[1.4fr_1fr] items-center gap-4 px-4 pb-5 pt-5">
+        <div>
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface-raised px-2 py-0.5 text-[8.5px] font-medium text-heading">
+            <span className="h-1 w-1 rounded-full bg-accent" />
+            {profile.availability || "Open to new roles"}
+          </span>
+          <p className="mt-2.5 font-mono text-[8px] uppercase tracking-[0.12em] text-muted">{profile.role || "Professional title"}</p>
+          <p className="display mt-1 text-[19px] leading-[1.08] tracking-[-0.03em]">{profile.headline || "Your headline"}</p>
+          <p className="mt-2 line-clamp-3 text-[9px] leading-[0.8rem]">{profile.heroIntro || "A short introduction under the headline."}</p>
+          <div className="mt-3 flex gap-1.5">
+            <span className="inline-flex h-5 items-center rounded-full bg-button px-2.5 text-[8.5px] font-medium text-button-text">Explore my projects</span>
+            <span className="inline-flex h-5 items-center rounded-full border border-line-strong px-2.5 text-[8.5px] font-medium text-heading">
+              View my background
+            </span>
+          </div>
+        </div>
+        <div className="relative mx-auto aspect-[5/6] w-full max-w-[9rem]">
+          <span className="absolute inset-[6%] rounded-full border border-dashed border-line-strong" />
+          <span className="absolute inset-x-[16%] bottom-[10%] top-[8%] overflow-hidden rounded-xl bg-photo">
             {profile.portrait && (
-              <img src={resolveAsset(profile.portrait)} alt="" className="absolute inset-x-0 bottom-0 h-[94%] w-full object-cover object-[46%_0%]" />
+              <img src={resolveAsset(profile.portrait)} alt="" className="absolute inset-x-0 bottom-0 h-[96%] w-full object-cover object-[50%_0%]" />
             )}
           </span>
-          {rest.length > 0 && <span>{rest.join(" ")}</span>}
-        </p>
-        <p className="mx-auto mt-3 max-w-[19rem] text-[9.5px] uppercase leading-[0.85rem]">
-          {profile.heroIntro || "Software quality assurance with a development background."}
-        </p>
-        <div className="mt-3 flex justify-center gap-2">
-          <span className="inline-flex h-6 items-center rounded-full border border-heading/80 px-3 text-[9px] uppercase text-heading">
-            Get in touch
-          </span>
-          <span className="inline-flex h-6 items-center rounded-full bg-button px-3 text-[9px] uppercase text-button-text">
-            Send message
-          </span>
+          <span className="absolute right-0 top-[38%] h-5 w-5 rounded-full bg-accent" />
         </div>
-        <p className="mt-4 flex items-center justify-between text-[9px] uppercase text-muted">
-          <span className="flex items-center gap-1.5">
-            <span className="h-1 w-1 rounded-full bg-accent" />
-            Available for work
-          </span>
-          <span className="text-accent">Accent link</span>
-        </p>
       </div>
 
-      <div className="grid gap-2.5 px-4 pb-4 sm:grid-cols-[1.2fr_1fr]">
+      <div className="grid gap-2.5 border-t border-line px-4 py-4 sm:grid-cols-[1.2fr_1fr]">
         <div className="card rounded-xl p-3">
-          <span className="inline-flex rounded-full bg-accent px-2 py-0.5 text-[8.5px] uppercase text-accent-on">Current role</span>
-          <p className="mt-2 text-[15px] font-normal leading-tight tracking-[-0.01em] text-heading">Junior SQA Engineer</p>
-          <p className="mt-1.5">Functional, regression and UAT testing with Cypress automation.</p>
+          <span className="inline-flex rounded-full bg-accent px-2 py-0.5 text-[8.5px] font-medium text-accent-on">In progress</span>
+          <p className="mt-2 text-[13px] font-semibold leading-tight tracking-[-0.01em] text-heading">Card heading</p>
+          <p className="mt-1.5">Body text on a card, with chips below.</p>
           <div className="mt-2 flex flex-wrap gap-1">
-            {["Cypress", "Jira", "Postman"].map((tool) => (
-              <span key={tool} className="rounded-full border border-heading/15 px-2 py-0.5 text-[8.5px] uppercase">
+            {["Procurement", "Inventory", "ERP"].map((tool) => (
+              <span key={tool} className="rounded-full border border-line px-2 py-0.5 text-[8.5px] text-heading">
                 {tool}
               </span>
             ))}
@@ -88,19 +83,17 @@ function ThemePreview({ palette, profile }) {
         </div>
         <div className="flex flex-col gap-2.5">
           <div className="rounded-xl border border-line bg-surface p-3">
-            <p className="text-heading">Panel heading</p>
+            <p className="font-semibold text-heading">Panel heading</p>
             <p className="mt-1">Panel and input text</p>
-            <span className="mt-2 block rounded-md border border-line-strong/60 bg-surface px-2 py-1 text-muted">Placeholder…</span>
+            <span className="mt-2 block rounded-md border border-line-strong bg-surface px-2 py-1 text-muted">Placeholder…</span>
             <p className="mt-1.5 text-danger">Error message</p>
           </div>
-          <ol className="border-t border-line-strong/60">
-            {["Manual testing", "Test automation"].map((item, index) => (
-              <li key={item} className="flex gap-2 border-b border-line-strong/60 py-1.5 uppercase text-heading">
-                <span className="text-muted">0{index + 1}.</span>
-                {item}
-              </li>
-            ))}
-          </ol>
+          <p className="flex items-center justify-between font-mono text-[8.5px] uppercase tracking-[0.1em] text-muted">
+            <span>
+              <span className="text-accent">03</span> — Muted label
+            </span>
+            <span className="text-accent">Accent</span>
+          </p>
         </div>
       </div>
     </div>
@@ -238,7 +231,7 @@ export default function ThemePage() {
         <div className="space-y-6">
           <Panel>
             <h2 className="text-lg font-medium text-heading">Presets</h2>
-            <p className="mt-1 text-sm text-body/80">Start from a palette built on the reference colours, then fine-tune below.</p>
+            <p className="mt-1 text-sm text-body/80">Start from a preset — light or dark — then fine-tune below.</p>
             <div className="mt-5 grid gap-2.5 sm:grid-cols-2">
               {THEME_PRESETS.map((preset, index) => {
                 const active = draftPreset?.id === preset.id;

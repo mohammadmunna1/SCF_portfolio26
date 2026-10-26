@@ -1,7 +1,7 @@
 // Colour design tokens for the whole site.
 // Each token is a CSS custom property holding "R G B" channels, so Tailwind classes like
-// `bg-canvas/80` keep working. The defaults are the approved reference palette
-// (reeves.webflow.io); src/index.css declares the same values for first paint — keep them in sync.
+// `bg-canvas/80` keep working. The default is the first preset ("Manifest": paper, ink and a
+// container-orange accent); src/index.css declares the same values for first paint — keep them in sync.
 
 export const THEME_TOKENS = [
   { key: "background", cssVar: "--c-bg", label: "Page background", group: "Backgrounds" },
@@ -21,9 +21,49 @@ export const THEME_TOKENS = [
 
 export const THEME_PRESETS = [
   {
+    id: "manifest",
+    name: "Manifest",
+    description: "Warm paper, ink and a container-orange accent (default).",
+    colors: {
+      background: "#F5F3EE",
+      surface: "#FBFAF7",
+      surfaceRaised: "#FFFFFF",
+      photoCard: "#E8E3D9",
+      heading: "#111A24",
+      body: "#3A4452",
+      muted: "#646D79",
+      border: "#E2DDD3",
+      borderStrong: "#C7C0B3",
+      accent: "#B93D0B",
+      onAccent: "#FFFFFF",
+      button: "#111A24",
+      buttonText: "#F5F3EE",
+    },
+  },
+  {
+    id: "night-freight",
+    name: "Night Freight",
+    description: "The same palette after dark: ink-blue night with a signal-orange accent.",
+    colors: {
+      background: "#0F141A",
+      surface: "#151B23",
+      surfaceRaised: "#1A222C",
+      photoCard: "#D8DEE6",
+      heading: "#EEF1F5",
+      body: "#C3CAD3",
+      muted: "#8D97A4",
+      border: "#242D39",
+      borderStrong: "#3B4757",
+      accent: "#F28C4E",
+      onAccent: "#0F141A",
+      button: "#EEF1F5",
+      buttonText: "#0F141A",
+    },
+  },
+  {
     id: "reeves",
     name: "Reeves Dark",
-    description: "The approved reference palette (default).",
+    description: "The previous design's charcoal palette.",
     colors: {
       background: "#232426",
       surface: "#2A2A2A",

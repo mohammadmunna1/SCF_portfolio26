@@ -21,31 +21,28 @@ export default {
         danger: token("--c-danger"),
       },
       fontFamily: {
-        // Humane loads automatically when its licensed files are added (src/lib/fonts.js);
-        // Six Caps (OFL) is the bundled stand-in with the same ultra-condensed proportions.
+        // The previous design's ultra-condensed face (Humane when its licensed files are added, see
+        // src/lib/fonts.js; Six Caps otherwise). Headlines now use Geist — see `.display` in src/index.css.
         display: ["Humane", "Six Caps", "Arial Narrow", "sans-serif"],
         sans: ["Geist Variable", "Geist", "system-ui", "-apple-system", "Segoe UI", "Roboto", "sans-serif"],
         mono: ["ui-monospace", "SFMono-Regular", "Cascadia Code", "Consolas", "Menlo", "monospace"],
       },
       fontSize: {
-        // Reference: Humane 320px / 224px line height at 1440px wide — scaled fluidly below that.
-        // Line heights stay ≥ 0.9 where titles can wrap, so stacked lines never touch.
-        "display-hero": ["clamp(6.5rem, 22.2vw, 20rem)", { lineHeight: "0.72" }],
-        "display-xl": ["clamp(5rem, 16vw, 15rem)", { lineHeight: "0.9" }],
-        "display-lg": ["clamp(3.75rem, 9vw, 8.5rem)", { lineHeight: "0.9" }],
-        "display-md": ["clamp(2.75rem, 5vw, 4.75rem)", { lineHeight: "0.92" }],
-        "display-sm": ["clamp(2rem, 2.6vw, 2.75rem)", { lineHeight: "0.92" }],
-        // Body copy (reference: Geist 16px / 22px, weight 300) is set on <body> in src/index.css.
+        // Geist headlines (used with the `.display` class), scaled fluidly from phones to wide screens.
+        // Tighter tracking as the size grows, as large Geist is set.
+        "display-hero": ["clamp(2.5rem, 1.55rem + 3.9vw, 4.5rem)", { lineHeight: "1.04", letterSpacing: "-0.035em" }],
+        "display-xl": ["clamp(2.5rem, 1.4rem + 4.6vw, 5.25rem)", { lineHeight: "1.02", letterSpacing: "-0.04em" }],
+        "display-lg": ["clamp(2rem, 1.45rem + 2.2vw, 3.25rem)", { lineHeight: "1.08", letterSpacing: "-0.03em" }],
+        "display-md": ["clamp(1.5rem, 1.25rem + 1vw, 2.125rem)", { lineHeight: "1.15", letterSpacing: "-0.025em" }],
+        "display-sm": ["clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem)", { lineHeight: "1.3", letterSpacing: "-0.015em" }],
+        // Body copy (Geist 16px / 1.6) is set on <body> in src/index.css.
         // No "body" size here: it would collide with the `text-body` colour class.
-        lead: ["clamp(1.0625rem, 1rem + 0.3vw, 1.25rem)", { lineHeight: "1.5" }],
-        caps: ["0.8125rem", { lineHeight: "1.25rem", letterSpacing: "0.02em" }],
-        micro: ["0.6875rem", { lineHeight: "1rem", letterSpacing: "0.06em" }],
+        lead: ["clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem)", { lineHeight: "1.65" }],
+        caps: ["0.8125rem", { lineHeight: "1.25rem", letterSpacing: "0.04em" }],
+        micro: ["0.6875rem", { lineHeight: "1rem", letterSpacing: "0.08em" }],
       },
       maxWidth: {
         prose: "65ch",
-      },
-      animation: {
-        "spin-slow": "spin 24s linear infinite",
       },
     },
   },

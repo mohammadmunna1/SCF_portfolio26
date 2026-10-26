@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { isExternal } from "../../lib/text";
 
-const VARIANTS = { outline: "btn-outline", primary: "btn-primary", quiet: "btn-quiet" };
+const VARIANTS = { outline: "btn-outline", primary: "btn-primary", quiet: "btn-quiet", accent: "btn-accent" };
 
 /**
- * Pill button in the reference's style (outlined "Get in touch").
- * Renders a router <Link> (to), an anchor (href) or a <button>. `size="sm"` is the compact card variant.
+ * Pill button. Renders a router <Link> (to), an anchor (href) or a <button>.
+ * `size="sm"` is the compact card variant.
  */
 export function Button({
   to,
@@ -50,7 +50,7 @@ export function Button({
   );
 }
 
-/** Four joined dots — the small mark the reference uses on its call-to-action buttons. */
+/** Four connected nodes — a small network mark for the contact buttons. */
 export function NodesIcon({ className = "" }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={className}>

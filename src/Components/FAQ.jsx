@@ -9,7 +9,7 @@ import SectionHeader from "./ui/SectionHeader";
 function FaqItem({ item, open, onToggle }) {
   const id = useId();
   return (
-    <div className="border-b border-line-strong/60">
+    <div className="border-b border-line">
       <h3>
         <button
           type="button"
@@ -17,7 +17,7 @@ function FaqItem({ item, open, onToggle }) {
           aria-expanded={open}
           aria-controls={`${id}-panel`}
           id={`${id}-button`}
-          className="flex w-full items-center justify-between gap-6 py-6 text-left text-[17px] uppercase text-heading md:py-7 md:text-lg"
+          className="flex w-full items-center justify-between gap-6 py-5 text-left text-[1.0625rem] font-semibold text-heading md:py-6"
         >
           {item.question}
           <motion.span animate={{ rotate: open ? 45 : 0 }} transition={SPRING_UI} className="shrink-0">
@@ -46,16 +46,16 @@ function FaqItem({ item, open, onToggle }) {
 }
 
 /** Questions and answers as a ruled accordion beside the section title. */
-const FAQ = ({ section }) => {
+const FAQ = ({ section, index }) => {
   const { faqs } = useContent();
   const [openId, setOpenId] = useState(faqs[0]?.id ?? null);
   if (!faqs.length) return null;
 
   return (
-    <section id="faq" aria-labelledby="faq-title" className="section-y">
+    <section id="faq" aria-labelledby="faq-title" className="section-y border-t border-line">
       <div className="container-site grid items-start gap-12 lg:grid-cols-12 lg:gap-10">
-        <SectionHeader section={section} id="faq-title" className="lg:sticky lg:top-28 lg:col-span-5" />
-        <Reveal className="border-t border-line-strong/60 lg:col-span-7">
+        <SectionHeader section={section} index={index} id="faq-title" className="lg:sticky lg:top-28 lg:col-span-5" />
+        <Reveal className="border-t border-line lg:col-span-7">
           {faqs.map((item) => (
             <FaqItem key={item.id} item={item} open={openId === item.id} onToggle={() => setOpenId(openId === item.id ? null : item.id)} />
           ))}

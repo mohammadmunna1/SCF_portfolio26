@@ -24,12 +24,9 @@ export default function SqaModal({ project, open, onClose }) {
           {/* Right padding keeps the first line clear of the close button */}
           <div className="flex flex-wrap items-center gap-3 pr-12">
             <span className="tag">{project.type}</span>
-            {project.testingType && <span className="meta">{project.testingType}</span>}
+            {project.testingType && <span className="meta text-muted">{project.testingType}</span>}
           </div>
-          <h2
-            id="sqa-modal-title"
-            className="mt-4 text-[2rem] font-normal leading-[1.1] tracking-[-0.02em] text-heading md:text-[2.5rem]"
-          >
+          <h2 id="sqa-modal-title" className="display mt-4 text-display-md">
             {project.title}
           </h2>
           {project.summary && <p className="copy mt-4 max-w-prose">{project.summary}</p>}
@@ -51,8 +48,8 @@ export default function SqaModal({ project, open, onClose }) {
               <dl className="grid gap-x-10 gap-y-5 sm:grid-cols-2">
                 {details.map(([label, value]) => (
                   <div key={label}>
-                    <dt className="meta text-muted">{label}</dt>
-                    <dd className="mt-1.5 text-base font-light leading-relaxed text-heading">{value}</dd>
+                    <dt className="eyebrow">{label}</dt>
+                    <dd className="mt-1.5 text-base leading-relaxed text-heading">{value}</dd>
                   </div>
                 ))}
               </dl>
@@ -67,7 +64,7 @@ export default function SqaModal({ project, open, onClose }) {
 
           {project.tools?.length > 0 && (
             <div className="mt-8">
-              <h3 className="meta">Tools</h3>
+              <h3 className="eyebrow">Tools</h3>
               <ul className="mt-3 flex flex-wrap gap-2">
                 {project.tools.map((tool) => (
                   <li key={tool} className="chip-line">
@@ -86,7 +83,7 @@ export default function SqaModal({ project, open, onClose }) {
                 </Button>
               )}
               {project.liveUrl && (
-                <Button size="sm" href={project.liveUrl} icon={LuArrowUpRight}>
+                <Button size="sm" variant="outline" href={project.liveUrl} icon={LuArrowUpRight}>
                   Live demo
                 </Button>
               )}

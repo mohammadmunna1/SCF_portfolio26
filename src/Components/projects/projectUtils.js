@@ -1,6 +1,8 @@
 import { useCallback, useState } from "react";
 
 export const CATEGORY_LABELS = {
+  "supply-chain": "Supply Chain",
+  automation: "Automation & AI",
   fullstack: "Full Stack",
   frontend: "Frontend",
   backend: "Backend",
@@ -11,6 +13,14 @@ const pad = (number) => String(number).padStart(2, "0");
 
 /** "01 / 06" — project counter. */
 export const counter = (index, total) => `${pad(index + 1)} / ${pad(total)}`;
+
+/** Supply chain projects lead the Projects section as case studies. */
+export const isSupplyChain = (project) => project.category === "supply-chain";
+
+export const isAutomation = (project) => project.category === "automation";
+
+/** Everything else in the Projects collection: web and software work. */
+export const isSoftware = (project) => !isSupplyChain(project) && !isAutomation(project);
 
 const SQA_TYPES = ["Automation", "Manual"];
 
@@ -26,21 +36,6 @@ export const sqaFilters = (projects) => [
 
 export const filterSqa = (projects, filter) =>
   filter === "all" ? projects : projects.filter((project) => project.type === filter);
-
-/** Filter tabs (with counts) for the development project categories that exist. */
-export const categoryFilters = (projects) => [
-  { key: "all", label: "All", count: projects.length },
-  ...Object.keys(CATEGORY_LABELS)
-    .filter((key) => projects.some((project) => project.category === key))
-    .map((key) => ({
-      key,
-      label: CATEGORY_LABELS[key],
-      count: projects.filter((project) => project.category === key).length,
-    })),
-];
-
-export const filterByCategory = (projects, filter) =>
-  filter === "all" ? projects : projects.filter((project) => project.category === filter);
 
 /** Keeps the selected project mounted while the modal animates out. */
 export function useProjectModal() {

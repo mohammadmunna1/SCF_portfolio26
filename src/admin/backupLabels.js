@@ -2,13 +2,14 @@ import { COLLECTIONS } from "../../shared/schema.js";
 
 /** Short names for the essential homepage sections (see ESSENTIAL_SECTIONS in shared/content-backup.js). */
 export const SECTION_NAMES = {
+  stats: "At a glance",
   about: "About",
-  stats: "Stats",
-  sqa: "SQA projects",
   experience: "Experience",
-  work: "Development",
-  skills: "Skills",
+  work: "Projects",
+  sqa: "QA projects",
   education: "Education",
+  courses: "Courses & certifications",
+  skills: "Skills",
   contact: "Contact",
 };
 

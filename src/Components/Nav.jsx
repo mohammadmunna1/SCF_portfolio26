@@ -1,11 +1,14 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { LuArrowRight, LuDownload, LuMenu, LuX } from "react-icons/lu";
 import { Link, useLocation } from "react-router-dom";
 import { useContent } from "../context/ContentContext";
 import { useFocusTrap } from "../hooks/useFocusTrap";
 import { useActiveSection, useLockBodyScroll, useScrollState } from "../hooks/useScrollState";
-import { EASE_OUT, SPRING_UI } from "../lib/motion";
+import { EASE_OUT } from "../lib/motion";
+import { cvLinkProps, twoDigits } from "../lib/text";
+import { Button } from "./ui/Buttons";
 import RollText from "./ui/RollText";
 
 /** In-page link on the homepage, router link (back to the homepage section) elsewhere. */
@@ -21,27 +24,8 @@ export function SectionLink({ id, onHome, children, ...rest }) {
   );
 }
 
-/** Two lines that turn into a cross — inside the light circle of the menu pill. */
-function MenuGlyph({ open }) {
-  return (
-    <span className="grid h-9 w-9 place-items-center rounded-full bg-button text-button-text">
-      <span className="relative block h-2 w-3.5">
-        <motion.span
-          className="absolute left-0 top-0 h-px w-3.5 bg-current"
-          animate={open ? { y: 3.5, rotate: 45 } : { y: 0, rotate: 0 }}
-          transition={SPRING_UI}
-        />
-        <motion.span
-          className="absolute bottom-0 left-0 h-px w-3.5 bg-current"
-          animate={open ? { y: -4, rotate: -45 } : { y: 0, rotate: 0 }}
-          transition={SPRING_UI}
-        />
-      </span>
-    </span>
-  );
-}
-
-function MenuPanel({ links, onHome, active, onClose }) {
+/** The menu on phones and tablets: a sheet below the header, listing every section. */
+function MenuPanel({ links, onHome, active, resumeUrl, onClose }) {
   const panelRef = useRef(null);
   useFocusTrap(panelRef, true, onClose);
 
@@ -49,12 +33,12 @@ function MenuPanel({ links, onHome, active, onClose }) {
     <>
       <motion.div
         aria-hidden="true"
-        className="fixed inset-0 z-[60] bg-canvas/40 backdrop-blur-md"
+        className="fixed inset-0 z-[60] bg-heading/20 backdrop-blur-[2px]"
         onClick={onClose}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.4 }}
+        transition={{ duration: 0.2 }}
       />
       <motion.div
         ref={panelRef}
@@ -62,65 +46,66 @@ function MenuPanel({ links, onHome, active, onClose }) {
         role="dialog"
         aria-modal="true"
         aria-label="Menu"
-        className="fixed inset-y-0 right-0 z-[70] flex w-full flex-col overflow-y-auto rounded-l-[28px] bg-button text-button-text sm:w-[min(36rem,92vw)]"
-        initial={{ x: "100%" }}
-        animate={{ x: 0 }}
-        exit={{ x: "100%", transition: { duration: 0.45, ease: EASE_OUT } }}
-        transition={{ duration: 0.7, ease: EASE_OUT }}
+        className="fixed inset-x-3 top-3 z-[70] max-h-[calc(100svh-1.5rem)] overflow-y-auto rounded-2xl border border-line bg-surface-raised p-2 shadow-xl sm:left-auto sm:w-[22rem]"
+        initial={{ opacity: 0, y: -8 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -8 }}
+        transition={{ duration: 0.2, ease: EASE_OUT }}
       >
-        <div className="flex h-[76px] shrink-0 items-center justify-end px-5 sm:px-8 md:h-[92px] xl:pr-20">
+        <div className="flex items-center justify-between py-1 pl-4 pr-1">
+          <span className="eyebrow">Menu</span>
           <button
             type="button"
             onClick={onClose}
-            className="flex h-11 items-center gap-3 rounded-full bg-surface-raised py-1 pl-1 pr-5 text-heading"
+            aria-label="Close menu"
+            className="grid h-10 w-10 place-items-center rounded-full text-heading transition-colors hover:bg-heading/[0.06]"
           >
-            <MenuGlyph open />
-            <span className="caps">Close</span>
+            <LuX aria-hidden="true" className="h-5 w-5" />
           </button>
         </div>
-
-        <nav aria-label="Site" className="flex flex-1 flex-col justify-center px-8 py-6 sm:px-14">
-          <ul>
+        <nav aria-label="Site">
+          <ul className="divide-y divide-line border-y border-line">
             {links.map((link, index) => (
-              <motion.li
-                key={link.key}
-                initial={{ opacity: 0, x: 40 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, ease: EASE_OUT, delay: 0.15 + index * 0.045 }}
-              >
+              <li key={link.key}>
                 <SectionLink
                   id={link.key}
                   onHome={onHome}
                   onClick={onClose}
                   aria-current={active === link.key ? "true" : undefined}
-                  className="roll-host block py-1 text-[clamp(2.25rem,4.2vw,3.25rem)] font-light uppercase leading-[1.1] tracking-[-0.01em]"
+                  className="flex items-center justify-between gap-4 px-4 py-3.5 text-[1.0625rem] font-medium text-heading transition-colors hover:bg-heading/[0.04]"
                 >
-                  <RollText copyClassName="text-button-text/45">{link.navLabel}</RollText>
+                  {link.navLabel}
+                  <span className={`eyebrow ${active === link.key ? "text-accent" : ""}`}>{twoDigits(index + 1)}</span>
                 </SectionLink>
-              </motion.li>
+              </li>
             ))}
-            <motion.li
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, ease: EASE_OUT, delay: 0.15 + links.length * 0.045 }}
-            >
+            <li>
               <Link
                 to="/projects"
                 onClick={onClose}
-                className="roll-host block py-1 text-[clamp(2.25rem,4.2vw,3.25rem)] font-light uppercase leading-[1.1] tracking-[-0.01em]"
+                className="flex items-center justify-between gap-4 px-4 py-3.5 text-[1.0625rem] font-medium text-heading transition-colors hover:bg-heading/[0.04]"
               >
-                <RollText copyClassName="text-button-text/45">All projects</RollText>
+                All projects
+                <LuArrowRight aria-hidden="true" className="h-4 w-4 text-muted" />
               </Link>
-            </motion.li>
+            </li>
           </ul>
         </nav>
+        {resumeUrl && (
+          <Button href={resumeUrl} variant="primary" leadingIcon={LuDownload} className="mt-2 w-full" {...cvLinkProps(resumeUrl)}>
+            Download CV
+          </Button>
+        )}
       </motion.div>
     </>,
     document.body
   );
 }
 
-/** Logo and the reference's "Menu" pill, which opens a full-height side panel. */
+/**
+ * The site header: the name (rolling to the professional title on hover), the section links — inline on
+ * large screens, in a menu below that — and the Download CV button. It tucks away while scrolling down.
+ */
 const Nav = () => {
   const { profile, sections } = useContent();
   const { pathname } = useLocation();
@@ -129,7 +114,7 @@ const Nav = () => {
   const { scrolled, hidden } = useScrollState();
   useLockBodyScroll(open);
 
-  const links = [{ key: "home", navLabel: "Home" }, ...sections.filter((section) => section.navLabel)];
+  const links = sections.filter((section) => section.navLabel);
   const active = useActiveSection(onHome ? links.map((link) => link.key) : []);
 
   useEffect(() => setOpen(false), [pathname]);
@@ -138,33 +123,67 @@ const Nav = () => {
     <>
       <motion.header
         className="fixed inset-x-0 top-0 z-50"
-        initial={{ y: -24, opacity: 0 }}
-        animate={{ y: hidden && !open ? "-110%" : 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: EASE_OUT }}
+        initial={false}
+        animate={{ y: hidden && !open ? "-100%" : 0 }}
+        transition={{ duration: 0.3, ease: EASE_OUT }}
       >
-        <motion.div
+        <div
           aria-hidden="true"
-          className="absolute inset-0 border-b border-line bg-canvas/85 backdrop-blur-md"
-          initial={false}
-          animate={{ opacity: scrolled ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
+          className={`absolute inset-0 border-b backdrop-blur-md transition-colors duration-300 ${
+            scrolled ? "border-line bg-canvas/90" : "border-transparent bg-canvas/0"
+          }`}
         />
-        <nav aria-label="Main" className="container-site relative flex h-[76px] items-center justify-between md:h-[92px]">
-          <Link to="/" className="roll-host text-[19px] font-normal tracking-[0.01em] text-heading md:text-[22px]">
-            <RollText copy={profile.brandHover} copyClassName="text-muted">
+        <nav aria-label="Main" className="container-site relative flex h-[68px] items-center justify-between gap-6 md:h-[76px]">
+          <Link to="/" className="roll-host shrink-0 text-[1.0625rem] font-semibold tracking-[-0.01em] text-heading">
+            <RollText copy={profile.brandHover} copyClassName="text-accent">
               {profile.brand || profile.name}
             </RollText>
           </Link>
-          <button
-            type="button"
-            onClick={() => setOpen(true)}
-            aria-expanded={open}
-            aria-controls="site-menu"
-            className="flex h-11 items-center gap-3 rounded-full bg-surface-raised py-1 pl-5 pr-1 text-heading transition-colors hover:bg-line-strong/60"
-          >
-            <span className="caps">Menu</span>
-            <MenuGlyph open={false} />
-          </button>
+
+          <ul className="hidden items-center gap-0.5 xl:flex">
+            {links.map((link) => (
+              <li key={link.key}>
+                <SectionLink
+                  id={link.key}
+                  onHome={onHome}
+                  aria-current={active === link.key ? "true" : undefined}
+                  className={`relative block rounded-full px-3 py-2 text-[0.875rem] font-medium transition-colors ${
+                    active === link.key ? "text-heading" : "text-body hover:text-heading"
+                  }`}
+                >
+                  {link.navLabel}
+                  {active === link.key && (
+                    <span aria-hidden="true" className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-accent" />
+                  )}
+                </SectionLink>
+              </li>
+            ))}
+          </ul>
+
+          <div className="flex items-center gap-2">
+            {profile.resumeUrl && (
+              <Button
+                href={profile.resumeUrl}
+                size="sm"
+                variant="primary"
+                leadingIcon={LuDownload}
+                className="hidden sm:inline-flex"
+                {...cvLinkProps(profile.resumeUrl)}
+              >
+                Download CV
+              </Button>
+            )}
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              aria-expanded={open}
+              aria-controls="site-menu"
+              className="btn btn-sm btn-outline xl:hidden"
+            >
+              <LuMenu aria-hidden="true" className="h-4 w-4" />
+              Menu
+            </button>
+          </div>
         </nav>
       </motion.header>
 
@@ -175,6 +194,7 @@ const Nav = () => {
             links={links}
             onHome={onHome}
             active={active}
+            resumeUrl={profile.resumeUrl}
             onClose={() => setOpen(false)}
           />
         )}

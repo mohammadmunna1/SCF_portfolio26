@@ -8,7 +8,7 @@ import { useToast } from "../Toast";
 import { backupPartLabel } from "../backupLabels";
 import { PageHeader, Panel, Spinner } from "../ui";
 
-const SHOWN = ["sqaProjects", "projects", "experience", "skills", "education", "certifications", "achievements", "faqs"];
+const SHOWN = ["projects", "certifications", "experience", "education", "skills", "sqaProjects", "achievements", "faqs"];
 
 export default function DashboardPage() {
   const { handleError } = useAuth();
@@ -30,7 +30,8 @@ export default function DashboardPage() {
 
   const quickActions = [
     { to: "/admin/profile", icon: LuUser, label: "Edit profile & hero" },
-    { to: "/admin/collections/sqaProjects", icon: LuPlus, label: "Manage SQA projects" },
+    { to: "/admin/collections/projects", icon: LuPlus, label: "Manage projects" },
+    { to: "/admin/collections/certifications", icon: LuPlus, label: "Manage courses & certifications" },
     { to: "/admin/theme", icon: LuPalette, label: "Customise colours" },
     { to: "/admin/collections/sections", icon: LuArrowRight, label: "Show, hide or reorder sections" },
   ];

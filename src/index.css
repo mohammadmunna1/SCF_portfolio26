@@ -1,0 +1,430 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Default palette ("Reeves Dark") as R G B channels — keep in sync with shared/theme.js.
+     A palette saved in the admin panel overrides these at runtime (src/lib/theme.js). */
+  :root {
+    --c-bg: 35 36 38; /* #232426 */
+    --c-surface: 42 42 42; /* #2A2A2A */
+    --c-raised: 52 53 55; /* #343537 */
+    --c-photo: 227 225 226; /* #E3E1E2 */
+    --c-heading: 225 225 225; /* #E1E1E1 */
+    --c-body: 204 204 204; /* #CCCCCC */
+    --c-muted: 140 140 148; /* #8C8C94 */
+    --c-border: 52 53 55; /* #343537 */
+    --c-border-strong: 107 108 108; /* #6B6C6C */
+    --c-accent: 203 163 133; /* #CBA385 */
+    --c-on-accent: 35 36 38; /* #232426 */
+    --c-button: 225 225 225; /* #E1E1E1 */
+    --c-button-text: 35 36 38; /* #232426 */
+    --c-danger: 242 161 150; /* #F2A196 — picked automatically for dark or light palettes */
+    color-scheme: dark;
+  }
+
+  html {
+    background: rgb(var(--c-bg));
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    @apply bg-canvas font-sans text-body antialiased;
+    font-size: 1rem;
+    line-height: 1.375rem;
+    font-weight: 300;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-heading;
+    font-weight: 400;
+  }
+
+  strong,
+  b {
+    font-weight: 500;
+  }
+
+  ::selection {
+    background: rgb(var(--c-button));
+    color: rgb(var(--c-button-text));
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--c-accent));
+    outline-offset: 3px;
+  }
+
+  section[id] {
+    scroll-margin-top: 72px;
+  }
+
+  img {
+    -webkit-user-drag: none;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-[1600px] px-5 sm:px-8 lg:px-12 xl:px-20;
+  }
+
+  .section-y {
+    @apply py-20 md:py-28 xl:py-32;
+  }
+
+  /* Oversized condensed type (Humane, or the Six Caps stand-in) — hero and titles only */
+  .display {
+    @apply font-display font-normal uppercase text-heading;
+    letter-spacing: 0;
+  }
+
+  /* Small uppercase Geist, as used for labels in the reference */
+  .caps {
+    @apply text-caps font-normal uppercase;
+  }
+
+  /* ── Typography inside sections (Geist) ─────────────────────────────────────
+     The condensed display face is kept for the hero, section titles and footer, where it is
+     set huge. Content inside sections uses Geist at sizes and weights that stay easy to read. */
+
+  /* Names of projects, roles, degrees and skill groups */
+  .title-item {
+    @apply font-sans text-[1.5rem] font-normal leading-[1.2] tracking-[-0.015em] text-heading md:text-[1.75rem] xl:text-[2rem];
+  }
+
+  /* Descriptions, paragraphs and bullet points — light, so they read as body text, not titles */
+  .copy {
+    @apply text-base font-light leading-[1.7] md:text-[1.0625rem];
+  }
+
+  /* Project cards sit two or three to a row from tablets up, so they use the same styles one step
+     smaller there; on phones (one full-width card) they match the Experience and Skills cards. */
+  .title-card {
+    @apply font-sans text-[1.5rem] font-normal leading-[1.25] tracking-[-0.01em] text-heading md:text-[1.375rem];
+  }
+
+  .copy-card {
+    @apply text-base font-light leading-[1.6] md:text-[0.9375rem];
+  }
+
+  /* Small uppercase details: dates, places, field labels, counters */
+  .meta {
+    @apply text-[0.8125rem] font-normal uppercase leading-5 tracking-[0.06em];
+  }
+
+  /* Project type / category badge */
+  .tag {
+    @apply inline-flex items-center rounded-full border border-heading/20 px-2.5 py-1 text-[0.75rem] font-normal uppercase leading-4 tracking-[0.06em] text-heading;
+  }
+
+  /* Hero portrait pill: as tall as the capital letters and sitting on their baseline (the flex row is
+     baseline-aligned, and an image-only box aligns by its bottom edge). The `cap` unit follows whichever
+     display font is active — Humane or the Six Caps stand-in; older browsers use the em fallback. */
+  .hero-capsule {
+    height: 0.87em;
+    width: 0.4em;
+    height: 1cap;
+    width: 0.46cap;
+  }
+
+  .btn {
+    @apply inline-flex h-12 items-center justify-center gap-2.5 whitespace-nowrap rounded-full px-7 text-[15px] font-normal uppercase tracking-[0.04em] transition-colors duration-300 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  /* Compact buttons for cards: never compete with the preview they sit under */
+  .btn-sm {
+    @apply h-8 gap-1.5 px-3.5 text-[12px] tracking-[0.05em];
+  }
+
+  .btn-outline {
+    @apply border border-heading/80 text-heading hover:border-button hover:bg-button hover:text-button-text;
+  }
+
+  .btn-primary {
+    @apply border border-button bg-button text-button-text hover:bg-button/85;
+  }
+
+  .btn-quiet {
+    @apply border border-line-strong/70 text-heading hover:border-heading;
+  }
+
+  /* Pills listing tools, technologies and skills (names keep their own casing, e.g. "Next.js").
+     Filled — on the page background */
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full bg-surface-raised px-3 py-1.5 text-sm font-light leading-5 text-heading;
+  }
+
+  /* Outlined — on cards */
+  .chip-line {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-heading/15 px-3 py-1.5 text-sm font-light leading-5 text-heading;
+  }
+
+  /* Compact size, for project cards */
+  .chip-sm {
+    @apply px-2.5 py-1 text-[0.8125rem];
+  }
+
+  /* About: current focus / previous experience — a numbered `.chip-line` that fills from the bottom on hover */
+  .capsule {
+    @apply gap-2 overflow-hidden;
+    transition: border-color 0.45s ease;
+  }
+
+  .card {
+    @apply rounded-[20px] border border-line bg-surface-raised;
+  }
+
+  .rule {
+    @apply h-px w-full bg-line-strong/60;
+  }
+
+  .input {
+    @apply w-full rounded-2xl border border-line-strong/60 bg-surface px-4 py-3.5 text-[15px] font-normal text-heading transition-colors placeholder:text-muted focus:border-heading focus:outline-none;
+  }
+
+  /* Underline that grows on hover — for text links */
+  .link {
+    @apply relative inline-flex items-center gap-1;
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+    transition: background-size 0.3s ease;
+  }
+
+  .link:hover,
+  .link:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  }
+
+  /* A single row that's cut off at the right fades out there instead of stopping mid-word */
+  .mask-fade-right {
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
+  }
+
+  /* Code cut to fit a card preview: long lines and the last visible lines fade out instead of stopping mid-glyph */
+  .mask-fade-code {
+    -webkit-mask-image: linear-gradient(to right, #000 85%, transparent), linear-gradient(to bottom, #000 72%, transparent);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to right, #000 85%, transparent), linear-gradient(to bottom, #000 72%, transparent);
+    mask-composite: intersect;
+  }
+
+  /* ── Hover interactions (reference: reeves.webflow.io) ───────────────────────────
+     Rolling label (<RollText>): inside a `.roll-host`, the text slides up and out while a copy rises
+     from below. Rows with `.hover-fill` fill with light grey from the bottom, and their text darkens. */
+  /* Both lines share one grid cell, so the box fits the longer of the two texts. */
+  .roll {
+    display: inline-grid;
+    overflow: hidden;
+    vertical-align: top;
+  }
+
+  .roll-line {
+    grid-area: 1 / 1;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .roll-copy {
+    transform: translateY(105%);
+  }
+
+  .hover-fill {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .hover-fill::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgb(var(--c-button));
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .hover-fill-ink,
+  .hover-fill-soft {
+    transition: color 0.45s ease;
+  }
+}
+
+/* Hover only where there's a real pointer (no "stuck" hover after a tap); keyboard focus gets the roll too. */
+@media (hover: hover) and (pointer: fine) {
+  .roll-host:hover .roll-line:not(.roll-copy) {
+    transform: translateY(-105%);
+  }
+
+  .roll-host:hover .roll-copy {
+    transform: translateY(0);
+  }
+
+  .hover-fill:hover::before {
+    transform: scaleY(1);
+  }
+
+  .hover-fill:hover .hover-fill-ink {
+    color: rgb(var(--c-button-text));
+  }
+
+  .hover-fill:hover .hover-fill-soft {
+    color: rgb(var(--c-button-text) / 0.6);
+  }
+
+  .capsule:hover {
+    border-color: rgb(var(--c-button));
+  }
+}
+
+.roll-host:focus-visible .roll-line:not(.roll-copy) {
+  transform: translateY(-105%);
+}
+
+.roll-host:focus-visible .roll-copy {
+  transform: translateY(0);
+}
+
+.hover-fill:focus-visible::before {
+  transform: scaleY(1);
+}
+
+.hover-fill:focus-visible .hover-fill-ink {
+  color: rgb(var(--c-button-text));
+}
+
+.hover-fill:focus-visible .hover-fill-soft {
+  color: rgb(var(--c-button-text) / 0.6);
+}
+
+/* Touch screens: the same effect while a finger is down, so a tap still gives feedback. */
+@media (hover: none) {
+  .roll-host:active .roll-line:not(.roll-copy) {
+    transform: translateY(-105%);
+  }
+
+  .roll-host:active .roll-copy {
+    transform: translateY(0);
+  }
+
+  .hover-fill:active::before {
+    transform: scaleY(1);
+  }
+
+  .hover-fill:active .hover-fill-ink {
+    color: rgb(var(--c-button-text));
+  }
+
+  .hover-fill:active .hover-fill-soft {
+    color: rgb(var(--c-button-text) / 0.6);
+  }
+
+  .capsule:active {
+    border-color: rgb(var(--c-button));
+  }
+}
+
+/* Reduced motion: the copy swaps in instantly and the fill appears without moving. */
+@media (prefers-reduced-motion: reduce) {
+  .roll-line,
+  .hover-fill::before {
+    transition: none;
+  }
+}
+
+/* ── Stacked cards (useCardStack + <StackItem>) ───────────────────────────────────────────────────
+   Where useCardStack turns the deck on (phones, or every screen size for lists that ask for it) it sets
+   `data-stacked` on the list. Each card then sticks below the header, a little lower than the one
+   before, so earlier cards show as layered edges while the next one slides over them. A card taller
+   than the screen sticks only once its end is in view (--stack-h is its height), so nothing is covered
+   before it has been read. With reduced motion the list always scrolls normally. */
+@media (prefers-reduced-motion: no-preference) {
+  .stack[data-stacked] {
+    --stack-top: 5.5rem; /* below the 76px header */
+    --stack-peek: 0.625rem; /* how much of each earlier card shows */
+    overflow: clip; /* the underlays below end with the list */
+  }
+
+  .stack[data-stacked] > .stack-card {
+    position: sticky;
+    top: calc(var(--stack-top) + var(--stack-index, 0) * var(--stack-peek));
+    top: min(calc(var(--stack-top) + var(--stack-index, 0) * var(--stack-peek)), calc(100svh - var(--stack-h, 0px) - 1rem));
+  }
+
+  /* As a deck whose earlier cards are taller than its last one ends, the content of those cards fades
+     (see useCardStack) — their surfaces stay, so the deck keeps its layers but shows no cut-off text */
+  .stack[data-stacked] > .stack-card:not(:last-child) > * > * {
+    opacity: var(--stack-fade, 1);
+  }
+
+  /* Covers whatever an earlier, taller card would otherwise show below this one */
+  .stack[data-stacked] > .stack-card::after {
+    content: "";
+    position: absolute;
+    inset: 100% 0 auto;
+    height: 100svh;
+    background: rgb(var(--c-bg));
+  }
+
+  /* Keyboard users get an ordinary list, so the focused link is never hidden under another card */
+  .stack[data-stacked]:has(:focus-visible) > .stack-card {
+    position: relative;
+    top: auto;
+  }
+}
+
+/* From tablets up: below the taller 92px header, with a little more of each earlier card showing */
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .stack[data-stacked] {
+    --stack-top: 7rem;
+    --stack-peek: 0.875rem;
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@layer utilities {
+  .marquee-track {
+    animation: marquee var(--marquee-duration, 40s) linear infinite;
+  }
+
+  .marquee:hover .marquee-track,
+  .marquee:focus-within .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track,
+    .animate-spin-slow {
+      animation: none;
+    }
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -1,0 +1,908 @@
+{
+  "format": 1,
+  "generatedAt": "2026-10-18T19:44:04.084Z",
+  "source": "https://codewithmunna.vercel.app/api/content",
+  "fingerprint": "5567924f71179ca3",
+  "hiddenSections": [
+    "testimonials",
+    "faq"
+  ],
+  "migrations": [
+    "2026-10-sqa-profile-refresh",
+    "2026-10-design-copy-refresh",
+    "2026-10-site-name",
+    "2026-10-logo-hover"
+  ],
+  "content": {
+    "profile": {
+      "name": "Mohammad Munna Mia",
+      "brand": "Munna",
+      "brandHover": "QA x DEV",
+      "role": "SQA Engineer",
+      "portrait": "/backup-assets/6ad3cb449a10ae1fbc541018.webp",
+      "availableForWork": true,
+      "headline": "SQA Engineer",
+      "heroIntro": "Hey there, I'm Mohammad Munna Mia — an SQA Engineer focused on manual testing, test automation, regression, API and end-to-end testing, with a background in front-end and full-stack development.",
+      "about": "Hi there! I'm Mohammad Munna Mia, an SQA Engineer based in Dhaka, Bangladesh. At Spectrum Software & Consulting (SSCL) I test OptiFin, a Supply Chain Finance solution used by leading banks in Bangladesh — running functional, regression and on-site User Acceptance Testing with banking stakeholders, and automating test cases with Cypress.\n\nBefore moving into quality assurance, I worked as a front-end and full-stack developer, building responsive web applications with React.js, Next.js, Svelte, TypeScript and the MERN stack. That development background helps me understand how software is built, write maintainable automation and report defects developers can act on.\n\nI hold a B.Sc. in Computer Science and Engineering from IUBAT. I believe in building quality into software, not testing it in later.",
+      "focusAreas": [
+        "Manual Testing",
+        "Test Automation",
+        "Regression Testing",
+        "API Testing",
+        "End-to-End Testing",
+        "Cypress"
+      ],
+      "devBackground": [
+        "Front-end Development",
+        "Full-stack Development",
+        "React.js",
+        "Next.js",
+        "Svelte",
+        "TypeScript",
+        "Javascript"
+      ],
+      "email": "mohammadmunnamia0@gmail.com",
+      "phone": "+8801858201032",
+      "location": "Uttara, Dhaka, Bangladesh",
+      "resumeUrl": "https://drive.google.com/file/d/1DS-XyN0chrT0D1-428y1IgOfYpoU7-Gk/view?usp=sharing",
+      "ctaTitle": "Let's work together!",
+      "ctaButtonLabel": "Get in touch",
+      "siteTitle": "Munna",
+      "siteDescription": "Portfolio of Mohammad Munna Mia — SQA Engineer specializing in manual testing, test automation, regression, API and end-to-end testing, with a background in front-end and full-stack development."
+    },
+    "theme": {
+      "background": "#242424",
+      "surface": "#2A2A2A",
+      "surfaceRaised": "#343537",
+      "photoCard": "#D6D4D2",
+      "heading": "#E3E1E2",
+      "body": "#D6D4D2",
+      "muted": "#8C9492",
+      "border": "#343537",
+      "borderStrong": "#717070",
+      "accent": "#CBA385",
+      "onAccent": "#242424",
+      "button": "#E3E1E2",
+      "buttonText": "#242424"
+    },
+    "sections": [
+      {
+        "id": "6ad10f7baceac04813c18895",
+        "navLabel": "About",
+        "eyebrow": "About",
+        "title": "About Me",
+        "subtitle": "",
+        "ctaLabel": "",
+        "key": "about"
+      },
+      {
+        "id": "6ad10f7baceac04813c1889a",
+        "navLabel": "",
+        "eyebrow": "",
+        "title": "Highlights",
+        "subtitle": "",
+        "ctaLabel": "",
+        "key": "stats"
+      },
+      {
+        "id": "6ad10f7baceac04813c18897",
+        "navLabel": "Experience",
+        "eyebrow": "Career",
+        "title": "Experience",
+        "subtitle": "",
+        "ctaLabel": "",
+        "key": "experience"
+      },
+      {
+        "id": "6ad10f7baceac04813c18899",
+        "navLabel": "SQA Projects",
+        "eyebrow": "01 — Current focus",
+        "title": "SQA & Test Automation",
+        "subtitle": "Cypress, BDD, Selenium WebDriver, Playwright, TestNG, API testing, regression testing and end-to-end automation.",
+        "ctaLabel": "View all SQA projects",
+        "key": "sqa"
+      },
+      {
+        "id": "6ad10f7baceac04813c18894",
+        "navLabel": "Development",
+        "eyebrow": "02 — Previous experience",
+        "title": "Software Development",
+        "subtitle": "Front-end and full-stack projects from my development years — the technical foundation behind my QA work.",
+        "ctaLabel": "View all projects",
+        "key": "work"
+      },
+      {
+        "id": "6ad10f7baceac04813c18898",
+        "navLabel": "Skills",
+        "eyebrow": "Toolkit",
+        "title": "Skills",
+        "subtitle": "Quality assurance and automation first — with development skills as a strong foundation.",
+        "ctaLabel": "",
+        "key": "skills"
+      },
+      {
+        "id": "6ad11bb2cc6c5236e0d2ef10",
+        "navLabel": "Education",
+        "eyebrow": "Background",
+        "title": "Education",
+        "subtitle": "",
+        "ctaLabel": "",
+        "key": "education"
+      },
+      {
+        "id": "6ad10f7baceac04813c1889d",
+        "navLabel": "Contact",
+        "eyebrow": "Contact",
+        "title": "Let's Talk",
+        "subtitle": "Have a question or want to work together? Feel free to contact me!",
+        "ctaLabel": "Send Message",
+        "key": "contact"
+      }
+    ],
+    "sqaProjects": [
+      {
+        "id": "6ad11cb4f09826405a473580",
+        "title": "Cypress Automation with BDD Framework",
+        "type": "Automation",
+        "summary": "A behaviour-driven Cypress test suite for OptiFin, a Supply Chain Finance web application. Scenarios are written in Gherkin and mapped to reusable step definitions, locator classes and shared test-data modules, covering admin user management, configuration and CAD Maker workflows across multiple finance products.",
+        "highlights": [
+          "67 feature files with 490+ Gherkin scenarios, organised by module",
+          "Shared Background steps and @positive / @negative tags for focused runs",
+          "Step definitions backed by 66 locator classes and shared test-data modules",
+          "Allure and Cucumber HTML reporting"
+        ],
+        "tools": [
+          "Cypress",
+          "Cucumber",
+          "Gherkin",
+          "JavaScript",
+          "cypress-xpath",
+          "esbuild"
+        ],
+        "framework": "Cypress + Cucumber (@badeball/cypress-cucumber-preprocessor)",
+        "methodology": "Behaviour-Driven Development (BDD)",
+        "testingType": "End-to-end, functional & regression testing",
+        "reportingTool": "Allure, multiple-cucumber-html-reporter",
+        "browsers": [
+          "Chrome"
+        ],
+        "repoUrl": "https://github.com/mohammadmunnamia0/Cypress-Automation-With-BDD-Framework",
+        "liveUrl": "",
+        "image": "",
+        "snippet": "Background: Open Website With Valid url\n    Given Open Browser and Visit Website\n\n@positive1\nScenario: Verify that Interest Rate is checking properly\n    When Enter Cad_Maker User ID\n    Then Enter Cad_Maker Password\n    When Click on Login\n    Then Click on EOD OK",
+        "snippetFile": "features/Configuration/Config_Interest_Rate.feature",
+        "snippetLanguage": "gherkin",
+        "icon": "workflow"
+      },
+      {
+        "id": "6ad11cb4f09826405a473581",
+        "title": "CBS Onboarding Automation",
+        "type": "Automation",
+        "summary": "Cypress automation for the onboarding workflow of a mock Core Banking System (CBS) in the OptiFin staging environment. It bulk-creates customer accounts (CD, OD and ASG) for each customer, saves them for reuse, and creates and approves Factoring Finance limits through a maker–checker flow.",
+        "highlights": [
+          "Interactive Node.js prompts for account counts, account selection and module",
+          "Created accounts persisted to a JSON store with cy.task and reused for limits",
+          "Maker submits and Authorizer approves each limit; rates validated before the run",
+          "Seeded generator of 5,000 company names for realistic test data"
+        ],
+        "tools": [
+          "Cypress",
+          "JavaScript",
+          "Node.js",
+          "cypress-xpath"
+        ],
+        "framework": "Cypress with Node.js CLI scripts",
+        "methodology": "",
+        "testingType": "End-to-end workflow automation & test-data setup",
+        "reportingTool": "",
+        "browsers": [
+          "Chrome"
+        ],
+        "repoUrl": "https://github.com/mohammadmunnamia0/Cbs-Onboarding-Automation",
+        "liveUrl": "",
+        "image": "",
+        "snippet": "it(`creates CD, OD, ASG accounts for customer ${entry.customerId} (CD ${entry.cdAccount})`, () => {\n  const companyName = randName()\n\n  // Helper to fill common fields and submit\n  const createAccount = (accNo, custId, cdAcc, type, finalName) => {\n    cy.log(`Creating ${type} account ${accNo}`)\n    cy.get(selectors.addAccountButton).should('be.visible').click()\n\n    cy.get(selectors.accountNo).clear().type(accNo)\n    cy.get(selectors.customerId).clear().type(custId)",
+        "snippetFile": "cypress/e2e/create_accounts.cy.js",
+        "snippetLanguage": "javascript",
+        "icon": "bank"
+      },
+      {
+        "id": "6ad10f7caceac04813c188a6",
+        "title": "E-commerce Automation",
+        "type": "Automation",
+        "icon": "cart",
+        "summary": "",
+        "framework": "Selenium WebDriver with Page Object Model (POM)",
+        "methodology": "",
+        "testingType": "Functional, UI, and Automation Testing",
+        "reportingTool": "HTMLTestRunner (HTML Reports)",
+        "browsers": [
+          "Chrome",
+          "Firefox",
+          "Edge"
+        ],
+        "repoUrl": "https://github.com/mohammadmunnamia0/e-commerce-automation.git",
+        "tools": [
+          "Selenium WebDriver",
+          "Page Object Model",
+          "HTMLTestRunner"
+        ]
+      },
+      {
+        "id": "6ad10f7caceac04813c188a7",
+        "title": "Login Functionality Automation",
+        "type": "Automation",
+        "icon": "lock",
+        "summary": "",
+        "framework": "Selenium WebDriver with Java",
+        "methodology": "",
+        "testingType": "Functional & UI Testing",
+        "reportingTool": "TestNG Reports",
+        "browsers": [
+          "Chrome",
+          "Firefox",
+          "Edge"
+        ],
+        "repoUrl": "https://github.com/mohammadmunnamia0/selenium-with-java.git",
+        "tools": [
+          "Selenium WebDriver",
+          "Java",
+          "TestNG"
+        ]
+      },
+      {
+        "id": "6ad10f7caceac04813c188a8",
+        "title": "POM Framework - Login Functionality Automation",
+        "type": "Automation",
+        "icon": "lock",
+        "summary": "",
+        "framework": "Selenium WebDriver with Java",
+        "methodology": "",
+        "testingType": "Functional & UI Testing",
+        "reportingTool": "TestNG Reports",
+        "browsers": [
+          "Chrome",
+          "Firefox",
+          "Edge"
+        ],
+        "repoUrl": "https://github.com/mohammadmunnamia0/Automation-POM-Framework-Testing.git",
+        "tools": [
+          "Selenium WebDriver",
+          "Java",
+          "TestNG",
+          "Page Object Model"
+        ]
+      },
+      {
+        "id": "6ad10f7caceac04813c188a9",
+        "title": "Online Banking Website",
+        "type": "Manual",
+        "icon": "bank",
+        "summary": "",
+        "framework": "",
+        "methodology": "Agile",
+        "testingType": "Functional & UI Testing",
+        "reportingTool": "Excel, MS Word",
+        "browsers": [
+          "Chrome",
+          "Firefox",
+          "Edge"
+        ],
+        "repoUrl": "https://github.com/mohammadmunnamia0/Manual-Testing-for-a-Banking-Website.git",
+        "tools": [
+          "Manual Testing",
+          "Excel",
+          "MS Word"
+        ]
+      },
+      {
+        "id": "6ad10f7caceac04813c188aa",
+        "title": "Login Functionality",
+        "type": "Manual",
+        "icon": "lock",
+        "summary": "",
+        "framework": "",
+        "methodology": "Manual Testing",
+        "testingType": "Functional & UI Testing",
+        "reportingTool": "Excel Spreadsheet",
+        "browsers": [
+          "Chrome",
+          "Firefox",
+          "Edge"
+        ],
+        "repoUrl": "https://github.com/mohammadmunnamia0/TestCAse-openCart.git",
+        "tools": [
+          "Manual Testing",
+          "Excel"
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "id": "6ad11cb5f09826405a473582",
+        "title": "Artcon",
+        "tagline": "Web Platform for a Leading Bangladeshi Art Agency",
+        "context": "Edistys · Client project",
+        "category": "frontend",
+        "image": "/images/projects/artcon.webp",
+        "description": "A content-driven web platform for Artcon, one of Bangladesh's leading art agencies, presenting its exhibitions, artists, collections, publications and events — with virtual-reality gallery tours and a CMS the Artcon team uses to publish without a developer.\n\nBuilt by the Edistys team with SvelteKit, TypeScript, Tailwind CSS and Sanity.io. My contribution covered front-end work and manual QA: designing and executing test cases, reporting UI/API defects and validating integrations.",
+        "technologies": [
+          "SvelteKit",
+          "TypeScript",
+          "Tailwind CSS",
+          "Sanity.io"
+        ],
+        "liveUrl": "https://www.artcon.bd/",
+        "repoUrl": "",
+        "serverRepoUrl": "",
+        "featured": true
+      },
+      {
+        "id": "6ad11cb5f09826405a473583",
+        "title": "Ryoko Travel Agency",
+        "tagline": "Online Travel Agency Platform — B2C, B2B & Admin CRM",
+        "context": "Edistys · Client project",
+        "category": "fullstack",
+        "image": "/images/projects/ryoko.webp",
+        "description": "A full-stack online travel agency platform handling visa applications, airport transfers, flight bookings and holiday packages — with a consumer site, a reseller (B2B) portal and an internal admin CRM. It includes dynamic visa application flows, passport OCR, document uploads, payments and role-based access.\n\nBuilt by the Edistys team with SvelteKit, Hono.js, Drizzle ORM, PostgreSQL and Payload CMS. My contribution was quality assurance: designing and executing test cases, identifying UI/API defects and validating integrations.",
+        "technologies": [
+          "SvelteKit",
+          "TypeScript",
+          "Hono.js",
+          "PostgreSQL",
+          "Drizzle ORM",
+          "Payload CMS"
+        ],
+        "liveUrl": "",
+        "repoUrl": "",
+        "serverRepoUrl": "",
+        "featured": true
+      },
+      {
+        "id": "6ad11cb5f09826405a473584",
+        "title": "Dialleads",
+        "tagline": "Marketing Website for an AI Call-Agent Platform",
+        "context": "Edistys · Client project",
+        "category": "frontend",
+        "image": "/images/projects/dialleads.webp",
+        "description": "A fast, responsive marketing website for Dialleads, an AI-powered phone call automation platform whose voice agents make and take calls for businesses. The site explains a technical product with audio samples, a traditional-vs-AI comparison, industry use-case pages and an onboarding flow, all managed through a CMS.\n\nBuilt at Edistys with SvelteKit, TypeScript, Tailwind CSS and Sanity.io.",
+        "technologies": [
+          "SvelteKit",
+          "TypeScript",
+          "Tailwind CSS",
+          "Sanity.io"
+        ],
+        "liveUrl": "https://www.dialleads.ai/",
+        "repoUrl": "",
+        "serverRepoUrl": "",
+        "featured": true
+      },
+      {
+        "id": "6ad11cb5f09826405a473585",
+        "title": "Tanzi Stretto",
+        "tagline": "E-commerce Platform for a Handcrafted Bangles Brand",
+        "context": "",
+        "category": "fullstack",
+        "image": "/images/projects/tanzistretto.webp",
+        "description": "A mobile-first e-commerce platform for Tanzi Stretto, a Bangladeshi brand of handcrafted bangles and jewelry — with a social feed that links posts to products, social login, PWA push notifications and a custom admin panel for products, inventory, orders and customers.\n\nBuilt with SvelteKit, Hono.js, Drizzle ORM, PostgreSQL, Redis and Tailwind CSS.",
+        "technologies": [
+          "SvelteKit",
+          "TypeScript",
+          "Hono.js",
+          "PostgreSQL",
+          "Redis",
+          "Tailwind CSS"
+        ],
+        "liveUrl": "https://tanzistretto.com/",
+        "repoUrl": "",
+        "serverRepoUrl": "",
+        "featured": true
+      },
+      {
+        "id": "6ad10f7caceac04813c1889e",
+        "title": "ShopEase",
+        "tagline": "Full-Featured E-commerce Platform",
+        "category": "fullstack",
+        "image": "/images/projects/shopease.webp",
+        "description": "ShopEase is a full-featured e-commerce app built with Next.js, Node.js, and Stripe, featuring JWT auth, an admin panel, and a responsive design for a secure, seamless shopping experience.\n\nThe ShopEase backend uses Node.js, Express, MongoDB, and JWT to handle secure auth, product & order management, and Stripe payments with reliable, real-time performance.",
+        "technologies": [
+          "Next.js",
+          "React.js",
+          "Node.js",
+          "Express.js",
+          "MongoDB",
+          "Stripe",
+          "JWT",
+          "TailwindCSS",
+          "REST API",
+          "Admin Panel"
+        ],
+        "liveUrl": "https://shopease-frontend-blond.vercel.app/",
+        "repoUrl": "https://github.com/mohammadmunnamia0/shopease_frontend.git",
+        "serverRepoUrl": "https://github.com/mohammadmunnamia0/shopease_backend.git",
+        "featured": true
+      },
+      {
+        "id": "6ad10f7caceac04813c1889f",
+        "title": "Blood Bridge Foundation",
+        "tagline": "Life-Saving Blood Donation Web App",
+        "category": "fullstack",
+        "image": "/images/projects/blood-bridge.webp",
+        "description": "Built a secure and user-centric full-stack blood donation platform using the MERN stack. Features include hospital and organization directories, donor registration, blood request system with validation, and a public request dashboard. Implemented secure access to donor info via modal authentication and used Firebase for auth and database management.",
+        "technologies": [
+          "React.js",
+          "Firebase",
+          "Node.js",
+          "Express.js",
+          "MongoDB",
+          "TailwindCSS",
+          "React Router",
+          "Framer Motion",
+          "SweetAlert2",
+          "JWT",
+          "Localstorage"
+        ],
+        "liveUrl": "https://blood-bridge-foundation.vercel.app/",
+        "repoUrl": "https://github.com/mohammadmunnamia0/BloodBridge-Foundation.git",
+        "serverRepoUrl": "",
+        "featured": true
+      },
+      {
+        "id": "6ad10f7caceac04813c188a0",
+        "title": "Smart-Star School",
+        "tagline": "Real Life Preliminary School Web Project",
+        "category": "frontend",
+        "image": "/images/projects/smartstar-school.webp",
+        "description": "Solo project built with React, Tailwind CSS, JavaScript, Web3Form and Framer Motion.\n\nSmartStar School is a colorful, kid-friendly educational website built to make early learning fun and engaging. I developed it using React for interactivity, Tailwind CSS for clean design, and Framer Motion for smooth animations. It's fully responsive, playful, and built with young users in mind.",
+        "technologies": [
+          "HTML",
+          "CSS",
+          "Tailwind",
+          "React.js",
+          "Node.js",
+          "Web3Form",
+          "Framer Motion"
+        ],
+        "liveUrl": "https://smart-start-school-wgkf.vercel.app/",
+        "repoUrl": "https://github.com/mohammadmunnamia0/SmartStart-School.git",
+        "serverRepoUrl": "",
+        "featured": false
+      },
+      {
+        "id": "6ad10f7caceac04813c188a1",
+        "title": "HexTech",
+        "tagline": "Portfolio Web Project – Team Collaboration",
+        "category": "fullstack",
+        "image": "/images/projects/hextech.webp",
+        "description": "Developed a MERN stack portfolio app using Next.js for SEO and performance. Collaborated in a team to integrate AOS, GSAP, and Framer Motion for smooth animations. Added dynamic email with Nodemailer, interactive maps, sliders, and responsive UI with TailwindCSS.",
+        "technologies": [
+          "HTML",
+          "CSS",
+          "Tailwind",
+          "Next.js",
+          "Firebase",
+          "Node.js",
+          "Nodemailer",
+          "GSAP",
+          "Framer Motion",
+          "MongoDB"
+        ],
+        "liveUrl": "https://hex-tech-project-b88o.vercel.app/",
+        "repoUrl": "https://github.com/mohammadmunnamia0/HexTech-Project",
+        "serverRepoUrl": "",
+        "featured": false
+      },
+      {
+        "id": "6ad10f7caceac04813c188a2",
+        "title": "LoneOrbit",
+        "tagline": "Full-Stack Development Project",
+        "category": "fullstack",
+        "image": "/images/projects/loneorbit.webp",
+        "description": "A marketplace built with React and Tailwind, allowing employers to manage jobs and bids, while bidders can place and track bids. Features include secure login, private routes, real-time updates, and optional bid deadlines.",
+        "technologies": [
+          "HTML",
+          "CSS",
+          "Tailwind",
+          "React",
+          "Firebase",
+          "Node.js",
+          "Axios",
+          "MongoDB"
+        ],
+        "liveUrl": "https://loneorbit-96b7e.web.app/",
+        "repoUrl": "https://github.com/mohammadmunnamia0/LoneOrbit0.1-Client",
+        "serverRepoUrl": "https://github.com/mohammadmunnamia0/LoneOrbit0.1-Server",
+        "featured": false
+      },
+      {
+        "id": "6ad10f7caceac04813c188a3",
+        "title": "Dev-Challenges",
+        "tagline": "API-Based Web Project",
+        "category": "frontend",
+        "image": "/images/projects/dev-challenges.webp",
+        "description": "A dynamic web project that fetches real-time data from an external API. Users can browse, read, and bookmark content, with the ability to manage and delete bookmarks. The site is interactive, responsive, and built with modern web development practices for a smooth experience.",
+        "technologies": [
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "Node.js",
+          "Firebase"
+        ],
+        "liveUrl": "https://dev-challenges-o6bw.vercel.app/",
+        "repoUrl": "https://github.com/mohammadmunnamia0/devChallenges",
+        "serverRepoUrl": "",
+        "featured": false
+      },
+      {
+        "id": "6ad10f7caceac04813c188a4",
+        "title": "Quick Quiz",
+        "tagline": "Interactive Quiz Platform",
+        "category": "frontend",
+        "image": "/images/projects/quick-quiz.webp",
+        "description": "An interactive quiz platform with real-time answers, a countdown timer, answer preview, and a result summary showing scores and comparisons. It features a user-friendly, responsive interface.",
+        "technologies": [
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "React",
+          "Node.js"
+        ],
+        "liveUrl": "https://quick-quiz01.netlify.app/",
+        "repoUrl": "https://github.com/mohammadmunnamia0/Quick-Quiz",
+        "serverRepoUrl": "",
+        "featured": false
+      },
+      {
+        "id": "6ad10f7caceac04813c188a5",
+        "title": "Portfolio Website",
+        "tagline": "Personal Portfolio",
+        "category": "frontend",
+        "image": "/images/projects/portfolio.webp",
+        "description": "A personal portfolio website to showcase projects, experience, and skills. Features include responsive design and smooth navigation.",
+        "technologies": [
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "React",
+          "Node.js"
+        ],
+        "liveUrl": "https://port-folio01-ten.vercel.app/",
+        "repoUrl": "",
+        "serverRepoUrl": "",
+        "featured": false,
+        "context": ""
+      }
+    ],
+    "experience": [
+      {
+        "id": "6ad11cb1f09826405a473575",
+        "role": "Junior SQA Engineer",
+        "company": "Spectrum Software & Consulting (Pvt.) Ltd. (SSCL)",
+        "companyUrl": "https://sscl.tech/",
+        "period": "April 2026 – Present",
+        "location": "Dhaka, Bangladesh",
+        "employmentType": "Full TIme",
+        "track": "qa",
+        "current": true,
+        "description": "",
+        "highlights": [
+          "Conduct functional, regression and on-site User Acceptance Testing (UAT) at client bank headquarters for OptiFin, a Supply Chain Finance solution used by leading banks in Bangladesh.",
+          "Collaborate with cross-functional teams and banking stakeholders to validate new features, identify defects and support high-quality software releases.",
+          "Use Cypress to automate test cases and support regression testing for web application features."
+        ],
+        "icon": "shield"
+      },
+      {
+        "id": "6ad10f7caceac04813c188ab",
+        "role": "Front-End Developer",
+        "company": "Edistys",
+        "companyUrl": "https://www.edistys.dev/",
+        "period": "May 2025 – April 2026",
+        "location": "Dhaka, Bangladesh",
+        "employmentType": "Full Time",
+        "description": "",
+        "icon": "code",
+        "current": false,
+        "highlights": [
+          "Developed responsive web applications using Svelte, Tailwind CSS and Headless CMS technologies.",
+          "Handled API integration, UI optimization and debugging across client projects.",
+          "Tested the Artcon and Ryoko Travel Agency websites — designed and executed 120+ test cases, identified UI/API defects and validated integrations."
+        ],
+        "track": "development"
+      },
+      {
+        "id": "6ad10f7caceac04813c188ad",
+        "role": "MERN Stack Developer Intern",
+        "company": "Solutya Pvt. Ltd.",
+        "companyUrl": "https://solutya.com/",
+        "period": "January 2025 – May 2025",
+        "location": "Dhaka, Bangladesh",
+        "employmentType": "Internship",
+        "description": "",
+        "icon": "server",
+        "current": false,
+        "highlights": [
+          "Developed features with MongoDB, Express.js, React.js, Node.js, Next.js and TypeScript.",
+          "Debugged and tested features and verified deployments.",
+          "Collaborated closely with senior developers throughout delivery."
+        ],
+        "track": "development"
+      },
+      {
+        "id": "6ad10f7caceac04813c188ac",
+        "role": "Web Developer (Front-End)",
+        "company": "Zensoftlab",
+        "companyUrl": "https://www.zensoftlab.com/",
+        "period": "April 2025 – May 2025",
+        "location": "Remote",
+        "employmentType": "Part-time",
+        "description": "Designed and developed reusable UI components with React.js and Next.js. Improved performance and SEO via Lighthouse audits and optimization. Reported and tracked frontend bugs to aid early defect detection. Collaborated with designers for consistent UI/UX across all devices.",
+        "icon": "monitor",
+        "current": false,
+        "highlights": [],
+        "track": "development"
+      },
+      {
+        "id": "6ad10f7caceac04813c188ae",
+        "role": "Senior Mentor",
+        "company": "Shopnojoyee Academy Care",
+        "companyUrl": "https://www.facebook.com/SAC122018/",
+        "period": "January 2021 – March 2025 · 4 yrs 3 mos",
+        "location": "Dhaka",
+        "employmentType": "Senior Mentor",
+        "description": "Mentored both HSC and SSC batch students with a focus on academic guidance and personal development in the tech field. Provided insights into modern technologies and career paths, and conducted engaging sessions on programming, development, and mathematics. Delivered lessons via Zoom and Google Meet, offered one-on-one support, and helped learners build a strong foundational knowledge for their exams. Focused on enhancing subject understanding, exam preparation, and student motivation through structured lesson planning and consistent support.",
+        "icon": "users",
+        "current": false,
+        "highlights": [],
+        "track": ""
+      }
+    ],
+    "education": [
+      {
+        "id": "6ad10f7caceac04813c188af",
+        "degree": "B.Sc. in Computer Science and Engineering",
+        "institution": "International University of Business Agriculture and Technology (IUBAT)",
+        "period": "2021 – 2025",
+        "details": "",
+        "grade": "CGPA: 3.70 / 4.00",
+        "thesis": "IoT-based Smart Cane for Blind People"
+      }
+    ],
+    "certifications": [
+      {
+        "id": "6ad11cb2f09826405a473576",
+        "title": "SQA: Manual & Automated Testing",
+        "issuer": "Ostad",
+        "issued": "",
+        "url": "https://ostad.app/share/certificate/c44788-md.-munna-mia",
+        "icon": "clipboard"
+      },
+      {
+        "id": "6ad10f7caceac04813c188b1",
+        "title": "Manual and Automation Software Testing",
+        "issuer": "EDGE Bangladesh",
+        "issued": "",
+        "url": "https://drive.google.com/file/d/14sGysmqanKmNNEf1aGxr_AXzOwLF3MtO/view",
+        "icon": "graduation-cap"
+      },
+      {
+        "id": "6ad10f7caceac04813c188b2",
+        "title": "SQA Crash Course",
+        "issuer": "Online Course",
+        "issued": "",
+        "url": "https://drive.google.com/file/d/188H84Rg1QCyaBgR1hkGsPMpPYwS_B_Dn/view",
+        "icon": "flask"
+      },
+      {
+        "id": "6ad10f7caceac04813c188b4",
+        "title": "Full Stack Web Development Course",
+        "issuer": "Development",
+        "issued": "",
+        "url": "https://drive.google.com/file/d/1MDMVBM0wDx-lOF00mOitxKVJO644w0qO/view",
+        "icon": "monitor"
+      },
+      {
+        "id": "6ad10f7caceac04813c188b5",
+        "title": "Public Speaking and Presentation",
+        "issuer": "Professional",
+        "issued": "",
+        "url": "https://10minuteschool.com/certificate/678557cecb866/",
+        "icon": "mic"
+      },
+      {
+        "id": "6ad10f7caceac04813c188b3",
+        "title": "SQA Career Launchpad for Beginners",
+        "issuer": "Online Course",
+        "issued": "",
+        "url": "https://drive.google.com/file/d/14cDeLEITntZ4WGmLd6N9vgWFtW0K85L0/view",
+        "icon": "rocket"
+      }
+    ],
+    "achievements": [
+      {
+        "id": "6ad11cb2f09826405a473577",
+        "role": "Participant",
+        "organization": "CSE Intra-University Programming Contest (IUPC)",
+        "period": "2022",
+        "description": ""
+      },
+      {
+        "id": "6ad11cb2f09826405a473578",
+        "role": "Member",
+        "organization": "IUBAT Math Olympics Society",
+        "period": "2022 – 2023",
+        "description": ""
+      },
+      {
+        "id": "6ad11cb2f09826405a473579",
+        "role": "Senior Mentor",
+        "organization": "Shopnojoyee Academy Care",
+        "period": "2020 – 2025",
+        "description": "Mentored HSC and SSC students through online sessions on programming, development and mathematics."
+      }
+    ],
+    "skills": [
+      {
+        "id": "6ad11cb4f09826405a47357a",
+        "title": "QA & Test Management",
+        "kind": "qa",
+        "icon": "clipboard",
+        "items": [
+          "TestRail",
+          "Jira"
+        ]
+      },
+      {
+        "id": "6ad11cb4f09826405a47357b",
+        "title": "Automation & Testing Tools",
+        "kind": "qa",
+        "icon": "bot",
+        "items": [
+          "Cypress",
+          "Selenium WebDriver",
+          "Playwright",
+          "TestNG",
+          "JMeter",
+          "Postman"
+        ]
+      },
+      {
+        "id": "6ad11cb4f09826405a47357c",
+        "title": "Testing Expertise",
+        "kind": "qa",
+        "icon": "bug",
+        "items": [
+          "Manual Testing",
+          "Test Automation",
+          "Test Case Design",
+          "Bug Reporting",
+          "Bug Lifecycle",
+          "Retesting",
+          "Functional Testing",
+          "Regression Testing",
+          "Web Testing",
+          "API Testing",
+          "SDLC",
+          "STLC",
+          "Agile",
+          "Scrum",
+          "Sprint Workflows"
+        ]
+      },
+      {
+        "id": "6ad11cb4f09826405a47357d",
+        "title": "Programming Languages",
+        "kind": "other",
+        "icon": "code",
+        "items": [
+          "JavaScript",
+          "TypeScript",
+          "C",
+          "C++"
+        ]
+      },
+      {
+        "id": "6ad11cb4f09826405a47357e",
+        "title": "Technical Skills",
+        "kind": "other",
+        "icon": "wrench",
+        "items": [
+          "SQL",
+          "Database Management",
+          "API Validation",
+          "Basic ETL Concepts",
+          "AI Automation",
+          "Debugging",
+          "Git",
+          "CI/CD",
+          "HTML",
+          "CSS",
+          "Bootstrap",
+          "Tailwind CSS"
+        ]
+      },
+      {
+        "id": "6ad11cb4f09826405a47357f",
+        "title": "Development Technologies",
+        "kind": "development",
+        "icon": "monitor",
+        "items": [
+          "React.js",
+          "Next.js",
+          "Svelte",
+          "Node.js",
+          "Express.js",
+          "MongoDB",
+          "Firebase",
+          "Framer Motion"
+        ]
+      }
+    ],
+    "stats": [
+      {
+        "id": "6ad10f7caceac04813c188c1",
+        "value": "1.8+",
+        "label": "Years of Experience"
+      },
+      {
+        "id": "6ad10f7caceac04813c188c2",
+        "value": "15+",
+        "label": "Own Projects Completed"
+      },
+      {
+        "id": "6ad10f7caceac04813c188c3",
+        "value": "6+",
+        "label": "Organization Projects Completed"
+      },
+      {
+        "id": "6ad10f7caceac04813c188c4",
+        "value": "5+",
+        "label": "Certificates Earned"
+      }
+    ],
+    "socials": [
+      {
+        "id": "6ad10f7caceac04813c188c5",
+        "platform": "linkedin",
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/mdmunnamia0/",
+        "showInHero": true
+      },
+      {
+        "id": "6ad10f7caceac04813c188c6",
+        "platform": "github",
+        "label": "GitHub",
+        "url": "https://github.com/mohammadmunnamia0",
+        "showInHero": true
+      }
+    ],
+    "faqs": [
+      {
+        "id": "6ad11cb7f09826405a473586",
+        "question": "What do you specialize in?",
+        "answer": "Software quality assurance: manual and functional testing, test automation with Cypress, regression, API and end-to-end testing. Before QA, I worked as a front-end and full-stack developer with React.js, Next.js, Svelte and TypeScript."
+      },
+      {
+        "id": "6ad11cb7f09826405a473587",
+        "question": "Where do you work now?",
+        "answer": "I'm an SQA Engineer Trainee / Junior SQA Engineer at Spectrum Software & Consulting (SSCL) in Dhaka, testing OptiFin, a Supply Chain Finance solution used by leading banks in Bangladesh."
+      },
+      {
+        "id": "6ad11cb7f09826405a473588",
+        "question": "Which testing tools do you use?",
+        "answer": "Cypress, Selenium WebDriver, Playwright, TestNG, JMeter and Postman for testing and automation, with TestRail and Jira for test management and bug tracking."
+      },
+      {
+        "id": "6ad11cb7f09826405a473589",
+        "question": "What kind of testing have you done on real projects?",
+        "answer": "Functional, regression and on-site User Acceptance Testing at client bank headquarters for OptiFin, plus manual QA for the Artcon and Ryoko Travel Agency websites at Edistys — designing and executing 120+ test cases."
+      },
+      {
+        "id": "6ad11cb7f09826405a47358a",
+        "question": "How can I reach you?",
+        "answer": "Use the contact form on this page, email me at mohammadmunnamia0@gmail.com, or connect with me on LinkedIn."
+      }
+    ],
+    "testimonials": []
+  }
+}

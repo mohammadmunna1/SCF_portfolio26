@@ -1,0 +1,38 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.vs/
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Vercel project link (created by `vercel link`) — machine-specific
+.vercel
+
+# Secrets: environment files (database URI, JWT secret, passwords) and keys.
+# Only the template .env.example, which holds no real values, is committed.
+.env
+.env.*
+!.env.example
+*.pem
+
+# Private full backups (npm run backup -- --full, npm run restore -- --all) — never commit them
+backups/

@@ -1,12 +1,13 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { LuArrowUpRight, LuCheck, LuRotateCcw, LuTriangleAlert, LuUpload } from "react-icons/lu";
+import { LuArrowUpRight, LuCheck, LuRotateCcw, LuTriangleAlert, LuUpload, LuWandSparkles } from "react-icons/lu";
 import {
   DEFAULT_THEME,
   THEME_PRESETS,
   THEME_TOKENS,
   checkThemeContrast,
   dangerColor,
+  fixThemeContrast,
   hexToChannels,
   resolveTheme,
   themeToCssVars,
@@ -175,9 +176,22 @@ export default function ThemePage() {
     return () => window.removeEventListener("beforeunload", onBeforeUnload);
   }, [dirty]);
 
+  // Makes every failing pairing readable by adjusting only the text colours involved (fixThemeContrast):
+  // lighter or darker, keeping their hue, just enough to pass. Backgrounds stay as chosen.
+  const fixContrast = () => {
+    const fixed = fixThemeContrast(draft);
+    const changed = THEME_TOKENS.filter(({ key }) => fixed[key] !== draft[key]).map((token) => token.label.toLowerCase());
+    setDraft(fixed);
+    if (checkThemeContrast(fixed).errors.length) {
+      toast.error("Some pairs can't be fixed by adjusting text colours alone — try different background colours.");
+    } else {
+      toast.success(`Adjusted ${changed.join(", ")} — every pairing is readable now. Review the preview, then publish.`);
+    }
+  };
+
   const publish = async () => {
     if (report.errors.length) {
-      toast.error("Fix the low-contrast combinations before publishing.");
+      toast.error("Some colour pairs are too low-contrast — use “Fix contrast” first.");
       return;
     }
     setSaving(true);
@@ -312,6 +326,16 @@ export default function ThemePage() {
               WCAG contrast for every text and background pairing the site uses. Failing pairs block publishing; “Low”
               pairs are allowed for large or secondary text.
             </p>
+            {report.errors.length > 0 && (
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-danger/40 bg-danger/10 p-3">
+                <p className="min-w-0 flex-1 text-sm text-heading">
+                  Too low-contrast to publish: {report.errors.map((error) => error.label.toLowerCase()).join(", ")}.
+                </p>
+                <Button icon={LuWandSparkles} onClick={fixContrast}>
+                  Fix contrast
+                </Button>
+              </div>
+            )}
             <div className="mt-3">
               <ContrastReport report={report} />
             </div>
@@ -329,15 +353,24 @@ export default function ThemePage() {
           >
             <span className="flex items-center gap-2 text-sm text-body">
               {report.errors.length > 0 && <LuTriangleAlert className="h-4 w-4 text-danger" aria-hidden="true" />}
-              {report.errors.length > 0 ? "Fix contrast issues to publish" : "Unpublished palette"}
+              {report.errors.length > 0
+                ? `${report.errors.length} colour ${report.errors.length === 1 ? "pair is" : "pairs are"} hard to read`
+                : "Unpublished palette"}
             </span>
             <div className="flex gap-2">
               <Button variant="ghost" onClick={() => setDraft(saved)} disabled={saving}>
                 Discard
               </Button>
-              <Button icon={LuUpload} loading={saving} disabled={report.errors.length > 0} onClick={publish}>
-                Publish
-              </Button>
+              {/* An unreadable palette can't be published, so the main action fixes it first */}
+              {report.errors.length > 0 ? (
+                <Button icon={LuWandSparkles} onClick={fixContrast}>
+                  Fix contrast
+                </Button>
+              ) : (
+                <Button icon={LuUpload} loading={saving} onClick={publish}>
+                  Publish
+                </Button>
+              )}
             </div>
           </motion.div>
         )}

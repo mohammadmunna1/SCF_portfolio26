@@ -61,6 +61,106 @@ export const THEME_PRESETS = [
     },
   },
   {
+    id: "port-blue",
+    name: "Port Blue",
+    description: "Cool harbour white with a clear blue accent.",
+    colors: {
+      background: "#F3F5F8",
+      surface: "#F9FAFC",
+      surfaceRaised: "#FFFFFF",
+      photoCard: "#DCE4EE",
+      heading: "#0F1B2D",
+      body: "#33435A",
+      muted: "#5B697D",
+      border: "#DCE3EB",
+      borderStrong: "#B5C1CF",
+      accent: "#1D5FC2",
+      onAccent: "#FFFFFF",
+      button: "#0F1B2D",
+      buttonText: "#F3F5F8",
+    },
+  },
+  {
+    id: "cream-navy",
+    name: "Cream & Navy",
+    description: "Warm cream paper with navy-blue type and accent.",
+    colors: {
+      background: "#F6F1E7",
+      surface: "#FBF8F1",
+      surfaceRaised: "#FFFDF8",
+      photoCard: "#E7DCC8",
+      heading: "#14213D",
+      body: "#364257",
+      muted: "#626B7A",
+      border: "#E6DECF",
+      borderStrong: "#C9BCA6",
+      accent: "#1F4E8C",
+      onAccent: "#FFFFFF",
+      button: "#14213D",
+      buttonText: "#F6F1E7",
+    },
+  },
+  {
+    id: "maroon-cream",
+    name: "Maroon & Cream",
+    description: "Classic cream with maroon accents and buttons.",
+    colors: {
+      background: "#F6EFE3",
+      surface: "#FBF6EE",
+      surfaceRaised: "#FFFCF6",
+      photoCard: "#EADCC6",
+      heading: "#2A1418",
+      body: "#4D3437",
+      muted: "#7A6060",
+      border: "#E7DAC7",
+      borderStrong: "#CBB79D",
+      accent: "#7B1E2B",
+      onAccent: "#FFF8EE",
+      button: "#5E1621",
+      buttonText: "#F6EFE3",
+    },
+  },
+  {
+    id: "deep-sea",
+    name: "Deep Sea",
+    description: "Dark navy with a sky-blue accent.",
+    colors: {
+      background: "#0B1524",
+      surface: "#101C2E",
+      surfaceRaised: "#15223A",
+      photoCard: "#D5DFEC",
+      heading: "#EDF2F9",
+      body: "#C2CDDC",
+      muted: "#8D9BB0",
+      border: "#1E2C44",
+      borderStrong: "#344766",
+      accent: "#62A0F0",
+      onAccent: "#0B1524",
+      button: "#EDF2F9",
+      buttonText: "#0B1524",
+    },
+  },
+  {
+    id: "maroon-night",
+    name: "Maroon Night",
+    description: "Deep maroon with cream type and a warm gold accent.",
+    colors: {
+      background: "#1F1013",
+      surface: "#27161A",
+      surfaceRaised: "#301C21",
+      photoCard: "#EBDDC8",
+      heading: "#F5EBDD",
+      body: "#DDCCBC",
+      muted: "#A8968C",
+      border: "#3B2429",
+      borderStrong: "#5C3C44",
+      accent: "#E5BE8A",
+      onAccent: "#1F1013",
+      button: "#F5EBDD",
+      buttonText: "#3A1219",
+    },
+  },
+  {
     id: "reeves",
     name: "Reeves Dark",
     description: "The previous design's charcoal palette.",
@@ -409,4 +509,75 @@ export function checkThemeContrast(theme) {
     errors: results.filter((result) => !result.passes),
     warnings: results.filter((result) => result.passes && !result.meetsRecommended),
   };
+}
+
+const hexToRgb = (hex) => {
+  const value = parseInt(hex.slice(1), 16);
+  return [(value >> 16) & 255, (value >> 8) & 255, value & 255];
+};
+
+const rgbToHex = (rgb) =>
+  `#${rgb.map((channel) => Math.round(Math.min(255, Math.max(0, channel))).toString(16).padStart(2, "0")).join("")}`.toUpperCase();
+
+function rgbToHsl([red, green, blue]) {
+  const [r, g, b] = [red / 255, green / 255, blue / 255];
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  const lightness = (max + min) / 2;
+  if (max === min) return [0, 0, lightness];
+  const delta = max - min;
+  const saturation = lightness > 0.5 ? delta / (2 - max - min) : delta / (max + min);
+  const hue = max === r ? (g - b) / delta + (g < b ? 6 : 0) : max === g ? (b - r) / delta + 2 : (r - g) / delta + 4;
+  return [hue / 6, saturation, lightness];
+}
+
+function hslToRgb([hue, saturation, lightness]) {
+  if (saturation === 0) return [lightness * 255, lightness * 255, lightness * 255];
+  const q = lightness < 0.5 ? lightness * (1 + saturation) : lightness + saturation - lightness * saturation;
+  const p = 2 * lightness - q;
+  const channel = (t) => {
+    const x = t < 0 ? t + 1 : t > 1 ? t - 1 : t;
+    if (x < 1 / 6) return p + (q - p) * 6 * x;
+    if (x < 1 / 2) return q;
+    if (x < 2 / 3) return p + (q - p) * (2 / 3 - x) * 6;
+    return p;
+  };
+  return [channel(hue + 1 / 3) * 255, channel(hue) * 255, channel(hue - 1 / 3) * 255];
+}
+
+/**
+ * The shade of `hex` that reaches every contrast in `pairs` ([{ background, ratio }]): same hue and
+ * saturation, lightness moved as little as possible. Black or white when no shade of it can.
+ */
+export function readableShade(hex, pairs) {
+  const passes = (candidate) => pairs.every(({ background, ratio }) => contrastRatio(candidate, background) >= ratio);
+  if (passes(hex)) return hex;
+  const [hue, saturation, lightness] = rgbToHsl(hexToRgb(hex));
+  for (let step = 1; step <= 200; step++) {
+    for (const candidateLightness of [lightness - step / 200, lightness + step / 200]) {
+      if (candidateLightness < 0 || candidateLightness > 1) continue;
+      const candidate = rgbToHex(hslToRgb([hue, saturation, candidateLightness]));
+      if (passes(candidate)) return candidate;
+    }
+  }
+  const worst = (candidate) => Math.min(...pairs.map(({ background }) => contrastRatio(candidate, background)));
+  return worst("#000000") >= worst("#FFFFFF") ? "#000000" : "#FFFFFF";
+}
+
+/**
+ * The palette with its unreadable pairings fixed: each text colour that fails a rule is made lighter or
+ * darker — keeping its hue — just enough to reach the recommended contrast on all of its backgrounds.
+ * Backgrounds are never changed; the accent is settled before the text drawn on it.
+ */
+export function fixThemeContrast(theme) {
+  const fixed = resolveTheme(theme);
+  for (const fg of [...new Set(CONTRAST_RULES.map((rule) => rule.fg))]) {
+    const rules = CONTRAST_RULES.filter((rule) => rule.fg === fg);
+    if (rules.every((rule) => contrastRatio(fixed[fg], fixed[rule.bg]) >= rule.min)) continue;
+    fixed[fg] = readableShade(
+      fixed[fg],
+      rules.map((rule) => ({ background: fixed[rule.bg], ratio: rule.recommended ?? rule.min }))
+    );
+  }
+  return fixed;
 }

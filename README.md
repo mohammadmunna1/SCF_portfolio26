@@ -20,7 +20,8 @@ A modern, minimal portfolio (React + Vite + Tailwind) that presents Md Munna Mia
 ### Admin panel (`/admin`)
 
 - Add, edit, delete, hide/show and drag-to-reorder any content; image uploads (resized to WebP in the browser)
-- **Theme & colours:** presets (Manifest is the default), colour pickers with HEX inputs, a live preview, “Preview on site”, publish / discard / reset to default, and WCAG contrast checks that block unreadable palettes (enforced by the API too)
+- **Theme & colours:** presets (Manifest is the default; light and dark ones including Port Blue, Cream & Navy, Maroon & Cream, Deep Sea and Maroon Night), colour pickers with HEX inputs, a live preview, “Preview on site”, publish / discard / reset to default, and WCAG contrast checks that block unreadable palettes (enforced by the API too). When a change leaves a pair hard to read, **Fix contrast** adjusts just the text colours involved — lighter or darker, same hue — until every pair passes
+- **CV:** the Download CV buttons serve `public/cv/Md-Munna-Mia-CV.pdf`, the CV without its reference section (the referee's contact details stay private). Replace that file, or point Profile → CV link elsewhere
 - Profile & SEO editor, section manager, messages inbox, password change, JSON backup export
 
 ## Tech stack

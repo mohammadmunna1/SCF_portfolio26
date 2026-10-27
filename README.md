@@ -6,16 +6,16 @@ A modern, minimal portfolio (React + Vite + Tailwind) that presents Md Munna Mia
 
 ### Public site
 
-- **Hero:** the positioning headline, a short introduction, *Explore my projects* / *View my background* / *Download CV* (shown when a CV link is set in Admin → Profile), and the portrait inside an animated field-to-consumer ring (11 stops, from field and factory through cargo, port, sea and air freight, rail, warehouse and road to retail and the consumer) with the current role and the degree in progress pinned to it
+- **Hero — a scroll-driven supply chain journey:** the page opens on a country road at dawn with the positioning headline, a short introduction and *Explore my projects* / *View my background* / *Download CV* (shown when a CV link is set in Admin → Profile). Scrolling then plays the journey, forwards and back: a van drives to a logistics hub and becomes a line-haul truck; at the plant the wall opens on the production line (raw stock → stamped part → assembled → boxed); a forklift stores the pallet in the warehouse racks; two routes leave the same warehouse — a van up into town, where the supermarket's shelves fill, and a container truck down to the port, where a crane loads the container onto a ship; the ship crosses the sea from golden hour to dusk, and a second crane hands the container to a truck for the distribution centre as delivery vans head into the city. Captions name each stage (Transportation → Logistics → Manufacturing → Warehousing & Inventory → Two Distribution Channels → Retail Distribution → International Logistics → Global Shipping & Delivery); a progress rail jumps between stages or skips the journey
 - **At a glance:** a ruled strip of key figures
-- **About:** the story, the supply chain focus drawn as a shipment-tracking route, the technical edge and languages
+- **About:** the portrait inside an animated field-to-consumer ring (11 stops, from field and factory through cargo, port, sea and air freight, rail, warehouse and road to retail and the consumer) with the current role and the degree in progress pinned to it; the story, the supply chain focus drawn as a shipment-tracking route, the technical edge and languages
 - **Experience:** a timeline with focus tags (e.g. Supply Chain Finance, ERP) and the current role marked
 - **Projects:** supply chain systems first as case studies (screenshot, or the project's workflow drawn as a route when there's no screenshot; what I did; stack; live demo and code), then the rest under tabs — All, Automation & AI, Quality & test automation, Software & web — with detail dialogs. `/projects` lists everything by group (`?view=supply-chain|automation|qa|software`); the old `/ProjectsDetails` URL still works
 - **Education:** the degrees as cards with an explicit *In progress* / *Completed* status, school results, activities
 - **Courses & certifications:** every course with its real image — the certificate, the official course image or the provider's logo — in matching 4:3 frames, with status (*Completed*, *In progress*, *Planned*), provider, date and a link; certificates open full size
 - **Skills:** supply chain capabilities first, then the technical toolkit
 - Contact form: messages are saved to the admin inbox **and** forwarded by email via Web3Forms
-- Light by default ("Manifest"), with a dark preset ("Night Freight") and others in the admin; restrained motion (short fades as content scrolls into view and the hero's field-to-consumer journey; no glow or parallax); fully responsive, keyboard accessible, honours "reduce motion"; falls back to bundled content if the API or database is down
+- Light by default ("Manifest"), with a dark preset ("Night Freight") and others in the admin; outside the hero, restrained motion (short fades as content scrolls into view, the field-to-consumer ring); fully responsive, keyboard accessible, honours "reduce motion" (the journey then cuts between still frames, one per stage); falls back to bundled content if the API or database is down
 
 ### Admin panel (`/admin`)
 
@@ -26,7 +26,7 @@ A modern, minimal portfolio (React + Vite + Tailwind) that presents Md Munna Mia
 
 ## Tech stack
 
-React 18 · Vite · Tailwind CSS · Framer Motion · React Router · Express · MongoDB (Mongoose) · JWT (httpOnly cookie) · bcrypt
+React 18 · Vite · Tailwind CSS · Framer Motion · React Router · Express · MongoDB (Mongoose) · JWT (httpOnly cookie) · bcrypt — the hero's journey is SVG drawn in code, animated with Framer Motion's scroll tracking (no extra animation library)
 
 ## Getting started
 
@@ -107,7 +107,17 @@ The ultra-condensed display face of the previous design (Humane / Six Caps, `src
 
 ### Illustrations
 
-The supply chain visuals are line art drawn in code (`src/Components/illustrations/`), so they take the palette's colours and need no image files: the hero's field-to-consumer ring (`SupplyJourney.jsx` — a shipment travels field → factory → cargo → port → sea and air freight → rail → warehouse → road → retail → consumer, each stop lighting up as it's reached; it pauses off screen and stays still with "reduce motion") and the workflow route used for projects without a screenshot (`FlowDiagram.jsx`, fed by each project's **Workflow steps** in the admin). Icons come from `react-icons` (Lucide).
+The supply chain visuals are line art drawn in code (`src/Components/illustrations/`), so they take the palette's colours and need no image files: the field-to-consumer ring around the portrait in About (`SupplyJourney.jsx` — a shipment travels field → factory → cargo → port → sea and air freight → rail → warehouse → road → retail → consumer, each stop lighting up as it's reached; it pauses off screen and stays still with "reduce motion") and the workflow route used for projects without a screenshot (`FlowDiagram.jsx`, fed by each project's **Workflow steps** in the admin). Icons come from `react-icons` (Lucide).
+
+### The hero's journey
+
+`src/Components/Hero.jsx` is a section about eight screens tall whose stage sticks to the viewport (CSS `position: sticky`), so the page scrolls through it. Framer Motion's `useScroll` turns the scroll position into the journey's progress (0–1), smoothed by a spring; with "reduce motion" it's stepped to one still frame per stage instead.
+
+- **Everything is a function of progress.** `journey/director.js` places every actor and the camera from that one number — nothing is carried from frame to frame — so scrolling back plays the story exactly in reverse, any frame can be drawn on demand (a resize redraws it), and there's one controller, never competing scroll triggers. Moves use smooth keyframe curves (`journey/keyframes.js`); the camera is a list of shots that blend into each other, framed separately for landscape and portrait screens.
+- **The world** (`journey/art/`) is hand-built SVG in one continuous landscape, laid out in `art/layout.js`: parallax layers (clouds, far ranges, hills, the world, the foreground), lit for the time of day the camera passes each place — dawn, day, golden hour at sea, dusk at the destination. The sky behind it (`journey/overlay.js`, with the captions, the progress rail and the text colour that follows the light) ships with the first screen; the world itself is a separate chunk loaded in parallel, and if it can't load the hero stays a single, still screen.
+- **The shipment** is whatever wears the palette's accent colour — the van and its trailer, then the container — so it's easy to follow and matches any palette chosen in the admin.
+- **Performance:** parts of the world off screen are skipped (`data-x` extents); group opacity is used only mid-fade; there's no large ambient animation (just turbines and chimney steam, paused off screen). On landscape screens each layer is its own SVG on a GPU layer moved by a CSS transform; on portrait screens one SVG is lighter. Measured in headless Edge on an integrated GPU while wheel-scrolling through the whole journey in about two seconds: 60 fps median, roughly 10–14% of frames late, on desktop, tablet and phone sizes.
+- **Editing:** stage titles, lines and timing are in `journey/stages.js`; where things are in `art/layout.js`; when they move in `director.js`. In development, `/?journey=0.42` holds the journey at any point, and `window.__journey(p)` moves it — handy for checking frames.
 
 ### Course and certificate images
 
@@ -193,6 +203,7 @@ The built `index.html` also preloads `/api/content` and the font the first scree
 │   └── default-content.js  # the default content from the CV (seeds a new database; last-resort fallback)
 ├── src/
 │   ├── Components/         # public sections (Hero, About, Experience, Projects, Education, Courses, Skills, …)
+│   │   ├── journey/        # the hero's scroll-driven journey: stages, overlay, director, camera, art/ (the world)
 │   │   ├── projects/       # case studies, project cards and dialogs
 │   │   ├── illustrations/  # line-art supply chain visuals drawn in code
 │   │   └── ui/             # buttons, section header, status badge, filter tabs, modal, …

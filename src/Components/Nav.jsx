@@ -129,8 +129,8 @@ const Nav = () => {
       >
         <div
           aria-hidden="true"
-          className={`absolute inset-0 border-b backdrop-blur-md transition-colors duration-300 ${
-            scrolled ? "border-line bg-canvas/90" : "border-transparent bg-canvas/0"
+          className={`absolute inset-0 border-b transition-colors duration-300 ${
+            scrolled ? "border-line bg-canvas/90 backdrop-blur-md" : "border-transparent bg-canvas/0"
           }`}
         />
         <nav aria-label="Main" className="container-site relative flex h-[68px] items-center justify-between gap-6 md:h-[76px]">

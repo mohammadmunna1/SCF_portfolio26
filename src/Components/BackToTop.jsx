@@ -1,13 +1,32 @@
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LuArrowUp } from "react-icons/lu";
 import { SPRING_UI } from "../lib/motion";
 
-/** Small "back to top" button, shown after scrolling past the first screen. */
+/**
+ * Small "back to top" button, shown after scrolling past the first screen — on the homepage, only once past
+ * the hero's journey (which has its own controls in that corner of the screen).
+ */
 const BackToTop = () => {
   const { scrollY } = useScroll();
   const [visible, setVisible] = useState(false);
-  useMotionValueEvent(scrollY, "change", (latest) => setVisible(latest > 900));
+  const showFrom = useRef(900);
+
+  // Where the journey ends, measured when the page's size changes — never while scrolling, when reading
+  // layout would make the browser redo it mid-frame.
+  useEffect(() => {
+    const measure = () => {
+      const journeyEnd = document.getElementById("journey-end");
+      const end = journeyEnd ? journeyEnd.getBoundingClientRect().top + window.scrollY - window.innerHeight / 2 : 0;
+      showFrom.current = Math.max(900, end);
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(document.body);
+    return () => observer.disconnect();
+  }, []);
+
+  useMotionValueEvent(scrollY, "change", (latest) => setVisible(latest > showFrom.current));
 
   return (
     <AnimatePresence>

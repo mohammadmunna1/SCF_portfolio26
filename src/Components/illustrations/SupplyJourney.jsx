@@ -13,7 +13,6 @@ import {
   LuWarehouse,
   LuWheat,
 } from "react-icons/lu";
-import { twoDigits } from "../../lib/text";
 
 // Drawn in a 500 × 600 box (the illustration's aspect ratio): the HTML stops are placed by percentage,
 // so they sit exactly on the SVG route at every size.
@@ -61,8 +60,9 @@ function stopPositions(path) {
  * portrait): a shipment travels from stop to stop — factory, cargo, port, sea and air freight, rail,
  * warehouse, road, retail — the route tracing in lightly behind it, and each stop takes a soft accent
  * tint as it's reached, so the ring complements the portrait rather than competing with it.
- * The caption below names the current stage. The trip pauses while off screen; with reduced motion the
- * whole route is shown, still. Decorative: hidden from assistive technology.
+ * The caption below shows how much of the route is drawn, as a percentage that keeps pace with the line,
+ * and names the current stage. The trip pauses while off screen; with reduced motion the whole route is
+ * shown, still. Decorative: hidden from assistive technology.
  */
 export default function SupplyJourney({ className = "" }) {
   const reduceMotion = useReducedMotion();
@@ -70,7 +70,7 @@ export default function SupplyJourney({ className = "" }) {
   const journeyRef = useRef(null);
   const progressRef = useRef(null);
   const markerRef = useRef(null);
-  const numberRef = useRef(null);
+  const percentRef = useRef(null);
   const labelRef = useRef(null);
   const stopRefs = useRef([]);
 
@@ -81,6 +81,7 @@ export default function SupplyJourney({ className = "" }) {
     const at = stopPositions(journey);
     const states = STOPS.map(() => "");
     let current = 0;
+    let percent = 0;
     let frame = 0;
     let started = 0;
     let elapsed = 0;
@@ -92,6 +93,13 @@ export default function SupplyJourney({ className = "" }) {
       const opacity = fading ? String(1 - (time - TRAVEL - HOLD) / FADE) : "1";
       const point = journey.getPointAtLength(t * length);
       progressRef.current.style.strokeDashoffset = String(1 - t);
+      // How much of the route is drawn, from the same t as the line: 100% exactly as it completes, held
+      // there while the route rests and fades, back to 0% as the next trip sets off.
+      const drawn = Math.floor(t * 100);
+      if (drawn !== percent) {
+        percent = drawn;
+        percentRef.current.textContent = `${drawn}%`;
+      }
       progressRef.current.style.opacity = opacity;
       markerRef.current.setAttribute("transform", `translate(${point.x} ${point.y})`);
       markerRef.current.style.opacity = opacity;
@@ -110,7 +118,6 @@ export default function SupplyJourney({ className = "" }) {
       });
       if (reached !== current) {
         current = reached;
-        numberRef.current.textContent = twoDigits(reached + 1);
         labelRef.current.textContent = STOPS[reached].label;
       }
       frame = requestAnimationFrame(render);
@@ -181,10 +188,11 @@ export default function SupplyJourney({ className = "" }) {
           {!reduceMotion && (
             <>
               <span className="text-line-strong">·</span>
-              <span ref={numberRef} className="text-accent">
-                01
+              {/* Room for "100%" (four characters plus the caption's letter spacing) with even digits, so the
+                  caption doesn't shift as the number grows */}
+              <span ref={percentRef} className="inline-block min-w-[calc(4ch+0.5em)] text-right tabular-nums text-accent">
+                0%
               </span>
-              <span>/ {twoDigits(STOPS.length)}</span>
               <span ref={labelRef} className="text-heading">
                 {STOPS[0].label}
               </span>

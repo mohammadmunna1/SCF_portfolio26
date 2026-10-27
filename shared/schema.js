@@ -467,7 +467,6 @@ export const COLLECTIONS = {
       },
       { name: "label", label: "Label", type: "text", required: true, max: 60 },
       { name: "url", label: "URL", type: "url", required: true },
-      { name: "showInHero", label: "Show in the hero", type: "boolean", default: false },
     ],
   },
 

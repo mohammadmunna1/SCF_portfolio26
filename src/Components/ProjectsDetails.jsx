@@ -22,7 +22,6 @@ const ProjectsDetails = () => {
   const modal = useProjectModal();
   const sqaModal = useProjectModal();
 
-  const work = sections.find((section) => section.key === "work");
   const qa = sections.find((section) => section.key === "sqa");
   const views = [
     { key: "supply-chain", label: "Supply chain", items: projects.filter(isSupplyChain) },
@@ -45,7 +44,9 @@ const ProjectsDetails = () => {
         <h1 id="projects-title" className="display mt-4 text-display-lg">
           All projects
         </h1>
-        {work?.subtitle && <p className="mt-5 max-w-[42rem] text-lead text-body">{work.subtitle}</p>}
+        <p className="mt-5 max-w-[42rem] text-lead text-body">
+          Supply chain systems first, then automation, quality and software projects.
+        </p>
       </Reveal>
 
       {views.length > 0 && (

@@ -75,9 +75,8 @@ export const DEFAULT_SECTIONS = [
     navLabel: "Projects",
     eyebrow: "Projects",
     title: "Systems built for supply chain work",
-    subtitle:
-      "Procurement and inventory systems built end to end, plus the automation, quality and software projects behind them.",
-    ctaLabel: "View all projects",
+    subtitle: "Procurement and inventory systems built end to end.",
+    ctaLabel: "View more projects",
   },
   {
     key: "sqa",
@@ -720,17 +719,17 @@ export const DEFAULT_CERTIFICATIONS = [
     icon: "warehouse",
   },
   {
-    title: "AI for Supply Chain Optimization",
+    title: "GenAI for Supply Chain Optimization",
     issuer: "Coursera",
     category: "supply-chain",
     status: "completed",
-    issued: "",
+    issued: "Apr 2026",
     mode: "Online",
     note: "",
-    image: "",
+    image: "/images/courses/coursera-genai-supply-chain-certificate.webp",
     logo: "/images/logos/coursera.webp",
-    url: "",
-    urlLabel: "",
+    url: "https://coursera.org/share/f6f22931ffa1147f4ed5b7244ecada87",
+    urlLabel: "View certificate",
     icon: "network",
   },
   {
@@ -894,13 +893,8 @@ export const DEFAULT_STATS = [
 ];
 
 export const DEFAULT_SOCIALS = [
-  {
-    platform: "linkedin",
-    label: "LinkedIn",
-    url: "https://www.linkedin.com/in/mdmunnamia0/",
-    showInHero: true,
-  },
-  { platform: "github", label: "GitHub", url: "https://github.com/mohammadmunnamia0", showInHero: true },
+  { platform: "linkedin", label: "LinkedIn", url: "https://www.linkedin.com/in/mdmunnamia0/" },
+  { platform: "github", label: "GitHub", url: "https://github.com/mohammadmunnamia0" },
 ];
 
 // Answers are drawn from the profile, experience and education above.

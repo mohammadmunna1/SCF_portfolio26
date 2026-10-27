@@ -1,9 +1,10 @@
 {
   "format": 1,
-  "generatedAt": "2026-10-26T19:18:13.530Z",
+  "generatedAt": "2026-10-27T18:24:10.236Z",
   "source": "database",
-  "fingerprint": "678de26361b19c1d",
+  "fingerprint": "d97540a9426f4677",
   "hiddenSections": [
+    "sqa",
     "testimonials",
     "faq"
   ],
@@ -56,19 +57,19 @@
       "siteDescription": "Md Munna Mia — supply chain and logistics portfolio. Pursuing a PGD in Logistics & Supply Chain Management, with a Computer Science background and hands-on experience in ERP, data and Supply Chain Finance software."
     },
     "theme": {
-      "background": "#F5F3EE",
-      "surface": "#FBFAF7",
-      "surfaceRaised": "#FFFFFF",
-      "photoCard": "#E8E3D9",
-      "heading": "#111A24",
-      "body": "#3A4452",
-      "muted": "#646D79",
-      "border": "#E2DDD3",
-      "borderStrong": "#C7C0B3",
-      "accent": "#B93D0B",
-      "onAccent": "#FFFFFF",
-      "button": "#111A24",
-      "buttonText": "#F5F3EE"
+      "background": "#0B1524",
+      "surface": "#101C2E",
+      "surfaceRaised": "#15223A",
+      "photoCard": "#D5DFEC",
+      "heading": "#EDF2F9",
+      "body": "#C2CDDC",
+      "muted": "#8D9BB0",
+      "border": "#1E2C44",
+      "borderStrong": "#344766",
+      "accent": "#62A0F0",
+      "onAccent": "#0B1524",
+      "button": "#EDF2F9",
+      "buttonText": "#0B1524"
     },
     "sections": [
       {
@@ -103,18 +104,9 @@
         "navLabel": "Projects",
         "eyebrow": "Projects",
         "title": "Systems built for supply chain work",
-        "subtitle": "Procurement and inventory systems built end to end, plus the automation, quality and software projects behind them.",
-        "ctaLabel": "View all projects",
+        "subtitle": "Procurement and inventory systems built end to end.",
+        "ctaLabel": "View more projects",
         "key": "work"
-      },
-      {
-        "id": "a5567d7c611f46c490ff29a6",
-        "navLabel": "",
-        "eyebrow": "Quality",
-        "title": "Quality & test automation",
-        "subtitle": "Test automation and UAT work, including the Supply Chain Finance platform OptiFin.",
-        "ctaLabel": "View all QA projects",
-        "key": "sqa"
       },
       {
         "id": "21594088ec552c45a9bf5206",
@@ -932,17 +924,17 @@
       },
       {
         "id": "75e2ea08be9a394a92631c6c",
-        "title": "AI for Supply Chain Optimization",
+        "title": "GenAI for Supply Chain Optimization",
         "issuer": "Coursera",
         "category": "supply-chain",
         "status": "completed",
-        "issued": "",
+        "issued": "Apr 2026",
         "mode": "Online",
         "note": "",
-        "image": "",
+        "image": "/images/courses/coursera-genai-supply-chain-certificate.webp",
         "logo": "/images/logos/coursera.webp",
-        "url": "",
-        "urlLabel": "",
+        "url": "https://coursera.org/share/f6f22931ffa1147f4ed5b7244ecada87",
+        "urlLabel": "View certificate",
         "icon": "network"
       },
       {
@@ -1156,15 +1148,13 @@
         "id": "8c06508926b2a0bf5623b0e4",
         "platform": "linkedin",
         "label": "LinkedIn",
-        "url": "https://www.linkedin.com/in/mdmunnamia0/",
-        "showInHero": true
+        "url": "https://www.linkedin.com/in/mdmunnamia0/"
       },
       {
         "id": "ccb4cc3ae95ccd4606027d31",
         "platform": "github",
         "label": "GitHub",
-        "url": "https://github.com/mohammadmunnamia0",
-        "showInHero": true
+        "url": "https://github.com/mohammadmunnamia0"
       }
     ],
     "faqs": [

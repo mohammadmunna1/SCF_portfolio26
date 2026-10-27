@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { LuArrowRight, LuArrowUpRight, LuDownload } from "react-icons/lu";
+import { LuArrowRight, LuDownload } from "react-icons/lu";
 import { useContent } from "../context/ContentContext";
 import { resolveAsset } from "../lib/api";
 import { EASE_OUT } from "../lib/motion";
@@ -97,11 +97,10 @@ function HeroVisual({ profile, current, studying }) {
  * JourneyBackdrop).
  */
 const Hero = () => {
-  const { profile, socials, experience, education } = useContent();
+  const { profile, experience, education } = useContent();
   const headline = profile.headline || profile.role || profile.name;
   const current = experience.find((job) => job.current);
   const studying = education.find((item) => item.status === "ongoing");
-  const links = socials.filter((social) => social.showInHero);
 
   return (
     <section id="home" aria-labelledby="hero-title" className="relative min-h-[100svh] overflow-hidden">
@@ -135,8 +134,7 @@ const Hero = () => {
             <Button href="#work" variant="primary" icon={LuArrowRight}>
               Explore my projects
             </Button>
-            {/* Page-coloured rather than see-through (like the links below), so the sketch behind never runs
-                through the label */}
+            {/* Page-coloured rather than see-through, so the sketch behind never runs through the label */}
             <Button href="#about" variant="outline" className="bg-canvas">
               View my background
             </Button>
@@ -146,20 +144,6 @@ const Hero = () => {
               </Button>
             )}
           </motion.div>
-
-          {links.length > 0 && (
-            <motion.ul {...appear(0.4)} className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
-              {links.map((link) => (
-                <li key={link.id}>
-                  <a href={link.url} target="_blank" rel="noopener noreferrer" className="link bg-canvas text-[0.9375rem] font-medium text-heading">
-                    {link.label}
-                    <LuArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" />
-                    <span className="sr-only"> (opens in a new tab)</span>
-                  </a>
-                </li>
-              ))}
-            </motion.ul>
-          )}
         </div>
 
         <motion.div {...appear(0.15)} className="lg:col-span-5">

@@ -59,7 +59,8 @@ function stopPositions(path) {
 /**
  * A supply chain from field to consumer, drawn as a ring road round whatever sits inside it (the hero
  * portrait): a shipment travels from stop to stop — factory, cargo, port, sea and air freight, rail,
- * warehouse, road, retail — the route drawing in behind it, and each stop lights up as it's reached.
+ * warehouse, road, retail — the route tracing in lightly behind it, and each stop takes a soft accent
+ * tint as it's reached, so the ring complements the portrait rather than competing with it.
  * The caption below names the current stage. The trip pauses while off screen; with reduced motion the
  * whole route is shown, still. Decorative: hidden from assistive technology.
  */
@@ -139,20 +140,22 @@ export default function SupplyJourney({ className = "" }) {
       <svg viewBox="0 0 500 600" className="absolute inset-0 h-full w-full overflow-visible" fill="none">
         <path d={RING} className="stroke-line-strong" strokeWidth="1.5" strokeDasharray="2 7" strokeLinecap="round" />
         <path ref={journeyRef} d={JOURNEY} />
-        {/* The route behind the shipment (all of it, still, with reduced motion) */}
+        {/* The route behind the shipment (all of it, still, with reduced motion): a light trace, so the
+            portrait stays the focus */}
         <path
           ref={progressRef}
           d={JOURNEY}
           pathLength="1"
-          className="stroke-accent"
-          strokeWidth="2"
+          className="stroke-accent/45"
+          strokeWidth="1.5"
+          strokeLinecap="round"
           strokeDasharray="1"
           style={{ strokeDashoffset: reduceMotion ? 0 : 1 }}
         />
         {!reduceMotion && (
           <g ref={markerRef} transform={`translate(${STOPS[0].x} ${STOPS[0].y})`}>
-            <circle r="12" className="fill-accent/20" />
-            <circle r="5.5" className="fill-accent" />
+            <circle r="8" className="fill-accent/10" />
+            <circle r="3.5" className="fill-accent/70" />
           </g>
         )}
       </svg>
@@ -163,7 +166,7 @@ export default function SupplyJourney({ className = "" }) {
           ref={(element) => {
             stopRefs.current[index] = element;
           }}
-          className="absolute grid h-8 w-8 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-line bg-surface-raised text-heading shadow-sm transition-colors duration-300 data-[state=here]:border-accent data-[state=here]:bg-accent data-[state=here]:text-accent-on data-[state=passed]:border-accent/40 data-[state=passed]:text-accent md:h-9 md:w-9"
+          className="absolute grid h-8 w-8 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-line bg-surface-raised text-heading shadow-sm transition-colors duration-500 data-[state=here]:border-accent/50 data-[state=here]:bg-[color-mix(in_srgb,rgb(var(--c-accent))_12%,rgb(var(--c-raised)))] data-[state=here]:text-accent data-[state=passed]:border-accent/25 data-[state=passed]:text-accent/80 md:h-9 md:w-9"
           style={{ left: `${(x / 500) * 100}%`, top: `${(y / 600) * 100}%` }}
         >
           <Icon className="h-4 w-4" />

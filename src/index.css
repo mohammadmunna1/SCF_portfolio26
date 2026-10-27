@@ -36,7 +36,8 @@
   }
 
   body {
-    @apply bg-canvas font-sans text-body antialiased;
+    /* No background of its own: the page colour is on <html>, so the sketch (z-index: -1) shows above it. */
+    @apply font-sans text-body antialiased;
     font-size: 1rem;
     line-height: 1.6;
     font-weight: 400;
@@ -243,269 +244,73 @@
   }
 }
 
-/* ——— The hero's scroll-driven supply chain journey (src/Components/Hero.jsx) ———
-   The section is several screens tall; its stage sticks to the viewport while the page scrolls through it.
-   Plain CSS rather than a Tailwind layer: some class names (the skies) are built in code, so a layer's
-   unused-class purge would drop them. */
-.journey {
-  height: 820vh;
-  height: 820svh;
-}
-
-/* Portrait screens travel a little faster; with reduced motion the stills need less scroll. */
-@media (max-aspect-ratio: 1/1) {
-  .journey {
-    height: 740svh;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .journey {
-    height: 520svh;
-  }
-}
-
-.journey[data-static] {
-  height: auto;
-}
-
-.journey-stage {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  height: 100svh;
+/* ——— The supply chain journey, sketched behind the page (src/Components/JourneyBackdrop.jsx) ———
+   Fixed under all content (z-index -1, over the page colour on <html>) and never in the way of it. Faint
+   pencil strokes in the heading colour on "paper" in the page colour, fading towards the top of the screen
+   where most reading happens. --u is one screen pixel in the sketch's units (set by the director), so lines
+   keep their weight at any scale. */
+.sketch-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
   overflow: hidden;
-  background: #e9d9c4;
-}
-
-.journey[data-static] .journey-stage {
-  position: relative;
-}
-
-.journey-sky {
-  position: absolute;
-  inset: 0;
-}
-
-.journey-sky-dawn {
-  background: linear-gradient(180deg, #8ea9c4 0%, #b8c8d6 34%, #e2d5c4 62%, #efdcc4 100%);
-}
-
-.journey-sky-day {
-  background: linear-gradient(180deg, #7aa0c7 0%, #a5c0d8 38%, #d8e3ea 68%, #e7ecec 100%);
-}
-
-.journey-sky-golden {
-  background: linear-gradient(180deg, #56698d 0%, #96a0b4 34%, #dfb48a 64%, #f0c68e 100%);
-}
-
-.journey-sky-dusk {
-  background: linear-gradient(180deg, #1b2747 0%, #39446b 36%, #8f6a80 66%, #c98a70 100%);
-}
-
-.journey-sky-night {
-  background: linear-gradient(180deg, #0a1226 0%, #12203c 52%, #22345a 100%);
-}
-
-/* The sun: a core with a soft glow, its colours set from the time of day */
-.journey-sun {
-  --sun-core: 255 240 212;
-  --sun-glow: 255 204 150;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 46vmin;
-  height: 46vmin;
-  margin: -23vmin 0 0 -23vmin;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgb(var(--sun-core)) 0 8.5%,
-    rgb(var(--sun-glow) / 0.6) 10%,
-    rgb(var(--sun-glow) / 0.22) 30%,
-    rgb(var(--sun-glow) / 0) 68%
-  );
-  will-change: transform;
-}
-
-.journey-moon {
-  position: absolute;
-  right: 22%;
-  top: 16%;
-  width: 4.5vmin;
-  height: 4.5vmin;
-  border-radius: 50%;
-  box-shadow: inset -1.1vmin 0.5vmin 0 0 #f1ecdf;
-}
-
-.journey-world {
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
-
-
-.journey-world[data-ready] {
-  opacity: 1;
-}
-
-/* Landscape screens: one SVG per depth layer on its own GPU layer, placed by a transform from its corner */
-.journey-layer {
-  position: absolute;
-  left: 0;
-  top: 0;
-  transform-origin: 0 0;
-  will-change: transform;
-}
-
-/* Text over the sky: positioned under the header, sized for the frame rather than the page */
-.journey-hero,
-.journey-captions {
-  padding-top: calc(68px + 3svh);
-}
-
-@media (min-width: 768px) {
-  .journey-hero,
-  .journey-captions {
-    padding-top: calc(76px + 4.5svh);
-  }
-}
-
-/* A soft veil in the colour of the sky behind the text, so it reads over busy parts of the scene too */
-.journey-veil {
-  --veil: 232 237 240;
-  position: absolute;
-  inset: 0;
   pointer-events: none;
-  background: radial-gradient(
-    ellipse 50% 40% at 22% 19%,
-    rgb(var(--veil) / 0.7),
-    rgb(var(--veil) / 0.42) 46%,
-    rgb(var(--veil) / 0) 82%
-  );
+  contain: strict;
+  -webkit-mask-image: linear-gradient(180deg, rgb(0 0 0 / 0.45) 30%, #000 72%);
+  mask-image: linear-gradient(180deg, rgb(0 0 0 / 0.45) 30%, #000 72%);
 }
 
-@media (max-aspect-ratio: 1/1) {
-  .journey-veil {
-    background: linear-gradient(180deg, rgb(var(--veil) / 0.82) 12%, rgb(var(--veil) / 0.5) 34%, rgb(var(--veil) / 0) 50%);
-  }
-}
-
-.journey-glow {
-  text-shadow:
-    0 0 1.1rem rgb(var(--veil-text, 232 237 240) / 0.95),
-    0 0 0.3rem rgb(var(--veil-text, 232 237 240) / 0.75);
-}
-
-.journey-headline {
-  font-size: clamp(2rem, 1.1rem + 2.6vw, 3.75rem);
-  line-height: 1.04;
-  letter-spacing: -0.035em;
-}
-
-.journey-intro {
-  font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem);
-  line-height: 1.6;
-}
-
-.journey-caption {
+.sketch-scene {
   position: absolute;
-  inset-inline: 0;
+  inset: 0;
+  color: rgb(var(--c-heading) / 0.25);
+  visibility: hidden;
+}
+
+/* One SVG per depth layer, each on its own GPU layer, placed by the director with a transform */
+.sketch-layer {
+  position: absolute;
+  left: 0;
   top: 0;
-  will-change: opacity, transform;
+  will-change: transform;
 }
 
-/* The text fades on its own layer, so its glow isn't redrawn every frame */
-.journey-hero {
-  will-change: opacity, transform;
+.sketch-scene[data-ready] {
+  visibility: visible;
 }
 
-.journey-controls {
-  @apply absolute inset-x-0 bottom-0 pb-3 sm:pb-5;
+.sketch-scene path {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: calc(var(--u, 1px) * 1.05);
 }
 
-/* Dark, solid enough to read on any part of the scene */
-.journey-rail {
-  @apply inline-flex max-w-full items-center gap-1 rounded-full py-1 pl-3 pr-1 text-[#eef1f5] sm:gap-2;
-  background: rgb(13 22 38 / 0.8);
+.sketch-scene .sk-bold {
+  stroke-width: calc(var(--u, 1px) * 1.35);
 }
 
-.journey-segment {
-  @apply grid h-9 w-[1.625rem] place-items-center sm:w-9;
+.sketch-scene .sk-fine {
+  stroke-width: calc(var(--u, 1px) * 0.8);
+  stroke-opacity: 0.85;
 }
 
-.journey-segment > span {
-  @apply relative block h-[3px] w-[1.125rem] overflow-hidden rounded-full bg-white/25 transition-colors sm:w-7;
+.sketch-scene .sk-hatch {
+  stroke-width: calc(var(--u, 1px) * 0.7);
+  stroke-opacity: 0.6;
 }
 
-.journey-segment:hover > span,
-.journey-segment[aria-current] > span {
-  @apply bg-white/40;
+.sketch-scene .sk-paper {
+  fill: rgb(var(--c-bg));
+  stroke: none;
 }
 
-.journey-segment > span > span {
-  @apply absolute inset-0 origin-left bg-white;
-  transform: scaleX(0);
-}
-
-.journey-skip {
-  @apply ml-1 inline-flex h-8 shrink-0 items-center gap-1 rounded-full bg-[#eef1f5] px-3 text-[0.8125rem] font-medium text-[#0d1626] transition-colors hover:bg-white;
-}
-
-.j-text {
-  font-family: "Geist Variable", Geist, system-ui, sans-serif;
-}
-
-
-/* Ambient life in the journey's world — turning turbines, chimney steam — small, paused off screen and with
-   reduced motion. Everything that tells the story moves with the scroll instead. */
-@keyframes journey-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.j-spin {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: journey-spin 12s linear infinite;
-}
-
-@keyframes journey-steam {
-  from {
-    transform: translate(0, 10px) scale(0.85);
-    opacity: 0;
-  }
-  30% {
-    opacity: 0.7;
-  }
-  to {
-    transform: translate(26px, -40px) scale(1.25);
-    opacity: 0;
-  }
-}
-
-.j-steam > * {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: journey-steam 6s ease-out infinite;
-}
-
-.j-steam > :nth-child(2) {
-  animation-delay: -2s;
-}
-
-.j-steam > :nth-child(3) {
-  animation-delay: -4s;
-}
-
-.journey-world[data-paused] :is(.j-spin, .j-steam > *) {
-  animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  :is(.j-spin, .j-steam > *) {
-    animation: none;
-  }
+.sketch-scene .sk-label {
+  fill: currentColor;
+  font-family: ui-monospace, SFMono-Regular, "Cascadia Code", Consolas, Menlo, monospace;
+  font-weight: 500;
+  letter-spacing: 0.14em;
 }
 
 /* Hover only where there's a real pointer (no "stuck" hover after a tap); keyboard focus rolls too. */

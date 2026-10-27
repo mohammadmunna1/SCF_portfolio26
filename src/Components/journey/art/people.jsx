@@ -1,51 +1,36 @@
-// People at work along the journey: simple, quiet figures (about 56 units tall, feet at y = 0). The director
-// swings `${j}.legA` / `${j}.legB` (about the hip) to make them walk.
+// People in the sketch: a few quick lines, about 58 units tall with their feet at y = 0. The director swings
+// `${j}.legA` / `${j}.legB` about the hip to make them walk.
 
-const HIP = -26;
+import { Ink } from "./draw";
+import { pencil } from "./pen";
 
-export function Person({
-  j,
-  x = 0,
-  y = 0,
-  skin = "#9A6747",
-  shirt = "#2F4B62",
-  trousers = "#26324A",
-  vest,
-  helmet,
-  carry,
-  flip = false,
-  scale = 1,
-}) {
+const HIP = -24;
+
+export function Person({ j, seed = 91, bag = false, cap = false }) {
+  const body = pencil(seed).circle(0, -52, 5.5);
+  body.lines(
+    [
+      [-4.5, -45],
+      [4.5, -45],
+      [3.5, HIP],
+      [-3.5, HIP],
+    ],
+    true,
+    0.8,
+  );
+  body.line(4, -43, 7, -29, 0.5).line(-4, -43, -7, -30, 0.5);
+  if (cap) body.line(-6, -56, 8, -56, 0.5);
+  if (bag) body.rect(5, -30, 10, 11, 0.5).arc(10, -30, 3.5, 180, 360);
+  const leg = (seed2) => pencil(seed2).line(0, 0, 0, -HIP, 0.5).line(0, -HIP, 4, -HIP, 0);
   return (
-    <g
-      data-j={j}
-      transform={`translate(${x} ${y})${flip ? " scale(-1 1)" : ""}${scale !== 1 ? ` scale(${scale})` : ""}`}
-    >
-      <ellipse cy="1" rx="14" ry="3" fill="#0B1220" opacity="0.2" />
+    <g data-j={j}>
+      <Ink pen={body} weight="line" />
       <g data-j={j && `${j}.legB`} transform={`translate(0 ${HIP})`}>
-        <rect x="-3.5" y="0" width="7" height="26" rx="3" fill={trousers} opacity="0.85" />
+        <Ink pen={leg(seed + 1)} weight="fine" />
       </g>
       <g data-j={j && `${j}.legA`} transform={`translate(0 ${HIP})`}>
-        <rect x="-3.5" y="0" width="7" height="26" rx="3" fill={trousers} />
+        <Ink pen={leg(seed + 2)} weight="line" />
       </g>
-      <rect x="-8" y="-50" width="16" height="27" rx="6" fill={shirt} />
-      {vest && <path d="M-8 -46h16v20h-16z" fill={vest} />}
-      {vest && <path d="M-8 -36h16" stroke="#F4F1EA" strokeWidth="2.2" opacity="0.9" />}
-      <circle cy="-57" r="7.5" fill={skin} />
-      {helmet ? (
-        <path d="M-8 -58a8 8 0 0 1 16 0h3v2h-19z" fill={helmet} />
-      ) : (
-        <path d="M-7.5 -58a7.5 7.5 0 0 1 15 -1q-7 -4 -15 1z" fill="#2A2522" />
-      )}
-      {carry ? (
-        <>
-          <rect x="1" y="-50" width="24" height="20" fill="#C9A26E" />
-          <rect x="1" y="-50" width="24" height="4" fill="#B48C58" />
-          <path d="M2 -40h10" stroke={shirt} strokeWidth="5" strokeLinecap="round" />
-        </>
-      ) : (
-        <path d="M0 -46l5 18" stroke={shirt} strokeWidth="5" strokeLinecap="round" />
-      )}
     </g>
   );
 }

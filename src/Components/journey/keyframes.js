@@ -31,10 +31,6 @@ export function track(p, keys) {
   return keys[keys.length - 1][1];
 }
 
-/** 1 between `start` and `end`, fading in before `start` and out before `end` over `fade`. */
-export const presence = (p, start, end, fade = 0.012) =>
-  Math.min(span(p, start - fade, start, ease.linear), 1 - span(p, end - fade, end, ease.linear));
-
 const cacheOf = (element) => (element.__journey ??= {});
 
 /** Sets an attribute, skipping the DOM write when the value hasn't changed (most hold still most of the time). */
@@ -63,9 +59,6 @@ export const move = (x, y, rotate = 0, scale = 1) =>
   `translate(${round(x)} ${round(y)})${rotate ? ` rotate(${round(rotate)})` : ""}${
     scale !== 1 ? ` scale(${Math.round(scale * 1000) / 1000})` : ""
   }`;
-
-/** Opacity as a short string, with "visibility" handled by the caller where it matters. */
-export const alpha = (value) => String(Math.round(clamp(value) * 1000) / 1000);
 
 /**
  * A smooth path through keyframes `[[p, value], …]` (monotone cubic): speed carries through each key, the

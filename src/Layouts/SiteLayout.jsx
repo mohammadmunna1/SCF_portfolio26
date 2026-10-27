@@ -4,6 +4,7 @@ import { LuX } from "react-icons/lu";
 import { Outlet, useLocation } from "react-router-dom";
 import BackToTop from "../Components/BackToTop";
 import Footer from "../Components/Footer";
+import JourneyBackdrop from "../Components/JourneyBackdrop";
 import Nav from "../Components/Nav";
 import Preloader from "../Components/Preloader";
 import { ContentProvider, useContentState } from "../context/ContentContext";
@@ -98,6 +99,7 @@ function SiteShell() {
           >
             Skip to content
           </a>
+          <JourneyBackdrop />
           <Nav />
           <main id="main" className="relative overflow-x-clip">
             <Outlet />

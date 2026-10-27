@@ -1,96 +1,151 @@
-// Deterministic generators for the organic parts of the journey's landscape (ridges, hills, scatter), so the
-// artwork is identical on every load.
+// Outlines and layouts shared by the sketch's drawings and the director that moves them: path data for
+// paper, vehicle bodies (the car's grows into the truck's), and the strokes of containers and pallets.
 
-/** Seeded random numbers (mulberry32): the same seed always gives the same sequence. */
-export function random(seed) {
-  let state = seed >>> 0;
-  return () => {
-    state = (state + 0x6d2b79f5) >>> 0;
-    let t = state;
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
+import { BOX } from "./layout";
 
 const r1 = (value) => Math.round(value * 10) / 10;
 
-/** Smooth closed-at-the-bottom path through points (Catmull-Rom turned into cubic Béziers). */
-export function smoothPath(points, bottom) {
-  if (points.length < 2) return "";
-  let d = `M${r1(points[0][0])} ${r1(bottom)}L${r1(points[0][0])} ${r1(points[0][1])}`;
-  for (let i = 0; i < points.length - 1; i++) {
-    const [x0, y0] = points[Math.max(0, i - 1)];
-    const [x1, y1] = points[i];
-    const [x2, y2] = points[i + 1];
-    const [x3, y3] = points[Math.min(points.length - 1, i + 2)];
-    const c1 = [x1 + (x2 - x0) / 6, y1 + (y2 - y0) / 6];
-    const c2 = [x2 - (x3 - x1) / 6, y2 - (y3 - y1) / 6];
-    d += `C${r1(c1[0])} ${r1(c1[1])} ${r1(c2[0])} ${r1(c2[1])} ${r1(x2)} ${r1(y2)}`;
-  }
-  return `${d}L${r1(points[points.length - 1][0])} ${r1(bottom)}Z`;
-}
+export const rectPath = (x, y, width, height) => `M${r1(x)} ${r1(y)}h${r1(width)}v${r1(height)}h${r1(-width)}Z`;
+export const polyPath = (points) => `M${points.map(([x, y]) => `${r1(x)} ${r1(y)}`).join("L")}Z`;
 
 /**
- * The same smooth outline as smoothPath, cut into closed pieces about `width` wide that overlap by one step
- * (no seams), each with its x extent — the director skips pieces that are off screen.
+ * A body's outline: its profile from the rear bottom over the top to the front bottom, then back along the
+ * bottom with an arch over each wheel ({ x, r }) — wheels close together share one arch.
  */
-export function smoothChunks(points, bottom, width = 1200) {
-  const segment = (i) => {
-    const [x0, y0] = points[Math.max(0, i - 1)];
-    const [x1, y1] = points[i];
-    const [x2, y2] = points[i + 1];
-    const [x3, y3] = points[Math.min(points.length - 1, i + 2)];
-    return `C${r1(x1 + (x2 - x0) / 6)} ${r1(y1 + (y2 - y0) / 6)} ${r1(x2 - (x3 - x1) / 6)} ${r1(y2 - (y3 - y1) / 6)} ${r1(x2)} ${r1(y2)}`;
-  };
-  const chunks = [];
-  let start = 0;
-  while (start < points.length - 1) {
-    let end = start + 1;
-    while (end < points.length - 1 && points[end][0] - points[start][0] < width) end++;
-    const last = Math.min(points.length - 1, end + 1);
-    let d = `M${r1(points[start][0])} ${r1(bottom)}L${r1(points[start][0])} ${r1(points[start][1])}`;
-    for (let i = start; i < last; i++) d += segment(i);
-    d += `L${r1(points[last][0])} ${r1(bottom)}Z`;
-    chunks.push({ d, x0: points[start][0], x1: points[last][0] });
-    start = end;
+export function outline(top, wheels) {
+  const bottom = top[top.length - 1][1];
+  let d = `M${top.map(([x, y]) => `${r1(x)} ${r1(y)}`).join("L")}`;
+  const arches = [];
+  for (const { x, r } of [...wheels].sort((a, b) => b.x - a.x)) {
+    const R = r + 3.5;
+    const dy = bottom + r; // from the wheel's centre (y = -r) down to the bottom edge
+    const dx = Math.sqrt(Math.max(0, R * R - dy * dy));
+    const last = arches[arches.length - 1];
+    if (last && x + dx > last.left) {
+      last.left = x - dx;
+      last.centres.push(x);
+    } else arches.push({ right: x + dx, left: x - dx, centres: [x], R, r, large: dy > 0 ? 1 : 0 });
   }
-  return chunks;
+  for (const { right, left, centres, R, r, large } of arches) {
+    d += `L${r1(right)} ${r1(bottom)}`;
+    if (centres.length === 1) d += `A${r1(R)} ${r1(R)} 0 ${large} 0 ${r1(left)} ${r1(bottom)}`;
+    else {
+      const top = r1(-r - R);
+      d += `A${r1(R)} ${r1(R)} 0 0 0 ${r1(centres[0])} ${top}L${r1(centres[centres.length - 1])} ${top}`;
+      d += `A${r1(R)} ${r1(R)} 0 0 0 ${r1(left)} ${r1(bottom)}`;
+    }
+  }
+  return `${d}L${r1(top[0][0])} ${r1(top[0][1])}Z`;
 }
 
-/**
- * A ridge line from x0 to x1: height above `base` comes from a few layered waves (`height` at most), with
- * `profile(x)` (0–1) shaping where it rises and falls. Returns the outline closed down to `bottom` and
- * `at(x)`, the ridge's y at any x (to stand trees and buildings on it) — and the outline in `chunks`.
- */
-export function ridge({ x0, x1, base, height, step = 60, seed = 1, bottom = 4000, profile = () => 1 }) {
-  const rand = random(seed);
-  const waves = [0.0011, 0.0023, 0.0051].map((frequency, i) => ({
-    frequency: frequency * (0.8 + rand() * 0.4),
-    phase: rand() * Math.PI * 2,
-    weight: [0.55, 0.3, 0.15][i],
-  }));
-  const at = (x) => {
-    let wave = 0;
-    for (const { frequency, phase, weight } of waves) wave += weight * (0.5 + 0.5 * Math.sin(x * frequency + phase));
-    return base - height * wave * profile(x);
-  };
-  const points = [];
-  for (let x = x0; x <= x1 + 0.1; x += step) points.push([x, at(x)]);
-  return { d: smoothPath(points, bottom), chunks: smoothChunks(points, bottom), at };
+// The car and the delivery truck it becomes share one structure: ten points from the rear bottom over the
+// roof to the front bottom, and three wheels (the car's third hides in its rear wheel until it splits off).
+const CAR = [
+  [-86, -12],
+  [-88, -34],
+  [-78, -40],
+  [-52, -42],
+  [-30, -64],
+  [16, -64],
+  [42, -43],
+  [82, -38],
+  [88, -30],
+  [88, -12],
+];
+const TRUCK = [
+  [-196, -22],
+  [-196, -150],
+  [-190, -154],
+  [-70, -154],
+  [36, -154],
+  [40, -112],
+  [84, -112],
+  [106, -70],
+  [112, -60],
+  [112, -22],
+];
+const CAR_WHEELS = [
+  [58, 14],
+  [-56, 14],
+  [-56, 14],
+];
+const TRUCK_WHEELS = [
+  [72, 17],
+  [-112, 17],
+  [-150, 17],
+];
+
+/** The car (m = 0) on its way to becoming the truck (m = 1): its outline and its wheels. */
+export function rigShape(m) {
+  const mix = (a, b) => a + (b - a) * m;
+  const top = CAR.map(([x, y], i) => [mix(x, TRUCK[i][0]), mix(y, TRUCK[i][1])]);
+  const wheels = CAR_WHEELS.map(([x, r], i) => ({ x: mix(x, TRUCK_WHEELS[i][0]), r: mix(r, TRUCK_WHEELS[i][1]) }));
+  return { wheels, d: outline(top, wheels) };
 }
 
-/** `count` items spread between x0 and x1 with some jitter, each with its own random numbers. */
-export function scatter(x0, x1, count, seed) {
-  const rand = random(seed);
-  const gap = (x1 - x0) / count;
-  return Array.from({ length: count }, (_, i) => ({
-    x: x0 + gap * (i + 0.15 + rand() * 0.7),
-    a: rand(),
-    b: rand(),
-    c: rand(),
-  }));
+export const VAN = [
+  [-95, -14],
+  [-96, -80],
+  [-90, -88],
+  [28, -88],
+  [58, -80],
+  [82, -52],
+  [93, -46],
+  [95, -14],
+];
+export const VAN_WHEELS = [
+  { x: 62, r: 14 },
+  { x: -60, r: 14 },
+];
+
+export const CAB = [
+  [112, -28],
+  [112, -112],
+  [118, -120],
+  [166, -120],
+  [177, -98],
+  [181, -62],
+  [181, -28],
+];
+export const TRACTOR_WHEELS = [
+  { x: -52, r: 15 },
+  { x: -18, r: 15 },
+  { x: 100, r: 16 },
+  { x: 160, r: 16 },
+];
+
+export const FORKLIFT = [
+  [-46, -12],
+  [-46, -44],
+  [-38, -54],
+  [30, -54],
+  [36, -44],
+  [36, -12],
+];
+export const FORKLIFT_WHEELS = [
+  { x: 22, r: 12 },
+  { x: -26, r: 10 },
+];
+
+/** A container's outline and corrugations, its bottom-left corner at (x, y). */
+export function containerStrokes(outlinePen, finePen, x, y) {
+  outlinePen.rect(x, y - BOX.h, BOX.w, BOX.h, 1.5);
+  for (let k = 15; k < BOX.w - 5; k += 15) finePen.line(x + k, y - BOX.h + 5, x + k, y - 5, 0);
 }
 
-/** A tent-shaped profile: 0 outside [from, to], rising to 1 across `ramp` at both ends. */
-export const plateau = (from, to, ramp) => (x) => Math.max(0, Math.min(1, (x - from) / ramp, (to - x) / ramp));
+/** A pallet of four cartons, its bottom-left corner at (x, y): strokes added to the given pencils. */
+export function palletStrokes(outlinePen, finePen, x, y) {
+  outlinePen.rect(x, y - 8, 60, 8, 1);
+  finePen.line(x + 8, y - 8, x + 8, y, 0).line(x + 30, y - 8, x + 30, y, 0).line(x + 52, y - 8, x + 52, y, 0);
+  for (const [bx, by] of [
+    [x + 2, y - 26],
+    [x + 30, y - 26],
+    [x + 2, y - 44],
+    [x + 30, y - 44],
+  ]) {
+    outlinePen.rect(bx, by, 28, 18, 0.8);
+    finePen.line(bx + 14, by, bx + 14, by + 6, 0);
+  }
+}
+
+export const palletPaper = (x, y) => `${rectPath(x, y - 8, 60, 8)}${rectPath(x + 2, y - 44, 56, 36)}`;

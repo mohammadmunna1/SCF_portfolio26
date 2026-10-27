@@ -1,279 +1,331 @@
-// Vehicles of the journey, drawn side-on facing right with the ground at y = 0. Parts the director moves
-// carry a `data-j` name (prefixed by the vehicle's own `j`). Accent-coloured parts follow the site palette:
-// the shipment is always the one in the accent colour.
+// The sketch's vehicles, facing right with their wheels on y = 0. The director moves them (data-j), turns
+// their wheels and, for the car, redraws the outline as it grows into a delivery truck.
 
-import { CONTAINER_COLORS, cabPath, polygon, rigShape } from "./geometry";
-import { random } from "./shapes";
+import { Drawing, Ink, Label, Paper } from "./draw";
+import { BOX, SHIP_SLOT } from "./layout";
+import { pencil } from "./pen";
+import {
+  CAB,
+  FORKLIFT,
+  FORKLIFT_WHEELS,
+  TRACTOR_WHEELS,
+  VAN,
+  VAN_WHEELS,
+  containerStrokes,
+  outline,
+  palletPaper,
+  palletStrokes,
+  polyPath,
+  rectPath,
+  rigShape,
+} from "./shapes";
 
-const TIRE = "#1D2229";
-const STEEL = "#A3ACB6";
-const DARK = "#2A3039";
-const BODY = "#EEECE6";
-
-/** A wheel drawn at radius 16 and scaled to `r`; the lug nuts show it turning. */
-export function Wheel({ j, x = 0, r = 16 }) {
-  return (
-    <g data-j={j} transform={`translate(${x} ${-r}) scale(${r / 16})`}>
-      <circle r="18.5" fill={DARK} />
-      <circle r="16" fill={TIRE} />
-      <circle r="9.6" fill="#B4BCC5" />
-      <circle r="9.6" fill="none" stroke="#7F8996" strokeWidth="1.4" />
-      <path
-        d="M0 -6.2a1.5 1.5 0 1 0 0.01 0M5.9 -1.9a1.5 1.5 0 1 0 0.01 0M3.6 5a1.5 1.5 0 1 0 0.01 0M-3.6 5a1.5 1.5 0 1 0 0.01 0M-5.9 -1.9a1.5 1.5 0 1 0 0.01 0"
-        fill="#5F6977"
-      />
-      <circle r="2.6" fill="#4A5360" />
-    </g>
-  );
+/** Hatched shade on the road under a vehicle, from x0 to x1. */
+function shadow(seed, x0, x1) {
+  const pen = pencil(seed);
+  for (let x = x0; x < x1; x += 9) pen.line(x, 3, x + 6, -1.5, 0);
+  return pen;
 }
 
-/** The shipment's vehicle: a van at m = 0, a semi truck at m = 1 (the director animates the morph). */
-export function Rig({ j, m = 0, x = 0, y = 0 }) {
-  const s = rigShape(m);
-  const part = (name) => ({ "data-j": `${j}.${name}`, ...s[name] });
-  return (
-    <g data-j={j} transform={`translate(${x} ${y})`}>
-      <ellipse {...part("shadow")} cy="2" ry="6" fill="#0B1220" opacity="0.22" />
-      <rect {...part("chassis")} fill={DARK} />
-      <rect {...part("tractor")} fill={DARK} />
-      <rect {...part("tank")} height="13" rx="4" fill={STEEL} />
-      {s.wheels.map(([wx, r], i) => (
-        <Wheel key={i} j={`${j}.w${i}`} x={wx} r={r} />
-      ))}
-      <rect {...part("box")} rx="4" fill={BODY} />
-      <rect {...part("boxTop")} rx="2" fill="#D9D5CC" />
-      <rect {...part("boxShade")} fill="#0B1220" opacity="0.08" />
-      <rect {...part("stripe")} className="fill-accent" />
-      <path {...part("seam")} stroke="#CFCAC0" strokeWidth="2" fill="none" />
-      <rect {...part("tail")} width="4" rx="1" fill="#B8432E" />
-      <rect {...part("rear")} fill="#232B36" opacity="0" />
-      <g {...part("logo")}>
-        <circle r="13" className="fill-accent" />
-        <path
-          d="M-6 -1h9l-3.5 -4M3 -1l-3.5 4"
-          stroke={BODY}
-          strokeWidth="2.4"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </g>
-      <path {...part("deflector")} className="fill-accent" />
-      <path {...part("cab")} className="fill-accent" />
-      <path {...part("skirt")} fill="#0B1220" opacity="0.2" />
-      <path {...part("window")} fill="url(#j-glass)" />
-      <path {...part("door")} stroke="#0B1220" strokeOpacity="0.25" strokeWidth="2" fill="none" />
-      <path {...part("sideDoor")} d="M-30 -96V-26" stroke="#CFCAC0" strokeWidth="2" fill="none" />
-      <rect {...part("light")} width="6" rx="1.5" fill="#F4E4B4" />
-      <rect {...part("bumper")} rx="3" fill={DARK} />
-      <rect {...part("mirror")} width="5" rx="2" fill={DARK} />
-    </g>
-  );
-}
-
-/** A container: 332 × 72, its origin at the middle of its floor. `accent` makes it the shipment. */
-export function Container({ j, x = 0, y = 0, color, accent = false, detail = true, length = 332 }) {
-  const half = length / 2;
-  const ribs = [];
-  for (let rx = -half + 22; rx < half - 8; rx += detail ? 11 : 22) ribs.push(`M${rx} -66V-6`);
-  return (
-    <g data-j={j} transform={`translate(${x} ${y})`}>
-      <rect
-        x={-half}
-        y="-72"
-        width={length}
-        height="72"
-        fill={accent ? undefined : color}
-        className={accent ? "fill-accent" : undefined}
-      />
-      <path d={ribs.join("")} stroke="#0B1220" strokeOpacity="0.16" strokeWidth={detail ? 2 : 3} />
-      <rect x={-half} y="-72" width={length} height="5" fill="#0B1220" opacity="0.22" />
-      <rect x={-half} y="-6" width={length} height="6" fill="#0B1220" opacity="0.3" />
-      {detail && (
-        <>
-          <path d={`M${-half + 6} -66V-6M${-half + 14} -66V-6`} stroke="#0B1220" strokeOpacity="0.32" strokeWidth="2" />
-          <rect x={half - 46} y="-60" width="30" height="16" fill="#F4F1EA" opacity="0.85" />
-          <path d={`M${half - 42} -55h20M${half - 42} -50h14`} stroke="#0B1220" strokeOpacity="0.5" strokeWidth="1.6" />
-        </>
-      )}
-      <path
-        d={`M${-half} -72h7v7h-7zM${half - 7} -72h7v7h-7zM${-half} -7h7v7h-7zM${half - 7} -7h7v7h-7z`}
-        fill="#0B1220"
-        opacity="0.4"
-      />
-    </g>
-  );
-}
-
-/** Cab-over tractor unit with a skeletal chassis for one 40-ft container (carried separately). */
-export function ContainerTruck({ j, x = 0, y = 0, cab = "#2F4B62" }) {
-  const wheels = [-312, -270, 24, 96];
-  const shape = { x0: 38, yb: -30, yr: -146, xw0: 104, xw1: 114, yw1: -104, yh: -100, xf: 120 };
-  return (
-    <g data-j={j} transform={`translate(${x} ${y})`}>
-      <ellipse cx="-118" cy="2" rx="250" ry="6" fill="#0B1220" opacity="0.22" />
-      <rect x="-356" y="-44" width="396" height="9" fill={DARK} />
-      <rect x="0" y="-38" width="120" height="10" fill={DARK} />
-      <rect x="-60" y="-35" width="8" height="22" fill="#4A5360" />
-      <rect x="44" y="-46" width="34" height="13" rx="4" fill={STEEL} />
-      {wheels.map((wx, i) => (
-        <Wheel key={wx} j={`${j}.w${i}`} x={wx} r={19} />
-      ))}
-      <path
-        d={polygon([
-          [42, -146],
-          [54, -168],
-          [90, -168],
-          [100, -146],
-        ])}
-        fill={cab}
-      />
-      <path d={cabPath(shape)} fill={cab} />
-      <path d={`M38 -43H120V-30H38Z`} fill="#0B1220" opacity="0.2" />
-      <path
-        d={polygon([
-          [46, -138],
-          [98, -138],
-          [106, -108],
-          [46, -108],
-        ])}
-        fill="url(#j-glass)"
-      />
-      <path d="M100 -136V-36" stroke="#0B1220" strokeOpacity="0.25" strokeWidth="2" />
-      <rect x="114" y="-88" width="6" height="9" rx="1.5" fill="#F4E4B4" />
-      <rect x="108" y="-39" width="15" height="13" rx="3" fill={DARK} />
-      <rect x="113" y="-108" width="5" height="18" rx="2" fill={DARK} />
-    </g>
-  );
-}
-
-/** Counterbalance forklift; the forks (and whatever sits on them) rise via the `${j}.forks` group. */
-export function Forklift({ j, x = 0, y = 0 }) {
-  return (
-    <g data-j={j} transform={`translate(${x} ${y})`}>
-      <ellipse cx="10" cy="2" rx="78" ry="5" fill="#0B1220" opacity="0.22" />
-      <rect x="56" y="-160" width="11" height="154" fill="#4E5865" />
-      <rect data-j={`${j}.mast`} x="60" y="-160" width="5" height="150" fill="#6A7480" />
-      <g data-j={`${j}.forks`}>
-        <rect x="64" y="-52" width="9" height="46" fill="#39414C" />
-        <rect x="64" y="-12" width="66" height="6" fill="#39414C" />
-      </g>
-      <path d="M-56 -64Q-58 -76 -46 -76H-12V-14H-50Q-56 -14 -56 -20Z" fill="#B4862F" />
-      <path d="M-40 -56H52Q58 -56 58 -50V-14H-40Z" fill="#D3A23C" />
-      <rect x="-40" y="-20" width="98" height="6" fill="#0B1220" opacity="0.18" />
-      <path
-        d="M-30 -56V-132M44 -56V-128M-36 -134H50"
-        stroke="#2C343F"
-        strokeWidth="5"
-        strokeLinecap="round"
-        fill="none"
-      />
-      <rect x="-22" y="-74" width="30" height="18" rx="4" fill="#2C343F" />
-      <g transform="translate(-4 -74)">
-        <rect x="-8" y="-30" width="18" height="30" rx="6" fill="#E2B33F" />
-        <rect x="-5" y="-30" width="4" height="30" fill="#F2E6B8" opacity="0.7" />
-        <circle cx="1" cy="-39" r="8" fill="#8D5B3E" />
-        <path d="M-7 -41a8 8 0 0 1 16 0z" fill="#E2B33F" />
-        <path d="M8 -22l18 4" stroke="#2C3A52" strokeWidth="5" strokeLinecap="round" />
-      </g>
-      <Wheel j={`${j}.w0`} x={-30} r={13} />
-      <Wheel j={`${j}.w1`} x={38} r={16} />
-    </g>
-  );
-}
-
-/** A pallet of boxed products (origin at the middle of the pallet's foot). */
-export function Pallet({ j, x = 0, y = 0, rows = 2 }) {
-  const boxes = [];
-  for (let row = 0; row < rows; row++) {
-    for (let col = 0; col < 2; col++) boxes.push({ bx: -50 + col * 50, by: -14 - (row + 1) * 36 });
+/** A wheel drawn at radius 16: the director places it, turns it and scales it to its size. */
+export function Wheel({ j }) {
+  const spokes = pencil(9);
+  for (let k = 0; k < 5; k++) {
+    const a = (k * 72 * Math.PI) / 180;
+    spokes.line(Math.cos(a) * 3.2, Math.sin(a) * 3.2, Math.cos(a) * 8.5, Math.sin(a) * 8.5, 0);
   }
   return (
-    <g data-j={j} transform={`translate(${x} ${y})`}>
-      <rect x="-55" y="-14" width="110" height="6" fill="#A8845A" />
-      <path d="M-55 -8h14v8h-14zM-7 -8h14v8h-14zM41 -8h14v8h-14z" fill="#8C6A42" />
-      <rect x="-55" y="-2" width="110" height="2" fill="#8C6A42" />
-      {boxes.map(({ bx, by }) => (
-        <g key={`${bx} ${by}`}>
-          <rect x={bx} y={by} width="49" height="35" fill="#C9A26E" />
-          <rect x={bx} y={by} width="49" height="5" fill="#B48C58" />
-          <rect x={bx + 21} y={by} width="7" height="35" fill="#B48C58" opacity="0.7" />
-          <rect x={bx + 6} y={by + 14} width="11" height="9" className="fill-accent" opacity="0.9" />
-        </g>
+    <g data-j={j}>
+      <circle className="sk-paper" r="16" />
+      <Ink pen={pencil(7).ring(0, 0, 16)} weight="bold" />
+      <Ink pen={pencil(8).ring(0, 0, 8.5).ring(0, 0, 2.2)} weight="fine" />
+      <Ink pen={spokes} weight="fine" />
+    </g>
+  );
+}
+
+function carDetails() {
+  const pen = pencil(21);
+  pen.lines(
+    [
+      [-47, -44],
+      [-29, -60],
+      [-8, -60],
+      [-8, -44],
+    ],
+    true,
+    1.2,
+  );
+  pen.lines(
+    [
+      [-4, -44],
+      [-4, -60],
+      [13, -60],
+      [34, -44],
+    ],
+    true,
+    1.2,
+  );
+  pen.line(-48, -42, -48, -16, 1).line(-6, -43, -6, -15, 1).line(36, -41, 36, -16, 1);
+  pen.line(-41, -35, -33, -35, 0.5).line(1, -36, 9, -36, 0.5);
+  pen.circle(83, -32, 3, 2).rect(-88, -33, 4, 7, 0.5);
+  pen.line(78, -18, 90, -18, 1).line(-90, -18, -80, -18, 1);
+  pen.line(40, -46, 45, -50, 0.5);
+  // A parcel on the back seat: the first mile's load
+  pen.rect(-27, -56, 14, 11, 0.8).line(-20, -56, -20, -45, 0);
+  return pen;
+}
+
+function truckDetails() {
+  const pen = pencil(31);
+  pen.line(40, -112, 40, -26, 1.5);
+  pen.lines(
+    [
+      [48, -105],
+      [82, -105],
+      [99, -74],
+      [48, -74],
+    ],
+    true,
+    1.2,
+  );
+  pen.line(100, -70, 100, -30, 1).line(52, -66, 60, -66, 0.4).line(50, -30, 64, -30, 1);
+  pen.rect(104, -52, 8, 6, 0.5).line(100, -28, 115, -28, 1.5);
+  pen.line(97, -106, 101, -88, 1).line(101, -88, 104, -88, 0.5);
+  for (const x of [-152, -108, -64, -20]) pen.line(x, -148, x, -30, 0);
+  pen.line(-190, -44, 34, -44, 1.5).line(-184, -110, -184, -80, 0.5);
+  pen.rect(4, -40, 26, 11, 0.8);
+  // The parcel mark on the box
+  pen.rect(-96, -122, 28, 22, 0.8).line(-82, -122, -82, -100, 0).line(-96, -114, -68, -114, 0);
+  return pen;
+}
+
+/**
+ * The first-mile car, which grows into the line-haul delivery truck on its way past the hub. The director
+ * redraws the outline (`.body`, `.paper`), places the wheels, and erases the car's details as the truck's
+ * are drawn in.
+ */
+export function Rig({ j }) {
+  const { d, wheels } = rigShape(0);
+  return (
+    <Drawing at={-200} len={260} data-j={j}>
+      <Ink pen={shadow(11, -84, 86)} weight="hatch" j={`${j}.carShade`} own />
+      <Ink pen={shadow(12, -192, 110)} weight="hatch" j={`${j}.truckShade`} own />
+      <Paper d={d} j={`${j}.paper`} />
+      <path className="sk-bold" d={d} pathLength="1" strokeDasharray="1 2" data-j={`${j}.body`} />
+      <Ink pen={carDetails()} weight="fine" j={`${j}.car`} own />
+      <Ink pen={truckDetails()} weight="fine" j={`${j}.truck`} own />
+      {wheels.map((_, k) => (
+        <Wheel key={k} j={`${j}.w${k}`} />
       ))}
+    </Drawing>
+  );
+}
+
+/** The local-delivery van, for the shop. */
+export function Van({ j, at }) {
+  const d = outline(VAN, VAN_WHEELS);
+  const lines = pencil(41);
+  lines.lines(
+    [
+      [34, -82],
+      [56, -77],
+      [76, -53],
+      [34, -53],
+    ],
+    true,
+    1.2,
+  );
+  lines.line(-40, -84, -40, -17, 1).line(30, -86, 30, -17, 1).line(-90, -84, -90, -17, 1);
+  lines.line(-34, -50, -26, -50, 0.4).line(36, -46, 44, -46, 0.4);
+  lines.line(-93, -36, 93, -36, 1.5).rect(87, -44, 6, 5, 0.5).line(84, -20, 97, -20, 1.2);
+  // A shopping-bag mark on the side
+  lines.rect(-12, -74, 18, 16, 0.6).arc(-3, -74, 5, 180, 360);
+  return (
+    <Drawing at={at} len={240} data-j={j}>
+      <Ink pen={shadow(42, -92, 94)} weight="hatch" />
+      <Paper d={d} />
+      <Ink pen={pencil(43).raw(d, 560)} weight="bold" />
+      <Ink pen={lines} weight="fine" />
+      {VAN_WHEELS.map((_, k) => (
+        <Wheel key={k} j={`${j}.w${k}`} />
+      ))}
+    </Drawing>
+  );
+}
+
+/** A tractor and its container chassis — the container rides on it separately (see Container). */
+export function ContainerTruck({ j, at, seed = 51 }) {
+  const cab = outline(CAB, [TRACTOR_WHEELS[3]]);
+  const chassis = pencil(seed);
+  chassis.rect(-82, -36, 170, 8, 1.5).line(62, -28, 62, -8, 0.5).line(57, -8, 67, -8, 0.3);
+  chassis.arc(-52, -15, 19, 190, 350).arc(-18, -15, 19, 190, 350);
+  chassis.line(80, -30, 114, -30, 1).line(86, -38, 110, -38, 1);
+  const details = pencil(seed + 1);
+  details.lines(
+    [
+      [124, -112],
+      [163, -112],
+      [172, -92],
+      [124, -92],
+    ],
+    true,
+    1.2,
+  );
+  details.line(120, -90, 120, -34, 1).line(126, -84, 134, -84, 0.4);
+  details.rect(104, -150, 6, 112, 1).rect(174, -50, 7, 6, 0.5).line(170, -25, 184, -25, 1.2);
+  return (
+    <Drawing at={at} len={240} data-j={j}>
+      <Ink pen={shadow(seed + 2, -86, 184)} weight="hatch" />
+      <Paper d={`${rectPath(-82, -36, 170, 8)}${cab}`} />
+      <Ink pen={chassis} weight="line" />
+      <Ink pen={pencil(seed + 3).raw(cab, 420)} weight="bold" />
+      <Ink pen={details} weight="fine" />
+      {TRACTOR_WHEELS.map((_, k) => (
+        <Wheel key={k} j={`${j}.w${k}`} />
+      ))}
+    </Drawing>
+  );
+}
+
+/**
+ * The shipment: a hatched container (its bottom centre at the origin), carried in turn by the truck, the
+ * crane and the ship.
+ */
+export function Container({ j, at }) {
+  const { w, h } = BOX;
+  const edge = pencil(61).rect(-w / 2, -h, w, h, 1.5);
+  edge.line(-w / 2 + 3, -h + 5, w / 2 - 3, -h + 5, 0).line(-w / 2 + 3, -5, w / 2 - 3, -5, 0);
+  const shade = pencil(62).hatch(
+    [
+      [-w / 2, -h],
+      [w / 2, -h],
+      [w / 2, 0],
+      [-w / 2, 0],
+    ],
+    6.5,
+    -55,
+  );
+  return (
+    <Drawing at={at} len={220} data-j={j}>
+      <Paper d={rectPath(-w / 2, -h, w, h)} />
+      <Ink pen={shade} weight="hatch" />
+      <Ink pen={edge} weight="bold" />
+      <Paper d={rectPath(-62, -40, 58, 17)} />
+      <Ink pen={pencil(63).rect(-62, -40, 58, 17, 0.6)} weight="fine" />
+      <Label x={-33} y={-27.5} size={11} anchor="middle">
+        SCF·01
+      </Label>
+    </Drawing>
+  );
+}
+
+/** A pallet on its own (static), its bottom-left corner at (x, y). */
+export function Pallet({ x, y, seed, j, ...rest }) {
+  const outlinePen = pencil(seed);
+  const finePen = pencil(seed + 1);
+  palletStrokes(outlinePen, finePen, x, y);
+  return (
+    <g data-j={j} {...rest}>
+      <Paper d={palletPaper(x, y)} />
+      <Ink pen={outlinePen} weight="line" />
+      <Ink pen={finePen} weight="fine" />
     </g>
   );
 }
 
 /**
- * A feeder container ship, stern at x = 0, bow at x = 1620, waterline at y = 0, with the shipment's place
- * on deck left free. `${j}.wake` (bow wave and wake) and `${j}.lights` (lit cabins) fade with speed and dusk.
+ * The warehouse forklift. Its carriage and forks (`.forks`) rise up the mast with the load (`.load`, shown
+ * while it carries a pallet).
  */
-export function Ship({ j, x = 0, y = 0, seed = 7 }) {
-  const bays = [
-    { x: 296, length: 332, tiers: 2 },
-    { x: 636, length: 166, tiers: 3 },
-    { x: 810, length: 166, tiers: 2 },
-    { x: 984, length: 332, tiers: 3 },
-    { x: 1324, length: 166, tiers: 2 },
-  ];
-  const rand = random(seed);
-  const stacks = [];
-  for (const bay of bays) {
-    for (let tier = 0; tier < bay.tiers; tier++) {
-      stacks.push({
-        key: `${bay.x}-${tier}`,
-        x: bay.x + bay.length / 2,
-        y: -120 - tier * 72,
-        length: bay.length,
-        color: CONTAINER_COLORS[Math.floor(rand() * CONTAINER_COLORS.length)],
-      });
-    }
-  }
+export function Forklift({ j, at }) {
+  const d = outline(FORKLIFT, FORKLIFT_WHEELS);
+  const frame = pencil(71);
+  frame.line(-22, -54, -18, -102, 1.5).line(26, -54, 24, -102, 1.5).line(-26, -102, 30, -102, 2);
+  frame.line(40, -2, 40, -116, 1).line(46, -2, 46, -116, 1).line(40, -60, 46, -60, 0).line(40, -112, 46, -112, 0);
+  const driver = pencil(72).circle(-2, -78, 6).line(-2, -72, -4, -56, 0.5).line(-2, -66, 10, -64, 0.5);
+  driver.line(14, -54, 9, -70, 0.5).line(4, -71, 14, -69, 0.5).rect(-36, -60, 18, 6, 0.5);
+  const forks = pencil(73).line(48, -4, 48, -46, 1).line(52, -46, 52, -4, 1);
+  const tines = pencil(74).line(48, -5, 106, -5, 1).line(106, -5, 108, -9, 0);
+  const loadLines = pencil(75);
+  const loadFine = pencil(76);
+  palletStrokes(loadLines, loadFine, 48, -6);
   return (
-    <g data-j={j} transform={`translate(${x} ${y})`}>
-      <g data-j={`${j}.wake`} display="none">
-        <path d="M-10 6C-120 2 -260 10 -420 4C-300 18 -150 16 -10 14Z" fill="#E6EEF2" opacity="0.55" />
-        <path d="M-40 18C-200 22 -380 20 -560 26" stroke="#E6EEF2" strokeOpacity="0.45" strokeWidth="3" fill="none" />
-        <path d="M1560 2C1620 -6 1660 4 1700 10C1650 14 1600 12 1560 12Z" fill="#F2F6F8" opacity="0.8" />
+    <Drawing at={at} len={240} data-j={j}>
+      <Ink pen={shadow(77, -48, 38)} weight="hatch" />
+      <Paper d={d} />
+      <Ink pen={pencil(78).raw(d, 300)} weight="bold" />
+      <Ink pen={frame} weight="line" />
+      <Ink pen={driver} weight="fine" />
+      <g data-j={`${j}.forks`}>
+        <Ink pen={forks} weight="line" />
+        <Ink pen={tines} weight="bold" />
+        <g data-j={`${j}.load`}>
+          <Paper d={palletPaper(48, -6)} />
+          <Ink pen={loadLines} weight="line" />
+          <Ink pen={loadFine} weight="fine" />
+        </g>
       </g>
-      <path d="M0 -120H1470Q1540 -122 1600 -152L1622 -152Q1606 -60 1560 0H24Z" fill="#22344D" />
-      <path d="M1470 -120Q1540 -122 1600 -152L1622 -152L1620 -140Q1560 -112 1470 -108Z" fill="#E9E6DF" opacity="0.9" />
-      <path d="M2 -12H1566L1560 0H24Z" fill="#7A3A34" />
-      <path d="M2 -16H1570" stroke="#E9E6DF" strokeWidth="3" />
-      <path d="M0 -120H1470" stroke="#3B4F6B" strokeWidth="4" />
-      <path d="M60 -120V-400H240V-120Z" fill="#ECE9E2" />
-      <path d="M40 -380H260V-404H40Z" fill="#DAD6CE" />
-      <path d="M60 -150H240M60 -192H240M60 -234H240M60 -276H240M60 -318H240" stroke="#C9C4BA" strokeWidth="2" />
-      <path
-        d={[-140, -182, -224, -266, -308, -350]
-          .map((wy) => `M76 ${wy}h22M112 ${wy}h22M148 ${wy}h22M184 ${wy}h22`)
-          .join("")}
-        stroke="#2C3A4F"
-        strokeWidth="9"
-      />
-      <path
-        data-j={`${j}.lights`}
-        display="none"
-        d={[-224, -266, -308, -350].map((wy) => `M76 ${wy}h22M148 ${wy}h22M184 ${wy}h22`).join("")}
-        stroke="#F2CF8A"
-        strokeWidth="9"
-      />
-      <path d="M44 -394H256" stroke="#2C3A4F" strokeWidth="8" />
-      <path d="M86 -404V-458H140V-404Z" fill="#2C7F7E" />
-      <path d="M86 -444H140" stroke="#ECE9E2" strokeWidth="6" />
-      <path d="M150 -404V-468M150 -452H178" stroke="#2C3A4F" strokeWidth="3" />
-      {stacks.map((stack) => (
-        <Container
-          key={stack.key}
-          x={stack.x}
-          y={stack.y}
-          length={stack.length - 2}
-          color={stack.color}
-          detail={false}
-        />
+      {FORKLIFT_WHEELS.map((_, k) => (
+        <Wheel key={k} j={`${j}.w${k}`} />
       ))}
-      <path d="M1500 -152V-230M1500 -214H1530" stroke="#2C3A4F" strokeWidth="3" />
-    </g>
+    </Drawing>
+  );
+}
+
+const HULL = [
+  [0, -60],
+  [598, -60],
+  [642, -74],
+  [622, -8],
+  [606, 6],
+  [18, 6],
+  [2, -6],
+];
+
+/**
+ * The container ship, drawn from its stern at the waterline (the origin). Its bays carry other cargo; the
+ * shipment's slot (SHIP_SLOT) is left free for the crane to fill.
+ */
+export function Ship({ j, at }) {
+  const hull = polyPath(HULL);
+  const lines = pencil(81);
+  lines.line(6, -52, 598, -52, 0).line(4, -7, 618, -7, 0);
+  lines.line(598, -74, 598, -142, 1).line(588, -130, 608, -130, 1).line(612, -56, 618, -44, 0.5);
+  const house = pencil(82).rect(14, -190, 86, 130, 2).line(2, -178, 112, -178, 2);
+  const funnel = [
+    [30, -190],
+    [35, -226],
+    [64, -226],
+    [69, -190],
+  ];
+  house.lines(funnel, true, 1.5).line(33, -212, 66, -212, 0);
+  const windows = pencil(83);
+  for (let k = 0; k < 6; k++) windows.rect(20 + k * 13, -172, 8, 7, 0.3);
+  for (const y of [-148, -124, -100, -76]) for (let k = 0; k < 6; k++) windows.rect(22 + k * 13, y, 5, 5, 0);
+  const boxes = pencil(84);
+  const ribs = pencil(85);
+  let paper = `${hull}${rectPath(14, -190, 86, 130)}${polyPath(funnel)}`;
+  [2, 1, 2].forEach((tiers, bay) => {
+    for (let tier = 0; tier < tiers; tier++) {
+      const x = SHIP_SLOT.x - 225 + bay * BOX.w;
+      const y = -60 - tier * BOX.h;
+      containerStrokes(boxes, ribs, x, y);
+      paper += rectPath(x, y - BOX.h, BOX.w, BOX.h);
+    }
+  });
+  const wash = pencil(86);
+  for (let k = 0; k < 9; k++) wash.arc(80 + k * 64, 4, 9, 200, 340, 3);
+  return (
+    <Drawing at={at} len={420} data-j={j}>
+      <Paper d={paper} />
+      <Ink pen={pencil(87).raw(hull, 1420)} weight="bold" />
+      <Ink pen={house} weight="line" />
+      <Ink pen={boxes} weight="line" />
+      <Ink pen={ribs} weight="fine" />
+      <Ink pen={windows} weight="fine" />
+      <Ink pen={lines} weight="fine" />
+      <Ink pen={wash} weight="hatch" />
+    </Drawing>
   );
 }

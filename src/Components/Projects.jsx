@@ -27,7 +27,7 @@ const Projects = ({ sections, index }) => {
   if (!caseStudies.length && !more) return null;
 
   return (
-    <section id="work" aria-labelledby="projects-title" className="section-y relative border-t border-line">
+    <section id="work" aria-labelledby="projects-title" className="section-y relative">
       {/* Older links to the QA projects (#sqa) land here too */}
       <span id="sqa" aria-hidden="true" className="absolute inset-x-0 top-0 scroll-mt-[84px]" />
       <div className="container-site">

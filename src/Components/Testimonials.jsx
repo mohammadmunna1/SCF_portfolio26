@@ -40,7 +40,7 @@ const Testimonials = ({ section, index }) => {
   if (!testimonials.length) return null;
 
   return (
-    <section id="testimonials" aria-labelledby="testimonials-title" className="section-y border-t border-line">
+    <section id="testimonials" aria-labelledby="testimonials-title" className="section-y">
       <div className="container-site">
         <SectionHeader section={section} index={index} id="testimonials-title" />
       </div>

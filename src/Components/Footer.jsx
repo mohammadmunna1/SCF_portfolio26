@@ -88,7 +88,7 @@ const Footer = () => {
 
       {/* Extra room at the bottom on phones keeps the last line clear of the floating back-to-top button */}
       <div className="container-site mt-12 md:mt-16">
-        <div className="grid gap-6 border-t border-line pb-10 pt-8 max-md:pb-24 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
+        <div className="grid gap-6 pb-10 max-md:pb-24 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
           <p className="text-[0.875rem] text-muted">
             © {year} {profile.name}
           </p>

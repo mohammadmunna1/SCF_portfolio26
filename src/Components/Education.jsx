@@ -54,7 +54,7 @@ const Education = ({ section, index }) => {
   const schools = education.slice(FEATURED);
 
   return (
-    <section id="education" aria-labelledby="education-title" className="section-y border-t border-line">
+    <section id="education" aria-labelledby="education-title" className="section-y">
       <div className="container-site">
         <SectionHeader section={section} index={index} id="education-title" />
 

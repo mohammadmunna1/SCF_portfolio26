@@ -170,7 +170,7 @@ const Courses = ({ section, index }) => {
   const shown = filter === "all" ? courses : courses.filter((course) => groupOf(course) === filter);
 
   return (
-    <section id="courses" aria-labelledby="courses-title" className="section-y border-t border-line">
+    <section id="courses" aria-labelledby="courses-title" className="section-y">
       <div className="container-site">
         <SectionHeader section={section} index={index} id="courses-title" />
         {present.length > 1 && (

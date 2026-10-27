@@ -76,7 +76,7 @@ const Experience = ({ section, index }) => {
   const jobs = [...experience].sort((a, b) => Number(Boolean(b.current)) - Number(Boolean(a.current)));
 
   return (
-    <section id="experience" aria-labelledby="experience-title" className="section-y border-t border-line">
+    <section id="experience" aria-labelledby="experience-title" className="section-y">
       <div className="container-site">
         <SectionHeader section={section} index={index} id="experience-title" />
         <ol className="mt-14 md:mt-16">

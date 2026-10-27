@@ -15,7 +15,7 @@ const Skills = ({ section, index }) => {
   const toolkit = skills.filter((group) => group.kind !== "supply-chain");
 
   return (
-    <section id="skills" aria-labelledby="skills-title" className="section-y border-t border-line">
+    <section id="skills" aria-labelledby="skills-title" className="section-y">
       <div className="container-site">
         <SectionHeader section={section} index={index} id="skills-title" />
 

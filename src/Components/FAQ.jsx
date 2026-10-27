@@ -52,7 +52,7 @@ const FAQ = ({ section, index }) => {
   if (!faqs.length) return null;
 
   return (
-    <section id="faq" aria-labelledby="faq-title" className="section-y border-t border-line">
+    <section id="faq" aria-labelledby="faq-title" className="section-y">
       <div className="container-site grid items-start gap-12 lg:grid-cols-12 lg:gap-10">
         <SectionHeader section={section} index={index} id="faq-title" className="lg:sticky lg:top-28 lg:col-span-5" />
         <Reveal className="border-t border-line lg:col-span-7">

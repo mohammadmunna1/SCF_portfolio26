@@ -95,7 +95,7 @@ const Contact = ({ section, index }) => {
   ].filter(Boolean);
 
   return (
-    <section id="contact" aria-labelledby="contact-title" className="section-y border-t border-line">
+    <section id="contact" aria-labelledby="contact-title" className="section-y">
       <div className="container-site grid items-start gap-14 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-5">
           <SectionHeader section={section} index={index} id="contact-title" />

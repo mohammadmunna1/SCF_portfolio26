@@ -74,7 +74,7 @@ const About = ({ section, index }) => {
         <FocusRoute items={profile.focusAreas} />
 
         {(profile.devBackground?.length > 0 || profile.languages?.length > 0) && (
-          <Reveal className="mt-14 grid gap-10 border-t border-line pt-10 md:grid-cols-12 md:gap-8">
+          <Reveal className="mt-16 grid gap-10 md:mt-20 md:grid-cols-12 md:gap-8">
             {profile.devBackground?.length > 0 && (
               <div className="md:col-span-8">
                 <h3 className="eyebrow">Technical edge</h3>

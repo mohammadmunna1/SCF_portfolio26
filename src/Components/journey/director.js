@@ -229,7 +229,7 @@ export function createDirector(root) {
     measure() {
       const { width, height } = root.getBoundingClientRect();
       const s = Math.min(height / 1000, width / 620);
-      view = { W: width, H: height, s, U: width / s, GY: height * 0.9 };
+      view = { W: width, H: height, s, U: width / s, GY: height * 0.93 };
       root.style.setProperty("--u", `${(1 / s).toFixed(4)}px`);
       // Each layer is drawn at the sketch's scale, so the GPU only has to move it.
       for (const { el, box } of layers) {
@@ -237,13 +237,13 @@ export function createDirector(root) {
         el.setAttribute("height", String(Math.ceil(box[3] * s)));
       }
 
-      // While the hero is on screen the camera holds still, the farm in the open right of the screen (the
-      // hero's text is on the left), and the car drives from just right of the hero's buttons (stacked
-      // wider on phones) towards the screen's right edge.
+      // While the hero is on screen the camera holds still on the open road (the farm just past the right
+      // edge, coming into view once the camera moves), and the car drives from just right of the hero's
+      // buttons (stacked wider on phones) towards the screen's right edge, under the portrait.
       const { U } = view;
-      const heroLeft = X.farm + 90 - 0.75 * U;
+      const heroLeft = X.farm - 1.05 * U;
       const start = heroLeft + U / 2;
-      const [from, to] = width < 640 ? [0.7, 0.94] : [0.58, 0.88];
+      const [from, to] = width < 640 ? [0.7, 0.94] : [0.56, 0.9];
       rigX = curve([
         [0, heroLeft + from * U],
         [HERO_END, heroLeft + to * U],

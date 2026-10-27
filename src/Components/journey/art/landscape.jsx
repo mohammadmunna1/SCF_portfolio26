@@ -331,7 +331,6 @@ function splitEvenly(x0, x1, y) {
 export function Countryside() {
   return (
     <Region x0={-2400} x1={3200}>
-      <Fence x0={-2300} x1={410} seed={110} />
       <Fence x0={650} x1={1820} seed={120} />
       <Farm />
       <Tree x={740} size={1.05} seed={131} />
@@ -341,7 +340,7 @@ export function Countryside() {
       <Pine x={1560} seed={161} />
       <Bush x={1640} seed={165} />
       <Sign x={1745} text="HUB  →" seed={171} />
-      <PowerLine poles={[-1560, -1140, -720, -300, 120, 700, 1120, 1540]} seed={180} />
+      <PowerLine poles={[700, 1120, 1540]} seed={180} />
       <Tree x={2330} size={0.8} seed={191} />
       <Bush x={2420} w={26} seed={195} />
       <PowerLine poles={[2520, 2940]} seed={200} />

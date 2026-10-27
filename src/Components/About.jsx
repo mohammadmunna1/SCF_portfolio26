@@ -2,7 +2,6 @@ import { LuDownload } from "react-icons/lu";
 import { useContent } from "../context/ContentContext";
 import { getKeywordIcon } from "../lib/icons";
 import { cvLinkProps, paragraphs, twoDigits } from "../lib/text";
-import ProfilePortrait from "./ProfilePortrait";
 import { Button, NodesIcon } from "./ui/Buttons";
 import Reveal from "./ui/Reveal";
 import SectionHeader from "./ui/SectionHeader";
@@ -44,20 +43,15 @@ function FocusRoute({ items }) {
   );
 }
 
-/** About: the portrait, the story, the supply chain focus, the technical edge behind it and languages. */
+/** About: the story, the supply chain focus, the technical edge behind it and languages. */
 const About = ({ section, index }) => {
-  const { profile, experience, education } = useContent();
+  const { profile } = useContent();
 
   return (
     <section id="about" aria-labelledby="about-title" className="section-y">
       <div className="container-site">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
-          <div className="lg:col-span-5">
-            <SectionHeader section={section} index={index} id="about-title" />
-            <Reveal delay={0.05} className="mt-12">
-              <ProfilePortrait profile={profile} experience={experience} education={education} className="lg:mx-0" />
-            </Reveal>
-          </div>
+          <SectionHeader section={section} index={index} id="about-title" className="lg:col-span-5" />
           <div className="lg:col-span-7 lg:pt-1">
             {paragraphs(profile.about).map((text, paragraph) => (
               <Reveal as="p" key={text.slice(0, 32)} delay={0.04 * paragraph} className={`copy max-w-[42rem] ${paragraph ? "mt-5" : ""}`}>

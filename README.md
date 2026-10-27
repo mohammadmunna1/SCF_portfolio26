@@ -6,10 +6,10 @@ A modern, minimal portfolio (React + Vite + Tailwind) that presents Md Munna Mia
 
 ### Public site
 
-- **Hero:** the positioning headline, a short introduction and *Explore my projects* / *View my background* / *Download CV* (shown when a CV link is set in Admin → Profile)
+- **Hero:** the positioning headline, a short introduction, *Explore my projects* / *View my background* / *Download CV* (shown when a CV link is set in Admin → Profile), and the portrait inside an animated field-to-consumer ring (11 stops, from field and factory through cargo, port, sea and air freight, rail, warehouse and road to retail and the consumer) with the current role and the degree in progress pinned to it
 - **The supply chain journey, sketched behind the page:** a monochrome pencil drawing, fixed behind all the content, moves with the page's scroll — forwards and back — while the page scrolls normally over it. A car on a country road becomes a delivery truck at the logistics hub and delivers to the factory, where goods are pressed, packed and conveyed across to the warehouse; a forklift racks them; two channels leave the warehouse — a van climbs to the shop, whose shelves fill, while a container truck heads to the port, where a crane loads the container aboard a ship; the ship crosses the sea, a second crane lands it, and a truck delivers it to a distribution centre overseas just as the footer comes up. The world is drawn in just ahead of the camera, and rubbed out again on the way back
 - **At a glance:** a ruled strip of key figures
-- **About:** the portrait inside an animated field-to-consumer ring (11 stops, from field and factory through cargo, port, sea and air freight, rail, warehouse and road to retail and the consumer) with the current role and the degree in progress pinned to it; the story, the supply chain focus drawn as a shipment-tracking route, the technical edge and languages
+- **About:** the story, the supply chain focus drawn as a shipment-tracking route, the technical edge and languages
 - **Experience:** a timeline with focus tags (e.g. Supply Chain Finance, ERP) and the current role marked
 - **Projects:** supply chain systems first as case studies (screenshot, or the project's workflow drawn as a route when there's no screenshot; what I did; stack; live demo and code), then the rest under tabs — All, Automation & AI, Quality & test automation, Software & web — with detail dialogs. `/projects` lists everything by group (`?view=supply-chain|automation|qa|software`); the old `/ProjectsDetails` URL still works
 - **Education:** the degrees as cards with an explicit *In progress* / *Completed* status, school results, activities
@@ -108,7 +108,7 @@ The ultra-condensed display face of the previous design (Humane / Six Caps, `src
 
 ### Illustrations
 
-The supply chain visuals are line art drawn in code (`src/Components/illustrations/`), so they take the palette's colours and need no image files: the field-to-consumer ring around the portrait in About (`SupplyJourney.jsx` — a shipment travels field → factory → cargo → port → sea and air freight → rail → warehouse → road → retail → consumer, each stop lighting up as it's reached; it pauses off screen and stays still with "reduce motion") and the workflow route used for projects without a screenshot (`FlowDiagram.jsx`, fed by each project's **Workflow steps** in the admin). Icons come from `react-icons` (Lucide).
+The supply chain visuals are line art drawn in code (`src/Components/illustrations/`), so they take the palette's colours and need no image files: the field-to-consumer ring around the portrait in the hero (`SupplyJourney.jsx` — a shipment travels field → factory → cargo → port → sea and air freight → rail → warehouse → road → retail → consumer, each stop lighting up as it's reached; it pauses off screen and stays still with "reduce motion") and the workflow route used for projects without a screenshot (`FlowDiagram.jsx`, fed by each project's **Workflow steps** in the admin). Icons come from `react-icons` (Lucide).
 
 ### The journey behind the page
 

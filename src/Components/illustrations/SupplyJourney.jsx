@@ -170,21 +170,24 @@ export default function SupplyJourney({ className = "" }) {
         </span>
       ))}
 
-      <p className="eyebrow absolute inset-x-0 top-full mt-8 flex items-center justify-center gap-2 text-[0.6875rem]">
-        <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-        Field to consumer
-        {!reduceMotion && (
-          <>
-            <span className="text-line-strong">·</span>
-            <span ref={numberRef} className="text-accent">
-              01
-            </span>
-            <span>/ {twoDigits(STOPS.length)}</span>
-            <span ref={labelRef} className="text-heading">
-              {STOPS[0].label}
-            </span>
-          </>
-        )}
+      <p className="eyebrow absolute inset-x-0 top-full mt-8 flex justify-center text-[0.6875rem]">
+        {/* Page-coloured, so the journey sketched behind the page never runs through the caption */}
+        <span className="flex items-center gap-2 bg-canvas px-2">
+          <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+          Field to consumer
+          {!reduceMotion && (
+            <>
+              <span className="text-line-strong">·</span>
+              <span ref={numberRef} className="text-accent">
+                01
+              </span>
+              <span>/ {twoDigits(STOPS.length)}</span>
+              <span ref={labelRef} className="text-heading">
+                {STOPS[0].label}
+              </span>
+            </>
+          )}
+        </span>
       </p>
     </div>
   );

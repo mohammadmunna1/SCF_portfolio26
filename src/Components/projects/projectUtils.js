@@ -14,13 +14,11 @@ const pad = (number) => String(number).padStart(2, "0");
 /** "01 / 06" — project counter. */
 export const counter = (index, total) => `${pad(index + 1)} / ${pad(total)}`;
 
-/** Supply chain projects lead the Projects section as case studies. */
+/** Supply chain projects are the homepage's case studies and the projects page's first group. */
 export const isSupplyChain = (project) => project.category === "supply-chain";
 
-export const isAutomation = (project) => project.category === "automation";
-
-/** Everything else in the Projects collection: web and software work. */
-export const isSoftware = (project) => !isSupplyChain(project) && !isAutomation(project);
+/** Everything else in the Projects collection — software, web and automation work — is Development. */
+export const isDevelopment = (project) => !isSupplyChain(project);
 
 const SQA_TYPES = ["Automation", "Manual"];
 

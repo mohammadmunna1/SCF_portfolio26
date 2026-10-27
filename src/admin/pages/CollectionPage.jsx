@@ -7,6 +7,7 @@ import { resolveAsset } from "../../lib/api";
 import { adminApi } from "../api";
 import { useAuth } from "../auth";
 import { FieldList } from "../fields";
+import { PROJECT_PAGE_OF, projectGroup } from "../projectGroups";
 import { validateFields } from "../validation";
 import { useToast } from "../Toast";
 import { Badge, Button, ConfirmDialog, Drawer, IconButton, PageHeader, Spinner, Switch } from "../ui";
@@ -73,10 +74,17 @@ function ItemRow({ item, index, total, definition, onEdit, onToggle, onDelete, o
   );
 }
 
-function CollectionManager({ name, definition }) {
+/**
+ * Lists, orders, adds, edits and deletes a collection's items — or, with `includes`, only the items it
+ * picks out (one project group), new ones starting from `newItem`.
+ */
+function CollectionManager({ name, definition, includes, newItem }) {
   const toast = useToast();
   const { handleError } = useAuth();
   const [items, setItems] = useState([]);
+  // Every item of the collection in its saved order: on a page showing part of it, the other items keep
+  // their places when this page's items are reordered.
+  const allRef = useRef([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(null); // { item, isNew }
   const [values, setValues] = useState({});
@@ -100,18 +108,27 @@ function CollectionManager({ name, definition }) {
     adminApi
       .list(name)
       .then((list) => {
-        setItems(list);
-        savedOrder.current = list.map((item) => item.id).join();
+        allRef.current = list;
+        const shown = includes ? list.filter(includes) : list;
+        setItems(shown);
+        savedOrder.current = shown.map((item) => item.id).join();
       })
       .catch(fail)
       .finally(() => setLoading(false));
-  }, [name, fail]);
+  }, [name, includes, fail]);
 
   const persistOrder = async (list = itemsRef.current) => {
     const ids = list.map((item) => item.id);
     if (ids.join() === savedOrder.current) return;
+    // This page's items take the new order in the places they held among all the collection's items.
+    const queue = [...list];
+    const full = includes ? allRef.current.map((item) => (includes(item) ? queue.shift() ?? item : item)) : list;
     try {
-      await adminApi.reorder(name, ids);
+      await adminApi.reorder(
+        name,
+        full.map((item) => item.id),
+      );
+      allRef.current = full;
       savedOrder.current = ids.join();
       toast.success("Order saved");
     } catch (error) {
@@ -157,11 +174,13 @@ function CollectionManager({ name, definition }) {
       if (editing.isNew) {
         const created = await adminApi.create(name, values);
         setItems((list) => [...list, created]);
+        allRef.current = [...allRef.current, created];
         savedOrder.current = [...itemsRef.current, created].map((item) => item.id).join();
         toast.success(`${definition.singular} added`);
       } else {
         const updated = await adminApi.update(name, editing.item.id, values);
         setItems((list) => list.map((entry) => (entry.id === updated.id ? updated : entry)));
+        allRef.current = allRef.current.map((entry) => (entry.id === updated.id ? updated : entry));
         toast.success("Changes saved");
       }
       setEditing(null);
@@ -178,6 +197,7 @@ function CollectionManager({ name, definition }) {
     try {
       await adminApi.remove(name, toDelete.id);
       setItems((list) => list.filter((entry) => entry.id !== toDelete.id));
+      allRef.current = allRef.current.filter((entry) => entry.id !== toDelete.id);
       savedOrder.current = itemsRef.current.filter((entry) => entry.id !== toDelete.id).map((item) => item.id).join();
       toast.success(`${definition.singular} deleted`);
       setToDelete(null);
@@ -195,7 +215,7 @@ function CollectionManager({ name, definition }) {
         description={definition.description}
         actions={
           !definition.fixed && (
-            <Button icon={LuPlus} onClick={() => openEditor(defaultItem(name), true)}>
+            <Button icon={LuPlus} onClick={() => openEditor({ ...defaultItem(name), ...newItem }, true)}>
               Add {definition.singular.toLowerCase()}
             </Button>
           )
@@ -208,7 +228,7 @@ function CollectionManager({ name, definition }) {
         <div className="rounded-2xl border border-dashed border-heading/15 px-6 py-16 text-center">
           <p className="text-body">No {definition.label.toLowerCase()} yet.</p>
           {!definition.fixed && (
-            <Button className="mt-5" icon={LuPlus} onClick={() => openEditor(defaultItem(name), true)}>
+            <Button className="mt-5" icon={LuPlus} onClick={() => openEditor({ ...defaultItem(name), ...newItem }, true)}>
               Add the first one
             </Button>
           )}
@@ -292,6 +312,24 @@ export default function CollectionPage() {
   const { name } = useParams();
   const definition = COLLECTIONS[name];
   if (!definition) return <Navigate to="/admin" replace />;
+  // Projects are managed on their group pages (Supply Chain, QA, Development).
+  if (PROJECT_PAGE_OF[name]) return <Navigate to={PROJECT_PAGE_OF[name]} replace />;
   // Keyed by name so switching collections resets all state.
   return <CollectionManager key={name} name={name} definition={definition} />;
+}
+
+/** One of the project pages — Supply Chain, QA or Development — managing only that group's projects. */
+export function ProjectGroupPage() {
+  const { group } = useParams();
+  const view = projectGroup(group);
+  if (!view) return <Navigate to={PROJECT_PAGE_OF.projects} replace />;
+  return (
+    <CollectionManager
+      key={view.key}
+      name={view.collection}
+      definition={view.definition}
+      includes={view.includes}
+      newItem={view.newItem}
+    />
+  );
 }

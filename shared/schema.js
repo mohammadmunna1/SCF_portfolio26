@@ -134,7 +134,7 @@ export const COLLECTIONS = {
     singular: "QA project",
     icon: "bug",
     description:
-      "Test automation and manual testing projects — shown under their own tab in the Projects section (Sections → QA projects).",
+      "Test automation and manual testing projects — the QA tab of the projects page (managed under Projects → QA).",
     titleField: "title",
     subtitleField: "type",
     imageField: "image",
@@ -203,7 +203,7 @@ export const COLLECTIONS = {
     singular: "Project",
     icon: "folder",
     description:
-      "Supply chain systems, automation and software projects. Supply chain projects lead the Projects section as case studies; the others sit under tabs below them.",
+      "Supply chain and development projects, managed under Projects → Supply Chain and Projects → Development. Supply chain projects are the homepage's case studies; all of them are on the projects page.",
     titleField: "title",
     subtitleField: "tagline",
     imageField: "image",
@@ -231,13 +231,13 @@ export const COLLECTIONS = {
           { value: "backend", label: "Backend" },
           { value: "other", label: "Other" },
         ],
-        help: "Supply Chain projects are featured as case studies; the rest are grouped under tabs.",
+        help: "Supply Chain projects are the homepage's case studies; the others are development work on the projects page.",
       },
       {
         name: "image",
         label: "Screenshot",
         type: "image",
-        help: "A 2:1 screenshot (e.g. 1600×800) fits best. Without one, supply chain projects show a drawing of their workflow.",
+        help: "A 2:1 screenshot (e.g. 1600×800) fits best. Without one, the project's workflow steps (below) are drawn instead.",
       },
       {
         name: "description",

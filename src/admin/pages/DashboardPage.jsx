@@ -6,9 +6,14 @@ import { adminApi } from "../api";
 import { useAuth } from "../auth";
 import { useToast } from "../Toast";
 import { backupPartLabel } from "../backupLabels";
+import { PROJECT_GROUPS } from "../projectGroups";
 import { PageHeader, Panel, Spinner } from "../ui";
 
-const SHOWN = ["projects", "certifications", "experience", "education", "skills", "sqaProjects", "achievements", "faqs"];
+// After the three project groups
+const SHOWN = ["certifications", "experience", "education", "skills", "achievements"];
+
+/** Items and how many of them are visible. */
+const tally = (items) => ({ total: items.length, visible: items.filter((item) => item.visible !== false).length });
 
 export default function DashboardPage() {
   const { handleError } = useAuth();
@@ -16,9 +21,9 @@ export default function DashboardPage() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    adminApi
-      .overview()
-      .then(setData)
+    // The projects themselves too, to count each group's
+    Promise.all([adminApi.overview(), adminApi.list("projects")])
+      .then(([overview, projects]) => setData({ ...overview, projects }))
       .catch((error) => {
         handleError(error);
         toast.error(error.message);
@@ -26,11 +31,21 @@ export default function DashboardPage() {
   }, [handleError, toast]);
 
   if (!data) return <Spinner />;
-  const { counts, messages, backupFilled = [] } = data;
+  const { counts, messages, projects, backupFilled = [] } = data;
+
+  const cards = [
+    ...PROJECT_GROUPS.map((group) => ({
+      key: group.key,
+      to: `/admin/projects/${group.key}`,
+      label: group.definition.label,
+      count: group.includes ? tally(projects.filter(group.includes)) : counts[group.collection],
+    })),
+    ...SHOWN.map((name) => ({ key: name, to: `/admin/collections/${name}`, label: COLLECTIONS[name].label, count: counts[name] })),
+  ];
 
   const quickActions = [
     { to: "/admin/profile", icon: LuUser, label: "Edit profile & hero" },
-    { to: "/admin/collections/projects", icon: LuPlus, label: "Manage projects" },
+    { to: "/admin/projects/supply-chain", icon: LuPlus, label: "Manage projects" },
     { to: "/admin/collections/certifications", icon: LuPlus, label: "Manage courses & certifications" },
     { to: "/admin/theme", icon: LuPalette, label: "Customise colours" },
     { to: "/admin/collections/sections", icon: LuArrowRight, label: "Show, hide or reorder sections" },
@@ -54,17 +69,17 @@ export default function DashboardPage() {
       )}
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {SHOWN.map((name) => (
+        {cards.map(({ key, to, label, count }) => (
           <Link
-            key={name}
-            to={`/admin/collections/${name}`}
+            key={key}
+            to={to}
             className="group rounded-2xl border border-heading/[0.07] bg-surface p-5 transition-colors hover:border-heading/25"
           >
-            <p className="text-sm text-body">{COLLECTIONS[name].label}</p>
-            <p className="mt-3 text-4xl font-extralight text-heading">{counts[name]?.total ?? 0}</p>
+            <p className="text-sm text-body">{label}</p>
+            <p className="mt-3 text-4xl font-extralight text-heading">{count?.total ?? 0}</p>
             <p className="mt-1 text-xs text-body/80">
-              {counts[name]?.visible ?? 0} visible
-              {counts[name]?.total > counts[name]?.visible ? ` · ${counts[name].total - counts[name].visible} hidden` : ""}
+              {count?.visible ?? 0} visible
+              {count?.total > count?.visible ? ` · ${count.total - count.visible} hidden` : ""}
             </p>
           </Link>
         ))}

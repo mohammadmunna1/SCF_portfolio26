@@ -5,8 +5,8 @@ import {
   LuAward,
   LuBriefcase,
   LuBug,
+  LuCodeXml,
   LuDatabaseBackup,
-  LuFolderGit2,
   LuGauge,
   LuGraduationCap,
   LuInbox,
@@ -21,6 +21,7 @@ import {
   LuPanelsTopLeft,
   LuQuote,
   LuTrophy,
+  LuTruck,
   LuUser,
   LuX,
 } from "react-icons/lu";
@@ -29,11 +30,10 @@ import { COLLECTIONS } from "../../shared/schema.js";
 import { SITE_NAME } from "../../shared/site.js";
 import { adminApi } from "./api";
 import { useAuth } from "./auth";
+import { PROJECT_GROUPS } from "./projectGroups";
 
 const COLLECTION_ICONS = {
   layout: LuPanelsTopLeft,
-  folder: LuFolderGit2,
-  bug: LuBug,
   briefcase: LuBriefcase,
   "graduation-cap": LuGraduationCap,
   award: LuAward,
@@ -45,11 +45,11 @@ const COLLECTION_ICONS = {
   quote: LuQuote,
 };
 
-// Roughly the homepage order, supply chain work first.
+const PROJECT_ICONS = { "supply-chain": LuTruck, qa: LuBug, development: LuCodeXml };
+
+// Roughly the homepage order (the projects have their own group, above).
 const CONTENT_ORDER = [
   "sections",
-  "projects",
-  "sqaProjects",
   "experience",
   "education",
   "certifications",
@@ -96,6 +96,16 @@ function Sidebar({ unread, onNavigate }) {
         <NavItem to="/admin" end icon={LuLayoutDashboard} label="Dashboard" onNavigate={onNavigate} />
         <NavItem to="/admin/profile" icon={LuUser} label="Profile" onNavigate={onNavigate} />
         <NavItem to="/admin/theme" icon={LuPalette} label="Theme & colours" onNavigate={onNavigate} />
+        <GroupLabel>Projects</GroupLabel>
+        {PROJECT_GROUPS.map((group) => (
+          <NavItem
+            key={group.key}
+            to={`/admin/projects/${group.key}`}
+            icon={PROJECT_ICONS[group.key]}
+            label={group.label}
+            onNavigate={onNavigate}
+          />
+        ))}
         <GroupLabel>Content</GroupLabel>
         {CONTENT_ORDER.map((name) => (
           <NavItem

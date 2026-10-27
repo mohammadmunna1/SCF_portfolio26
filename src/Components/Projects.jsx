@@ -1,16 +1,16 @@
 import { LuArrowRight } from "react-icons/lu";
 import { useContent } from "../context/ContentContext";
 import CaseStudy from "./projects/CaseStudy";
-import { isAutomation, isSoftware, isSupplyChain } from "./projects/projectUtils";
+import { isDevelopment, isSupplyChain } from "./projects/projectUtils";
 import { Button } from "./ui/Buttons";
 import SectionHeader from "./ui/SectionHeader";
 
 const FALLBACK_HEADING = { eyebrow: "Projects", title: "Projects" };
 
 /**
- * Projects: the supply chain systems, as case studies — the work this portfolio is about. The rest
- * (automation, quality and software work) is one link away, on /projects, which opens at the first of those
- * groups. The wording and the button's label come from the Projects section in the admin.
+ * Projects: the supply chain systems, as case studies — the work this portfolio is about. The rest (QA and
+ * development work) is one link away, on /projects, which opens at the first of those groups (QA only while
+ * its section is shown). The wording and the button's label come from the Projects section in the admin.
  */
 const Projects = ({ sections, index }) => {
   const { projects, sqaProjects } = useContent();
@@ -20,9 +20,8 @@ const Projects = ({ sections, index }) => {
   // The homepage shows the supply chain projects marked "Show on the homepage"
   const caseStudies = work ? projects.filter((project) => project.featured !== false && isSupplyChain(project)) : [];
   const more = [
-    ["automation", work ? projects.filter(isAutomation).length : 0],
     ["qa", qa ? sqaProjects.length : 0],
-    ["software", work ? projects.filter(isSoftware).length : 0],
+    ["development", work ? projects.filter(isDevelopment).length : 0],
   ].find(([, count]) => count > 0)?.[0];
 
   if (!caseStudies.length && !more) return null;

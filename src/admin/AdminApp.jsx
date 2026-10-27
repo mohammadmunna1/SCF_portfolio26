@@ -6,7 +6,7 @@ import AdminLayout from "./AdminLayout";
 import { AuthProvider, RequireAuth } from "./auth";
 import AccountPage from "./pages/AccountPage";
 import BackupPage from "./pages/BackupPage";
-import CollectionPage from "./pages/CollectionPage";
+import CollectionPage, { ProjectGroupPage } from "./pages/CollectionPage";
 import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import MessagesPage from "./pages/MessagesPage";
@@ -47,6 +47,7 @@ export default function AdminApp() {
             <Route index element={<DashboardPage />} />
             <Route path="profile" element={<ProfilePage />} />
             <Route path="theme" element={<ThemePage />} />
+            <Route path="projects/:group" element={<ProjectGroupPage />} />
             <Route path="collections/:name" element={<CollectionPage />} />
             <Route path="messages" element={<MessagesPage />} />
             <Route path="backup" element={<BackupPage />} />

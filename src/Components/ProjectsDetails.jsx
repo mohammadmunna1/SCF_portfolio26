@@ -4,16 +4,15 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useContent } from "../context/ContentContext";
 import { DevGrid } from "./DevProjects";
 import ProjectModal from "./projects/ProjectModal";
-import { filterSqa, isAutomation, isSoftware, isSupplyChain, sqaFilters, useProjectModal } from "./projects/projectUtils";
+import { filterSqa, isDevelopment, isSupplyChain, sqaFilters, useProjectModal } from "./projects/projectUtils";
 import SqaModal from "./projects/SqaModal";
 import { SqaGrid } from "./SqaProjects";
 import FilterTabs from "./ui/FilterTabs";
 import Reveal from "./ui/Reveal";
 
 /**
- * Every project, grouped as on the homepage: supply chain systems, automation & AI, quality & test
- * automation and software & web. Served at /projects (and the legacy /ProjectsDetails); `?view=` selects
- * the group.
+ * Every project, in the three groups they're managed in: supply chain, QA and development. Served at
+ * /projects (and the legacy /ProjectsDetails); `?view=` selects the group.
  */
 const ProjectsDetails = () => {
   const { projects, sqaProjects, sections } = useContent();
@@ -25,12 +24,13 @@ const ProjectsDetails = () => {
   const qa = sections.find((section) => section.key === "sqa");
   const views = [
     { key: "supply-chain", label: "Supply chain", items: projects.filter(isSupplyChain) },
-    { key: "automation", label: "Automation & AI", items: projects.filter(isAutomation) },
     { key: "qa", label: qa?.title || "Quality & test automation", items: sqaProjects, intro: qa?.subtitle },
-    { key: "software", label: "Software & web", items: projects.filter(isSoftware) },
+    { key: "development", label: "Development", items: projects.filter(isDevelopment) },
   ].filter((view) => view.items.length);
-  // Older links used ?view=sqa and ?view=dev
-  const requested = { sqa: "qa", dev: "software" }[params.get("view")] || params.get("view");
+  // Older links used ?view=sqa, dev, automation and software
+  const requested =
+    { sqa: "qa", dev: "development", automation: "development", software: "development" }[params.get("view")] ||
+    params.get("view");
   const view = views.find((item) => item.key === requested) || views[0];
 
   return (
@@ -45,7 +45,7 @@ const ProjectsDetails = () => {
           All projects
         </h1>
         <p className="mt-5 max-w-[42rem] text-lead text-body">
-          Supply chain systems first, then automation, quality and software projects.
+          Supply chain systems first, then quality assurance and development projects.
         </p>
       </Reveal>
 

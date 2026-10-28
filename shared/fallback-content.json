@@ -1,8 +1,8 @@
 {
   "format": 1,
-  "generatedAt": "2026-10-27T19:12:30.896Z",
+  "generatedAt": "2026-10-28T03:09:17.632Z",
   "source": "database",
-  "fingerprint": "84e5d6a4bdcc19e5",
+  "fingerprint": "3c1cb1581dae705d",
   "hiddenSections": [
     "sqa",
     "testimonials",
@@ -121,7 +121,7 @@
         "id": "438e9cf6c803fff28146cd2c",
         "navLabel": "Training & Certifications",
         "eyebrow": "Professional development",
-        "title": "Training & certifications",
+        "title": "Training & Certifications",
         "subtitle": "Supply chain and ERP training first, then the technology and professional courses behind my technical side.",
         "ctaLabel": "",
         "key": "courses"

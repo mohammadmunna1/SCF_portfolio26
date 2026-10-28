@@ -91,7 +91,7 @@ export const DEFAULT_SECTIONS = [
     key: "courses",
     navLabel: "Training & Certifications",
     eyebrow: "Professional development",
-    title: "Training & certifications",
+    title: "Training & Certifications",
     subtitle: "Supply chain and ERP training first, then the technology and professional courses behind my technical side.",
     ctaLabel: "",
   },

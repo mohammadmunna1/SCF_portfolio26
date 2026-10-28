@@ -5,7 +5,7 @@
 /**
  * Strokes from a pencil, in one of the sketch's weights: "bold" outlines, "line", "fine" details or "hatch"
  * shading. `w` ("from to") narrows when, during its drawing's reveal, these strokes are drawn; `own` leaves
- * the reveal to the director (strokes it draws and erases itself, like the car turning into a truck).
+ * the reveal to the director (strokes it draws and erases itself, like the small cargo truck turning into the delivery truck).
  */
 export function Ink({ pen, weight = "line", w, j, own }) {
   const { d, pathLength } = pen.done();

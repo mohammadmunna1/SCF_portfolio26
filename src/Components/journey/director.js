@@ -15,8 +15,8 @@ const SMOOTHING = 0.018; // the camera eases between subjects over this much pro
 const AHEAD = 0.4; // the pencil draws up to this far right of the screen's centre (a share of the view)
 const MARGIN = 140; // world units beyond the screen still treated as on screen
 
-// The car, growing into a truck on its way past the hub, to the factory's receiving door (the first stretch,
-// across the hero screen, is set per screen size in measure()).
+// The small open-bed cargo truck, growing into the delivery truck on its way past the hub, to the factory's
+// receiving door (the first stretch, across the hero screen, is set per screen size in measure()).
 const MORPH = [0.155, 0.205];
 
 // Production: four units of goods start down the line one after another, are pressed and packed, cross to
@@ -238,7 +238,7 @@ export function createDirector(root) {
       }
 
       // While the hero is on screen the camera holds still on the open road (the farm just past the right
-      // edge, coming into view once the camera moves), and the car drives from just right of the hero's
+      // edge, coming into view once the camera moves), and the cargo truck drives from just right of the hero's
       // buttons (stacked wider on phones) towards the screen's right edge, under the portrait.
       const { U } = view;
       const heroLeft = X.farm - 1.05 * U;
@@ -252,7 +252,7 @@ export function createDirector(root) {
         [0.275, X.parked],
       ]);
 
-      // What the camera follows: the car, the goods down the line, the forklift, both channels at the fork,
+      // What the camera follows: the cargo truck, the goods down the line, the forklift, both channels at the fork,
       // the shop, then the container — on the crane, aboard the ship, and on the last truck.
       const subject = (p) => {
         if (p <= HERO_END) return start;
@@ -326,7 +326,7 @@ export function createDirector(root) {
       const [left, right] = range(cx, 1);
       const inView = (x0, x1) => x1 > left - MARGIN && x0 < right + MARGIN;
 
-      // The car becoming the delivery truck
+      // The small cargo truck becoming the delivery truck
       const x = rigX(p);
       const m = span(p, MORPH[0], MORPH[1]);
       if (show("rig", inView(x - 200, x + 120))) {
@@ -340,8 +340,8 @@ export function createDirector(root) {
         }
         wheels("rig", rigWheels, x);
         const rig = revealOf("rig");
-        own("rig.car", Math.min(rig, 1 - span(m, 0, 0.45)));
-        own("rig.carShade", Math.min(rig, 1 - span(m, 0, 0.3)));
+        own("rig.pickup", Math.min(rig, 1 - span(m, 0, 0.45)));
+        own("rig.pickupShade", Math.min(rig, 1 - span(m, 0, 0.3)));
         own("rig.truck", Math.min(rig, span(m, 0.45, 1)));
         own("rig.truckShade", Math.min(rig, span(m, 0.5, 1)));
       }

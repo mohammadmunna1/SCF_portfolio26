@@ -38,9 +38,9 @@ function progressAt(y, { hero, end }) {
 }
 
 /**
- * The supply chain journey, sketched in pencil behind the whole page and moving with its scroll — a car on
- * a country road, then a truck, the factory, the warehouse, the shop and the port, the crossing, and the
- * delivery overseas. Fixed behind the content, decorative, and never in the way of it.
+ * The supply chain journey, sketched in pencil behind the whole page and moving with its scroll — a small
+ * cargo truck on a country road, then a delivery truck, the factory, the warehouse, the shop and the port,
+ * the crossing, and the delivery overseas. Fixed behind the content, decorative, and never in the way of it.
  */
 export default function JourneyBackdrop() {
   const reduceMotion = useReducedMotion();

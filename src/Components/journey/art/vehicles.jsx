@@ -1,5 +1,5 @@
 // The sketch's vehicles, facing right with their wheels on y = 0. The director moves them (data-j), turns
-// their wheels and, for the car, redraws the outline as it grows into a delivery truck.
+// their wheels and, for the small cargo truck, redraws the outline as it grows into a delivery truck.
 
 import { Drawing, Ink, Label, Paper } from "./draw";
 import { BOX, SHIP_SLOT } from "./layout";
@@ -44,35 +44,42 @@ export function Wheel({ j }) {
   );
 }
 
-function carDetails() {
+function pickupDetails() {
   const pen = pencil(21);
+  // The cab: window, door and handle, mirror, headlight and bumper
   pen.lines(
     [
-      [-47, -44],
-      [-29, -60],
-      [-8, -60],
-      [-8, -44],
+      [14, -83],
+      [46, -83],
+      [60, -64],
+      [14, -64],
     ],
     true,
     1.2,
   );
-  pen.lines(
+  pen.line(10, -60, 10, -22, 1).line(16, -54, 23, -54, 0.4).line(55, -66, 60, -71, 0.5);
+  pen.rect(88, -51, 5, 5, 0.4).line(87, -22, 99, -22, 1.2);
+  // The open bed: tailgate seam, side rail and stake pockets
+  pen.line(-91, -49, -91, -21, 0.8).line(-93, -38, -1, -38, 1);
+  for (const x of [-70, -42, -14]) pen.line(x, -52, x, -45, 0);
+  // Its load from the farm: two braced crates and a sack of produce, over the rail
+  for (const [x, w, h] of [
+    [-86, 26, 26],
+    [-56, 24, 20],
+  ]) {
+    pen.rect(x, -52 - h, w, h, 0.8).line(x, -52 - h, x + w, -52, 0).line(x + w, -52 - h, x, -52, 0);
+  }
+  pen.stroke(
     [
-      [-4, -44],
-      [-4, -60],
-      [13, -60],
-      [34, -44],
+      [-29, -52],
+      [-30, -62],
+      [-22, -70],
+      [-12, -66],
+      [-9, -55],
+      [-10, -52],
     ],
     true,
-    1.2,
   );
-  pen.line(-48, -42, -48, -16, 1).line(-6, -43, -6, -15, 1).line(36, -41, 36, -16, 1);
-  pen.line(-41, -35, -33, -35, 0.5).line(1, -36, 9, -36, 0.5);
-  pen.circle(83, -32, 3, 2).rect(-88, -33, 4, 7, 0.5);
-  pen.line(78, -18, 90, -18, 1).line(-90, -18, -80, -18, 1);
-  pen.line(40, -46, 45, -50, 0.5);
-  // A parcel on the back seat: the first mile's load
-  pen.rect(-27, -56, 14, 11, 0.8).line(-20, -56, -20, -45, 0);
   return pen;
 }
 
@@ -101,19 +108,19 @@ function truckDetails() {
 }
 
 /**
- * The first-mile car, which grows into the line-haul delivery truck on its way past the hub. The director
- * redraws the outline (`.body`, `.paper`), places the wheels, and erases the car's details as the truck's
- * are drawn in.
+ * The first-mile vehicle: a small open-bed cargo truck carrying the farm's load, which grows into the
+ * line-haul delivery truck on its way past the hub. The director redraws the outline (`.body`, `.paper`),
+ * places the wheels, and erases the small truck's details as the delivery truck's are drawn in.
  */
 export function Rig({ j }) {
   const { d, wheels } = rigShape(0);
   return (
     <Drawing at={-200} len={260} data-j={j}>
-      <Ink pen={shadow(11, -84, 86)} weight="hatch" j={`${j}.carShade`} own />
+      <Ink pen={shadow(11, -94, 96)} weight="hatch" j={`${j}.pickupShade`} own />
       <Ink pen={shadow(12, -192, 110)} weight="hatch" j={`${j}.truckShade`} own />
       <Paper d={d} j={`${j}.paper`} />
       <path className="sk-bold" d={d} pathLength="1" strokeDasharray="1 2" data-j={`${j}.body`} />
-      <Ink pen={carDetails()} weight="fine" j={`${j}.car`} own />
+      <Ink pen={pickupDetails()} weight="fine" j={`${j}.pickup`} own />
       <Ink pen={truckDetails()} weight="fine" j={`${j}.truck`} own />
       {wheels.map((_, k) => (
         <Wheel key={k} j={`${j}.w${k}`} />

@@ -1,5 +1,5 @@
 // Outlines and layouts shared by the sketch's drawings and the director that moves them: path data for
-// paper, vehicle bodies (the car's grows into the truck's), and the strokes of containers and pallets.
+// paper, vehicle bodies (the small cargo truck's grows into the delivery truck's), and the strokes of containers and pallets.
 
 import { BOX } from "./layout";
 
@@ -38,19 +38,20 @@ export function outline(top, wheels) {
   return `${d}L${r1(top[0][0])} ${r1(top[0][1])}Z`;
 }
 
-// The car and the delivery truck it becomes share one structure: ten points from the rear bottom over the
-// roof to the front bottom, and three wheels (the car's third hides in its rear wheel until it splits off).
-const CAR = [
-  [-86, -12],
-  [-88, -34],
-  [-78, -40],
-  [-52, -42],
-  [-30, -64],
-  [16, -64],
-  [42, -43],
-  [82, -38],
-  [88, -30],
-  [88, -12],
+// The small open-bed cargo truck and the delivery truck it becomes share one structure: ten points from the
+// rear bottom over the bed rail and the cab to the front bottom, and three wheels (the small truck's third
+// hides in its rear wheel until it splits off). The open bed's rail rises into the closed box.
+const PICKUP = [
+  [-96, -18],
+  [-96, -50],
+  [-92, -52],
+  [-40, -52],
+  [2, -52],
+  [8, -88],
+  [50, -88],
+  [66, -60],
+  [94, -56],
+  [96, -18],
 ];
 const TRUCK = [
   [-196, -22],
@@ -64,10 +65,10 @@ const TRUCK = [
   [112, -60],
   [112, -22],
 ];
-const CAR_WHEELS = [
-  [58, 14],
-  [-56, 14],
-  [-56, 14],
+const PICKUP_WHEELS = [
+  [64, 14],
+  [-58, 14],
+  [-58, 14],
 ];
 const TRUCK_WHEELS = [
   [72, 17],
@@ -75,11 +76,11 @@ const TRUCK_WHEELS = [
   [-150, 17],
 ];
 
-/** The car (m = 0) on its way to becoming the truck (m = 1): its outline and its wheels. */
+/** The small cargo truck (m = 0) on its way to becoming the delivery truck (m = 1): outline and wheels. */
 export function rigShape(m) {
   const mix = (a, b) => a + (b - a) * m;
-  const top = CAR.map(([x, y], i) => [mix(x, TRUCK[i][0]), mix(y, TRUCK[i][1])]);
-  const wheels = CAR_WHEELS.map(([x, r], i) => ({ x: mix(x, TRUCK_WHEELS[i][0]), r: mix(r, TRUCK_WHEELS[i][1]) }));
+  const top = PICKUP.map(([x, y], i) => [mix(x, TRUCK[i][0]), mix(y, TRUCK[i][1])]);
+  const wheels = PICKUP_WHEELS.map(([x, r], i) => ({ x: mix(x, TRUCK_WHEELS[i][0]), r: mix(r, TRUCK_WHEELS[i][1]) }));
   return { wheels, d: outline(top, wheels) };
 }
 

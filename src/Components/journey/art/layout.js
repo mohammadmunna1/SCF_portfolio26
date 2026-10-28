@@ -21,7 +21,7 @@ export const BOOM = -330;
 
 export const X = {
   farm: 440,
-  hub: 1880, // the logistics hub, where the car becomes a truck
+  hub: 1880, // the logistics hub, where the small cargo truck becomes the delivery truck
   hubEnd: 2240,
   factory: 3200,
   factoryEnd: 3920,

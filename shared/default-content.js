@@ -89,8 +89,8 @@ export const DEFAULT_SECTIONS = [
   { key: "education", navLabel: "Education", eyebrow: "Education", title: "Academic background", subtitle: "", ctaLabel: "" },
   {
     key: "courses",
-    navLabel: "Courses",
-    eyebrow: "Courses & certifications",
+    navLabel: "Training & Certifications",
+    eyebrow: "Professional development",
     title: "Training & certifications",
     subtitle: "Supply chain and ERP training first, then the technology and professional courses behind my technical side.",
     ctaLabel: "",

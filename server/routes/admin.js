@@ -51,7 +51,7 @@ router.get(
     res.json({
       counts: Object.fromEntries(counts),
       messages: { total: totalMessages, unread, recent: recentMessages.map(toAdminItem) },
-      database: { name: mongoose.connection.name },
+      database: { name: mongoose.connection.name, accountEmail: config.mongoAccountEmail },
       // Parts the public site is showing from the backup copy because they're missing from the database
       backupFilled: filled,
     });

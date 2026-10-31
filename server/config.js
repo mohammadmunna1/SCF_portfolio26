@@ -19,6 +19,8 @@ export const config = {
   isProduction,
   port: Number(env.PORT) || 3001,
   mongoUri: env.MONGODB_URI || "",
+  // The Atlas account the database belongs to; the connection string doesn't say, so it's set by hand.
+  mongoAccountEmail: (env.MONGODB_ACCOUNT_EMAIL || "").trim().toLowerCase(),
   jwtSecret,
   jwtSecretIsEphemeral,
   sessionDays,

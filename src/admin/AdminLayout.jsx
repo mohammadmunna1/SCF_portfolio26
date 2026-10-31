@@ -6,6 +6,7 @@ import {
   LuBriefcase,
   LuBug,
   LuCodeXml,
+  LuDatabase,
   LuDatabaseBackup,
   LuGauge,
   LuGraduationCap,
@@ -27,6 +28,7 @@ import {
 } from "react-icons/lu";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { COLLECTIONS } from "../../shared/schema.js";
+import { SITE_NAME } from "../../shared/site.js";
 import { adminApi } from "./api";
 import { useAuth } from "./auth";
 import { PROJECT_GROUPS } from "./projectGroups";
@@ -83,14 +85,23 @@ const GroupLabel = ({ children }) => (
   <p className="px-3 pb-1 pt-4 text-[11px] font-medium uppercase tracking-[0.14em] text-body/70">{children}</p>
 );
 
-function Sidebar({ unread, onNavigate }) {
-  const { admin, logout } = useAuth();
+function Sidebar({ unread, dbAccount, onNavigate }) {
+  const { logout } = useAuth();
   return (
     <div className="flex h-full flex-col">
-      <div className="px-5 pb-3 pt-5 pr-12 lg:pr-5">
-        <p className="truncate text-[15px] font-medium text-heading" title={admin?.email}>
-          {admin?.email}
-        </p>
+      <div className="px-4 pb-3 pt-5">
+        <p className="truncate pl-1 pr-10 text-lg font-normal tracking-[0.01em] text-heading lg:pr-0">{SITE_NAME}</p>
+        {dbAccount && (
+          <div className="mt-3 rounded-xl border border-heading/15 bg-heading/[0.04] px-3.5 py-3">
+            <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-body/80">
+              <LuDatabase className="h-3.5 w-3.5" aria-hidden="true" />
+              MongoDB account
+            </p>
+            <p className="mt-1 truncate text-[15px] font-semibold text-heading" title={dbAccount}>
+              {dbAccount}
+            </p>
+          </div>
+        )}
       </div>
       <nav aria-label="Admin" className="flex-1 space-y-1 overflow-y-auto px-3 pb-4">
         <NavItem to="/admin" end icon={LuLayoutDashboard} label="Dashboard" onNavigate={onNavigate} />
@@ -146,15 +157,19 @@ function Sidebar({ unread, onNavigate }) {
 
 export default function AdminLayout() {
   const { pathname } = useLocation();
-  const { admin, handleError } = useAuth();
+  const { handleError } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const [unread, setUnread] = useState(0);
+  const [dbAccount, setDbAccount] = useState("");
 
   // Refresh the unread badge as the admin moves around (cheap, and keeps it current after reading mail).
   useEffect(() => {
     adminApi
       .overview()
-      .then((data) => setUnread(data.messages.unread))
+      .then((data) => {
+        setUnread(data.messages.unread);
+        setDbAccount(data.database.accountEmail || "");
+      })
       .catch(handleError);
   }, [pathname, handleError]);
 
@@ -163,12 +178,12 @@ export default function AdminLayout() {
   return (
     <div className="min-h-screen bg-canvas text-heading lg:grid lg:grid-cols-[260px_1fr]">
       <aside className="sticky top-0 hidden h-screen border-r border-heading/10 bg-surface lg:block">
-        <Sidebar unread={unread} />
+        <Sidebar unread={unread} dbAccount={dbAccount} />
       </aside>
 
       <header className="sticky top-0 z-30 flex items-center justify-between border-b border-heading/10 bg-canvas/90 px-4 py-3 backdrop-blur lg:hidden">
-        <p className="min-w-0 truncate pr-3 text-[15px] font-medium text-heading" title={admin?.email}>
-          {admin?.email}
+        <p className="text-lg tracking-[0.01em] text-heading">
+          {SITE_NAME} <span className="text-sm text-body/80">· Admin</span>
         </p>
         <button
           type="button"
@@ -199,7 +214,7 @@ export default function AdminLayout() {
               >
                 <LuX className="h-5 w-5" />
               </button>
-              <Sidebar unread={unread} onNavigate={() => setMenuOpen(false)} />
+              <Sidebar unread={unread} dbAccount={dbAccount} onNavigate={() => setMenuOpen(false)} />
             </motion.aside>
           </motion.div>
         )}

@@ -27,7 +27,6 @@ import {
 } from "react-icons/lu";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { COLLECTIONS } from "../../shared/schema.js";
-import { SITE_NAME } from "../../shared/site.js";
 import { adminApi } from "./api";
 import { useAuth } from "./auth";
 import { PROJECT_GROUPS } from "./projectGroups";
@@ -88,9 +87,10 @@ function Sidebar({ unread, onNavigate }) {
   const { admin, logout } = useAuth();
   return (
     <div className="flex h-full flex-col">
-      <div className="px-5 pb-3 pt-5">
-        <p className="text-lg font-normal tracking-[0.01em] text-heading">{SITE_NAME}</p>
-        <p className="mt-0.5 truncate text-xs text-body/80">Admin · {admin?.email}</p>
+      <div className="px-5 pb-3 pt-5 pr-12 lg:pr-5">
+        <p className="truncate text-[15px] font-medium text-heading" title={admin?.email}>
+          {admin?.email}
+        </p>
       </div>
       <nav aria-label="Admin" className="flex-1 space-y-1 overflow-y-auto px-3 pb-4">
         <NavItem to="/admin" end icon={LuLayoutDashboard} label="Dashboard" onNavigate={onNavigate} />
@@ -146,7 +146,7 @@ function Sidebar({ unread, onNavigate }) {
 
 export default function AdminLayout() {
   const { pathname } = useLocation();
-  const { handleError } = useAuth();
+  const { admin, handleError } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const [unread, setUnread] = useState(0);
 
@@ -167,8 +167,8 @@ export default function AdminLayout() {
       </aside>
 
       <header className="sticky top-0 z-30 flex items-center justify-between border-b border-heading/10 bg-canvas/90 px-4 py-3 backdrop-blur lg:hidden">
-        <p className="text-lg tracking-[0.01em] text-heading">
-          {SITE_NAME} <span className="text-sm text-body/80">· Admin</span>
+        <p className="min-w-0 truncate pr-3 text-[15px] font-medium text-heading" title={admin?.email}>
+          {admin?.email}
         </p>
         <button
           type="button"
